@@ -14,7 +14,7 @@ struct BinCellView: View {
         ZStack {
             Color(.clear)
             HStack(alignment: .top) {
-                Image(bin.color)
+                Image(bin.color.rawValue)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 70, alignment: .center)
