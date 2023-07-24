@@ -13,19 +13,21 @@ struct ContentView: View {
     @State var isNotificationBageShown: Bool = true
     
     var body: some View {
-        ZStack {
-            Color("primary_bg")
-                .edgesIgnoringSafeArea(.all)
-            VStack {
-                SettingsBar()
-                
-                if !notificationEnabled {
-                    if isNotificationBageShown {
-                        NotificationBage(isNotificationBageShown: $isNotificationBageShown)
+        NavigationView {
+            ZStack {
+                Color("primary_bg")
+                    .edgesIgnoringSafeArea(.all)
+                VStack {
+                    SettingsBar()
+                    
+                    if !notificationEnabled {
+                        if isNotificationBageShown {
+                            NotificationBage(isNotificationBageShown: $isNotificationBageShown)
+                        }
                     }
+                    YourBinsHeader()
+                    BinsList()
                 }
-                YourBinsHeader()
-                BinsList()
             }
         }
     }
@@ -63,10 +65,8 @@ struct YourBinsHeader: View {
                 .font(.title2)
                 .foregroundColor(.white)
             Spacer()
-            Button {
-                withAnimation {
-                    
-                }
+            NavigationLink {
+                AddBinView()
             } label: {
                 Image(systemName: "plus")
                     .tint(Color("primary_elements"))
