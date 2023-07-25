@@ -9,6 +9,7 @@ import Foundation
 
 protocol BinsListViewModelProtocol {
     func getBinsList()
+    func deleteBin(at offsets: IndexSet)
 }
 
 final class BinsListViewModel: ObservableObject, BinsListViewModelProtocol {
@@ -17,5 +18,8 @@ final class BinsListViewModel: ObservableObject, BinsListViewModelProtocol {
         bins = Singleton.shared.getBins()
     }
     
+    func deleteBin(at offsets: IndexSet) {
+        Singleton.shared.deleteBin(at: offsets)
+    }
     
 }

@@ -11,10 +11,14 @@ struct BinsListView: View {
     @StateObject var vm = BinsListViewModel()
 
     var body: some View {
-        List($vm.bins) { $bin in
-            BinCellView(bin: $bin)
-                .listRowBackground(Color("primary_bg"))
-                .listRowSeparator(.hidden, edges: .all)
+        List {
+            ForEach ($vm.bins) { $bin in
+                BinCellView(bin: $bin)
+                    .listRowBackground(Color("primary_bg"))
+                    .listRowSeparator(.hidden, edges: .all)
+            }
+            .onDelete(perform: vm.deleteBin)
+
         }
         .listStyle(.plain)
         .scrollContentBackground(.hidden)
