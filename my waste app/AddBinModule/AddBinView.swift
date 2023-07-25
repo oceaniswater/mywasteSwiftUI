@@ -6,22 +6,47 @@
 //
 
 import SwiftUI
+import UIKit
 
 struct AddBinView: View {
     
-    @State var colorSelected: BinColor = .red
-    @State var typeSelected: BinType = .glass
-    
+    @Environment(\.dismiss) private var dismiss
+    @StateObject var vm = AddBinViewModel()
+        
     var body: some View {
         NavigationView {
             ZStack {
                 Color("primary_bg")
                     .edgesIgnoringSafeArea(.all)
                 VStack {
-                    ImageBin(colorSelected: $colorSelected)
-                    ColorPicker(colorSelected: $colorSelected)
-                    TypePicker(typeSelected: $typeSelected)
-                    Spacer()
+                    ImageBin(colorSelected: $vm.colorSelected)
+                    Form {
+                        Section {
+                            ColorPicker(colorSelected: $vm.colorSelected)
+                                .frame(height: 30)
+                            TypePicker(typeSelected: $vm.typeSelected)
+                                .frame(height: 30)
+                        }
+                        Section {
+                            WeekdayList(selectedRows: $vm.selectedRows, days: $vm.days)
+                                .frame(height: 30)
+                        }
+                    }
+                    .scrollContentBackground(.hidden)
+                    Button {
+                        vm.addBin()
+                        dismiss()
+                    } label: {
+                        ZStack {
+                            Rectangle()
+                                .frame(width: 355, height: 55)
+                            .cornerRadius(10.0)
+                            Text("Add bin")
+                                .foregroundColor(.white)
+                        }
+                            
+                    }
+
                 }
             }
         }
@@ -40,7 +65,7 @@ struct ImageBin: View {
         Image(colorSelected.rawValue)
             .resizable()
             .aspectRatio(contentMode: .fit)
-            .frame(maxHeight: 200)
+            .frame(maxHeight: 150)
             .padding()
     }
 }
@@ -56,7 +81,7 @@ struct ColorPicker: View {
             }
         }
         .scrollContentBackground(.hidden)
-        .pickerStyle(.wheel)
+        .frame(height: 80)
     }
 }
 
@@ -71,7 +96,22 @@ struct TypePicker: View {
             }
         }
         .scrollContentBackground(.hidden)
-        .clipped()
-        .pickerStyle(.automatic)
+        .frame(height: 80)
+    }
+}
+
+struct WeekdayList: View {
+    @Binding var selectedRows: Set<UUID>
+    @Binding var days: [WeekDay]
+    
+    var body: some View {
+        List(selection: $selectedRows) {
+            ForEach(days) { day in
+                WeekdayRow(weekday: day, selectedItems: $selectedRows)
+                    
+            }
+        }
+        .listStyle(.automatic)
+        .scrollContentBackground(.hidden)
     }
 }

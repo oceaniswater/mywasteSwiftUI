@@ -18,15 +18,15 @@ struct ContentView: View {
                 Color("primary_bg")
                     .edgesIgnoringSafeArea(.all)
                 VStack {
-                    SettingsBar()
+                    SettingsBarView()
                     
                     if !notificationEnabled {
                         if isNotificationBageShown {
-                            NotificationBage(isNotificationBageShown: $isNotificationBageShown)
+                            NotificationBageView(isNotificationBageShown: $isNotificationBageShown)
                         }
                     }
-                    YourBinsHeader()
-                    BinsList()
+                    YourBinsHeaderView()
+                    BinsListView()
                 }
             }
         }
@@ -39,7 +39,7 @@ struct ContentView_Previews: PreviewProvider {
     }
 }
 
-struct SettingsBar: View {
+struct SettingsBarView: View {
     var body: some View {
         HStack() {
             Spacer()
@@ -58,28 +58,30 @@ struct SettingsBar: View {
     }
 }
 
-struct YourBinsHeader: View {
+struct YourBinsHeaderView: View {
+
     var body: some View {
         HStack {
             Text("Your Bins")
                 .font(.title2)
                 .foregroundColor(.white)
             Spacer()
-            NavigationLink {
-                AddBinView()
-            } label: {
-                Image(systemName: "plus")
-                    .tint(Color("primary_elements"))
-                    .padding()
-                    .cornerRadius(10.0)
-                    .font(.title2)
+                NavigationLink {
+                    AddBinView()
+                } label: {
+                    Image(systemName: "plus")
+                        .tint(Color("primary_elements"))
+                        .padding()
+                        .cornerRadius(10.0)
+                        .font(.title2)
             }
+            
         }
         .padding(.horizontal)
     }
 }
 
-struct NotificationBage: View {
+struct NotificationBageView: View {
     @Binding var isNotificationBageShown: Bool
     
     var body: some View {
@@ -115,18 +117,4 @@ struct NotificationBage: View {
     }
 }
 
-struct BinsList: View {
-    @State var bins: [Bin] = []
-    var body: some View {
-        List(bins) { bin in
-            BinCellView(bin: bin)
-                .listRowBackground(Color("primary_bg"))
-                .listRowSeparator(.hidden, edges: .all)
-        }
-        .listStyle(.plain)
-        .scrollContentBackground(.hidden)
-        .task {
-            bins = Singleton.shared.getBins()
-        }
-    }
-}
+

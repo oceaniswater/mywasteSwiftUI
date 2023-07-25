@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct BinCellView: View {
-    var bin: Bin
+    @Binding var bin: Bin
     
     var body: some View {
         ZStack {
@@ -27,7 +27,7 @@ struct BinCellView: View {
                             Text("days:")
                                 .font(.footnote)
                                 .foregroundColor(.gray)
-                            Text(bin.days.joined(separator: ", "))
+                            Text(bin.days.map({$0.name}).joined(separator: ", "))
                                 .font(.footnote)
                                 .foregroundColor(.white)
                         }
@@ -50,8 +50,8 @@ struct BinCellView: View {
     }
 }
 
-//struct BinCellView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        BinCellView()
-//    }
-//}
+struct BinCellView_Previews: PreviewProvider {
+    static var previews: some View {
+        BinCellView(bin: .constant(Bin(color: .blue, type: .glass, days: [WeekDay(name: "Monday")])))
+    }
+}

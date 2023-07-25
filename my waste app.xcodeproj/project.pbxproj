@@ -15,6 +15,12 @@
 		86DF7EFD2A6EC5A200B304EE /* Bin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86DF7EFC2A6EC5A200B304EE /* Bin.swift */; };
 		86DF7EFF2A6EC66E00B304EE /* Singleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86DF7EFE2A6EC66E00B304EE /* Singleton.swift */; };
 		86DF7F012A6EFBD500B304EE /* AddBinView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86DF7F002A6EFBD500B304EE /* AddBinView.swift */; };
+		86DF7F0A2A6F21F200B304EE /* MultiPicker in Frameworks */ = {isa = PBXBuildFile; productRef = 86DF7F092A6F21F200B304EE /* MultiPicker */; };
+		86DF7F0C2A6F22AC00B304EE /* WeekDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86DF7F0B2A6F22AC00B304EE /* WeekDay.swift */; };
+		86DF7F0F2A6FCD6D00B304EE /* WeekdayRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86DF7F0E2A6FCD6D00B304EE /* WeekdayRow.swift */; };
+		86DF7F132A6FE85C00B304EE /* BinsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86DF7F122A6FE85C00B304EE /* BinsListView.swift */; };
+		86DF7F152A6FE8CE00B304EE /* BinsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86DF7F142A6FE8CE00B304EE /* BinsListViewModel.swift */; };
+		86DF7F172A6FF36F00B304EE /* AddBinViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86DF7F162A6FF36F00B304EE /* AddBinViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +33,11 @@
 		86DF7EFC2A6EC5A200B304EE /* Bin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bin.swift; sourceTree = "<group>"; };
 		86DF7EFE2A6EC66E00B304EE /* Singleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Singleton.swift; sourceTree = "<group>"; };
 		86DF7F002A6EFBD500B304EE /* AddBinView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBinView.swift; sourceTree = "<group>"; };
+		86DF7F0B2A6F22AC00B304EE /* WeekDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekDay.swift; sourceTree = "<group>"; };
+		86DF7F0E2A6FCD6D00B304EE /* WeekdayRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekdayRow.swift; sourceTree = "<group>"; };
+		86DF7F122A6FE85C00B304EE /* BinsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinsListView.swift; sourceTree = "<group>"; };
+		86DF7F142A6FE8CE00B304EE /* BinsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinsListViewModel.swift; sourceTree = "<group>"; };
+		86DF7F162A6FF36F00B304EE /* AddBinViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBinViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -34,6 +45,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				86DF7F0A2A6F21F200B304EE /* MultiPicker in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,6 +93,9 @@
 			isa = PBXGroup;
 			children = (
 				86DF7F002A6EFBD500B304EE /* AddBinView.swift */,
+				86DF7F0D2A6FCD5200B304EE /* Model */,
+				86DF7F0E2A6FCD6D00B304EE /* WeekdayRow.swift */,
+				86DF7F162A6FF36F00B304EE /* AddBinViewModel.swift */,
 			);
 			path = AddBinModule;
 			sourceTree = "<group>";
@@ -88,8 +103,8 @@
 		86DF7F032A6EFBFC00B304EE /* MainScreenModule */ = {
 			isa = PBXGroup;
 			children = (
-				86DF7F052A6EFC3000B304EE /* Model */,
-				86DF7F042A6EFC1400B304EE /* View */,
+				86DF7EEE2A6EA13B00B304EE /* ContentView.swift */,
+				86DF7F112A6FE82900B304EE /* BinList */,
 			);
 			path = MainScreenModule;
 			sourceTree = "<group>";
@@ -98,7 +113,7 @@
 			isa = PBXGroup;
 			children = (
 				86DF7EFA2A6EC4FA00B304EE /* BinCellView.swift */,
-				86DF7EEE2A6EA13B00B304EE /* ContentView.swift */,
+				86DF7F122A6FE85C00B304EE /* BinsListView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -109,6 +124,32 @@
 				86DF7EFC2A6EC5A200B304EE /* Bin.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		86DF7F0D2A6FCD5200B304EE /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				86DF7F0B2A6F22AC00B304EE /* WeekDay.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		86DF7F102A6FE43900B304EE /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				86DF7F142A6FE8CE00B304EE /* BinsListViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		86DF7F112A6FE82900B304EE /* BinList */ = {
+			isa = PBXGroup;
+			children = (
+				86DF7F042A6EFC1400B304EE /* View */,
+				86DF7F052A6EFC3000B304EE /* Model */,
+				86DF7F102A6FE43900B304EE /* ViewModel */,
+			);
+			path = BinList;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -127,6 +168,9 @@
 			dependencies = (
 			);
 			name = "my waste app";
+			packageProductDependencies = (
+				86DF7F092A6F21F200B304EE /* MultiPicker */,
+			);
 			productName = "my waste app";
 			productReference = 86DF7EE92A6EA13B00B304EE /* my waste app.app */;
 			productType = "com.apple.product-type.application";
@@ -155,6 +199,9 @@
 				Base,
 			);
 			mainGroup = 86DF7EE02A6EA13B00B304EE;
+			packageReferences = (
+				86DF7F082A6F21F200B304EE /* XCRemoteSwiftPackageReference "MultiPicker" */,
+			);
 			productRefGroup = 86DF7EEA2A6EA13B00B304EE /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -181,12 +228,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				86DF7F152A6FE8CE00B304EE /* BinsListViewModel.swift in Sources */,
+				86DF7F0C2A6F22AC00B304EE /* WeekDay.swift in Sources */,
 				86DF7EEF2A6EA13B00B304EE /* ContentView.swift in Sources */,
 				86DF7EFD2A6EC5A200B304EE /* Bin.swift in Sources */,
 				86DF7EFB2A6EC4FA00B304EE /* BinCellView.swift in Sources */,
+				86DF7F132A6FE85C00B304EE /* BinsListView.swift in Sources */,
 				86DF7EFF2A6EC66E00B304EE /* Singleton.swift in Sources */,
+				86DF7F0F2A6FCD6D00B304EE /* WeekdayRow.swift in Sources */,
 				86DF7F012A6EFBD500B304EE /* AddBinView.swift in Sources */,
 				86DF7EED2A6EA13B00B304EE /* my_waste_appApp.swift in Sources */,
+				86DF7F172A6FF36F00B304EE /* AddBinViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -387,6 +439,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		86DF7F082A6F21F200B304EE /* XCRemoteSwiftPackageReference "MultiPicker" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/toastersocks/MultiPicker";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		86DF7F092A6F21F200B304EE /* MultiPicker */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 86DF7F082A6F21F200B304EE /* XCRemoteSwiftPackageReference "MultiPicker" */;
+			productName = MultiPicker;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 86DF7EE12A6EA13B00B304EE /* Project object */;
 }

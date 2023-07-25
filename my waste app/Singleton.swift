@@ -10,8 +10,14 @@ import Foundation
 final class Singleton {
     static let shared = Singleton()
     private init() {}
-    private var bins = [Bin(color: .red, type: .glass, days: ["Mon"]), Bin(color: .green, type: .general, days: ["Tue", "Fri"]), Bin(color: .blue, type: .paper, days: ["Mon"] ), Bin(color: .green, type: .metal, days: ["Tue", "Fri"])]
+    private var bins: [Bin] = []
     func getBins() -> [Bin] {
         return bins
     }
+    func addBin(bin: Bin) {
+        let bin = Bin(color: bin.color, type: bin.type, days: bin.days)
+        self.bins.append(bin)
+    }
+    
+    let weekdays = [WeekDay(name: "Sunday"), WeekDay(name: "Monday"), WeekDay(name: "Tuesday"), WeekDay(name: "Wedensday"), WeekDay(name: "Thursday"), WeekDay(name: "Friday"), WeekDay(name: "Saturday")]
 }

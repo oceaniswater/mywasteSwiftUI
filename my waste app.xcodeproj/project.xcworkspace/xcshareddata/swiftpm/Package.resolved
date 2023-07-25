@@ -1,0 +1,23 @@
+{
+  "pins" : [
+    {
+      "identity" : "helpers",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/toastersocks/Helpers.git",
+      "state" : {
+        "revision" : "3005bafcbcc702361c5d0e1ef0a330642aa13301",
+        "version" : "0.4.0"
+      }
+    },
+    {
+      "identity" : "multipicker",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/toastersocks/MultiPicker",
+      "state" : {
+        "branch" : "main",
+        "revision" : "9818f5f2379c3fe6ae5b6b98c32d8ed5a3a0a38b"
+      }
+    }
+  ],
+  "version" : 2
+}

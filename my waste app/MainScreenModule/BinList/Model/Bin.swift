@@ -26,5 +26,5 @@ struct Bin: Identifiable {
     let id = UUID()
     var color: BinColor
     var type: BinType
-    var days: [String]
+    var days: [WeekDay]
 }
