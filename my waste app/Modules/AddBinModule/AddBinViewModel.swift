@@ -37,5 +37,4 @@ final class AddBinViewModel: ObservableObject, AddBinViewModelProtocol {
         //
         return false
     }
-    
 }

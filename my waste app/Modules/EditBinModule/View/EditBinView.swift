@@ -1,40 +1,43 @@
 //
-//  AddBinView.swift
+//  EditBinView.swift
 //  my waste app
 //
-//  Created by Mark Golubev on 24/07/2023.
+//  Created by Mark Golubev on 25/07/2023.
 //
 
 import SwiftUI
-import UIKit
 
-struct AddBinView: View {
+struct EditBinView: View {
     
     @Environment(\.dismiss) private var dismiss
-    @StateObject var vm = AddBinViewModel()
-        
+    @Binding var bin: Bin
+    @StateObject var vm = EditBinViewModel()
+    
     var body: some View {
         NavigationView {
             ZStack {
                 Color("primary_bg")
                     .edgesIgnoringSafeArea(.all)
                 VStack {
-                    ImageBin(colorSelected: $vm.colorSelected)
+                    ImageBin(colorSelected: $bin.color)
                     Form {
                         Section {
-                            ColorPicker(colorSelected: $vm.colorSelected)
+                            ColorPicker(colorSelected: $bin.color)
                                 .frame(height: 30)
-                            TypePicker(typeSelected: $vm.typeSelected)
+                            TypePicker(typeSelected: $bin.type)
                                 .frame(height: 30)
                         }
                         Section {
                             WeekdayList(selectedRows: $vm.selectedRows, days: $vm.days)
                                 .frame(height: 30)
+                                .onAppear {
+                                    vm.makeSetUUID(weekdays: bin.days)
+                                }
                         }
                     }
                     .scrollContentBackground(.hidden)
                     Button {
-                        vm.addBin()
+//                        vm.addBin()
                         dismiss()
                     } label: {
                         ZStack {
@@ -53,13 +56,13 @@ struct AddBinView: View {
     }
 }
 
-struct AddBinView_Previews: PreviewProvider {
+struct EditBinView_Previews: PreviewProvider {
     static var previews: some View {
-        AddBinView()
+        EditBinView(bin: .constant(Bin(color: .black, type: .glass, days: [WeekDay(name: "Monday")])))
     }
 }
 
-struct ImageBin: View {
+struct ImageBinEdit: View {
     @Binding var colorSelected: BinColor
     var body: some View {
         Image(colorSelected.rawValue)
@@ -70,7 +73,7 @@ struct ImageBin: View {
     }
 }
 
-struct ColorPicker: View {
+struct ColorPickerEdit: View {
     @Binding var colorSelected: BinColor
     var body: some View {
         List {
@@ -85,7 +88,7 @@ struct ColorPicker: View {
     }
 }
 
-struct TypePicker: View {
+struct TypePickerEdit: View {
     @Binding var typeSelected: BinType
     var body: some View {
         List {
@@ -100,7 +103,7 @@ struct TypePicker: View {
     }
 }
 
-struct WeekdayList: View {
+struct WeekdayListEdit: View {
     @Binding var selectedRows: Set<UUID>
     @Binding var days: [WeekDay]
     
@@ -115,3 +118,4 @@ struct WeekdayList: View {
         .scrollContentBackground(.hidden)
     }
 }
+

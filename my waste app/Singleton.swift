@@ -23,5 +23,9 @@ final class Singleton {
         self.bins.remove(atOffsets: offsets)
     }
     
+    func editBin(at offsets: IndexSet, bin: Bin) {
+        
+    }
+    
     let weekdays = [WeekDay(name: "Sunday"), WeekDay(name: "Monday"), WeekDay(name: "Tuesday"), WeekDay(name: "Wedensday"), WeekDay(name: "Thursday"), WeekDay(name: "Friday"), WeekDay(name: "Saturday")]
 }

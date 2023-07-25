@@ -11,22 +11,23 @@ struct ContentView: View {
     
     @State var notificationEnabled: Bool = false
     @State var isNotificationBageShown: Bool = true
+    @State private var path = NavigationPath()
     
     var body: some View {
-        NavigationView {
+        NavigationStack(path: $path) {
             ZStack {
                 Color("primary_bg")
                     .edgesIgnoringSafeArea(.all)
                 VStack {
                     SettingsBarView()
-                    
                     if !notificationEnabled {
                         if isNotificationBageShown {
                             NotificationBageView(isNotificationBageShown: $isNotificationBageShown)
                         }
                     }
                     YourBinsHeaderView()
-                    BinsListView()
+                    BinsListView(path: $path)
+                        
                 }
             }
         }
@@ -59,7 +60,6 @@ struct SettingsBarView: View {
 }
 
 struct YourBinsHeaderView: View {
-
     var body: some View {
         HStack {
             Text("Your Bins")

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct BinCellView: View {
     @Binding var bin: Bin
+    @Binding var path: NavigationPath
     
     var body: some View {
         ZStack {
@@ -35,23 +36,22 @@ struct BinCellView: View {
                 }
                 Spacer()
                 Button {
-                    //
+                    path.append(bin)
                 } label: {
                     Image(systemName: "slider.horizontal.3")
                         .foregroundColor(.white)
                 }
-
             }
             .padding(.all, 10)
             .background(Color("primary_cell"))
             .cornerRadius(10.00)
-        .frame(maxHeight: 100.00)
+            .frame(maxHeight: 100.00)
         }
     }
 }
 
 struct BinCellView_Previews: PreviewProvider {
     static var previews: some View {
-        BinCellView(bin: .constant(Bin(color: .blue, type: .glass, days: [WeekDay(name: "Monday")])))
+        BinCellView(bin: .constant(Bin(color: .blue, type: .glass, days: [WeekDay(name: "Monday")])), path: .constant(NavigationPath()))
     }
 }

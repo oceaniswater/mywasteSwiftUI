@@ -10,9 +10,14 @@ import Foundation
 protocol BinsListViewModelProtocol {
     func getBinsList()
     func deleteBin(at offsets: IndexSet)
+    func editBin(at offsets: IndexSet)
 }
 
 final class BinsListViewModel: ObservableObject, BinsListViewModelProtocol {
+    func editBin(at offsets: IndexSet) {
+        //
+    }
+    
     @Published var bins: [Bin] = []
     func getBinsList() {
         bins = Singleton.shared.getBins()
