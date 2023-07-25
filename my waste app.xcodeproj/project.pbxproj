@@ -15,7 +15,6 @@
 		86DF7EFD2A6EC5A200B304EE /* Bin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86DF7EFC2A6EC5A200B304EE /* Bin.swift */; };
 		86DF7EFF2A6EC66E00B304EE /* Singleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86DF7EFE2A6EC66E00B304EE /* Singleton.swift */; };
 		86DF7F012A6EFBD500B304EE /* AddBinView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86DF7F002A6EFBD500B304EE /* AddBinView.swift */; };
-		86DF7F0A2A6F21F200B304EE /* MultiPicker in Frameworks */ = {isa = PBXBuildFile; productRef = 86DF7F092A6F21F200B304EE /* MultiPicker */; };
 		86DF7F0C2A6F22AC00B304EE /* WeekDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86DF7F0B2A6F22AC00B304EE /* WeekDay.swift */; };
 		86DF7F0F2A6FCD6D00B304EE /* WeekdayRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86DF7F0E2A6FCD6D00B304EE /* WeekdayRow.swift */; };
 		86DF7F132A6FE85C00B304EE /* BinsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86DF7F122A6FE85C00B304EE /* BinsListView.swift */; };
@@ -45,7 +44,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				86DF7F0A2A6F21F200B304EE /* MultiPicker in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -169,7 +167,6 @@
 			);
 			name = "my waste app";
 			packageProductDependencies = (
-				86DF7F092A6F21F200B304EE /* MultiPicker */,
 			);
 			productName = "my waste app";
 			productReference = 86DF7EE92A6EA13B00B304EE /* my waste app.app */;
@@ -200,7 +197,6 @@
 			);
 			mainGroup = 86DF7EE02A6EA13B00B304EE;
 			packageReferences = (
-				86DF7F082A6F21F200B304EE /* XCRemoteSwiftPackageReference "MultiPicker" */,
 			);
 			productRefGroup = 86DF7EEA2A6EA13B00B304EE /* Products */;
 			projectDirPath = "";
@@ -439,25 +435,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		86DF7F082A6F21F200B304EE /* XCRemoteSwiftPackageReference "MultiPicker" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/toastersocks/MultiPicker";
-			requirement = {
-				branch = main;
-				kind = branch;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		86DF7F092A6F21F200B304EE /* MultiPicker */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 86DF7F082A6F21F200B304EE /* XCRemoteSwiftPackageReference "MultiPicker" */;
-			productName = MultiPicker;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 86DF7EE12A6EA13B00B304EE /* Project object */;
 }
