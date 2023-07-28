@@ -9,7 +9,7 @@ import Foundation
 
 protocol BinsListViewModelProtocol {
     func getBinsList()
-    func deleteBin(at offsets: IndexSet)
+    func deleteBin(at id: String)
     func editBin(at offsets: IndexSet)
 }
 
@@ -20,11 +20,18 @@ final class BinsListViewModel: ObservableObject, BinsListViewModelProtocol {
     
     @Published var bins: [Bin] = []
     func getBinsList() {
-        bins = Singleton.shared.getBins()
+        DataManager.fetchBinsAndWeekdays(for: "01968288-7A95-4417-B2E6-D585DE49C18C") { bins in
+            self.bins = bins
+        }
     }
     
-    func deleteBin(at offsets: IndexSet) {
-        Singleton.shared.deleteBin(at: offsets)
+    func deleteBin(at id: String) {
+        DataManager.deleteBin(binId: id) { error in
+            print(error)
+        }
     }
     
+    func isEmpty() -> Bool {
+        return bins.isEmpty
+    }
 }

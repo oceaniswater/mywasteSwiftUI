@@ -9,7 +9,7 @@ import SwiftUI
 
 struct WeekdayRow: View {
     var weekday: WeekDay
-    @Binding var selectedItems: Set<UUID>
+    @Binding var selectedItems: Set<String>
     
     var isSelected: Bool {
         selectedItems.contains(weekday.id)
@@ -40,7 +40,7 @@ struct WeekdayRow: View {
 
 struct WeekdayRow_Previews: PreviewProvider {
     static var previews: some View {
-        let id = UUID()
-        WeekdayRow(weekday: WeekDay(name: "Monday"), selectedItems: .constant([id]))
+        let id = "2"
+        WeekdayRow(weekday: WeekDay(id: "2", name: "Monday"), selectedItems: .constant([id]))
     }
 }

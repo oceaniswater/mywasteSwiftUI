@@ -10,7 +10,7 @@ import SwiftUI
 struct EditBinView: View {
     
     @Environment(\.dismiss) private var dismiss
-    @Binding var bin: Bin
+    @State var bin: Bin
     @StateObject var vm = EditBinViewModel()
     
     var body: some View {
@@ -31,7 +31,7 @@ struct EditBinView: View {
                             WeekdayList(selectedRows: $vm.selectedRows, days: $vm.days)
                                 .frame(height: 30)
                                 .onAppear {
-                                    vm.makeSetUUID(weekdays: bin.days)
+                                    vm.makeSelectedRowSet(weekdays: bin.days)
                                 }
                         }
                     }
@@ -49,6 +49,21 @@ struct EditBinView: View {
                         }
                             
                     }
+                    .padding()
+                    Button {
+                        vm.deleteBin(at: bin.id)
+                        dismiss()
+                    } label: {
+                        ZStack {
+                            Rectangle()
+                                .foregroundColor(.red)
+                                .frame(width: 355, height: 55)
+                            .cornerRadius(10.0)
+                            Text("Delete bin")
+                                .foregroundColor(.white)
+                        }
+                            
+                    }
 
                 }
             }
@@ -56,11 +71,11 @@ struct EditBinView: View {
     }
 }
 
-struct EditBinView_Previews: PreviewProvider {
-    static var previews: some View {
-        EditBinView(bin: .constant(Bin(color: .black, type: .glass, days: [WeekDay(name: "Monday")])))
-    }
-}
+//struct EditBinView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        EditBinView(bin: .constant(Bin(color: .black, type: .glass, days: [WeekDay(name: "Monday")])))
+//    }
+//}
 
 struct ImageBinEdit: View {
     @Binding var colorSelected: BinColor
@@ -104,7 +119,7 @@ struct TypePickerEdit: View {
 }
 
 struct WeekdayListEdit: View {
-    @Binding var selectedRows: Set<UUID>
+    @Binding var selectedRows: Set<String>
     @Binding var days: [WeekDay]
     
     var body: some View {

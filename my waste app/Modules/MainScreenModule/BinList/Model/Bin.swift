@@ -22,27 +22,10 @@ enum BinColor: String, CaseIterable, Identifiable {
     var id: Self { self }
 }
 
-class Bin: Identifiable, Hashable {
-    static func == (lhs: Bin, rhs: Bin) -> Bool {
-        lhs.id == rhs.id
-    }
-    
-    let id = UUID()
+struct Bin: Identifiable, Hashable {
+    let id: String
     var color: BinColor
     var type: BinType
-    var days: [WeekDay]
+    var days: [String]
     
-    init(color: BinColor, type: BinType, days: [WeekDay]) {
-        self.color = color
-        self.type = type
-        self.days = days
-    }
-    
-    func hash(into hasher: inout Hasher) {
-        // Combine the hash values of the properties using the Hasher
-        hasher.combine(id)
-        hasher.combine(color)
-        hasher.combine(type)
-        hasher.combine(days)
-    }
 }

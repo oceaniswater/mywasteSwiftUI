@@ -26,6 +26,7 @@
 		86DF7F232A70516B00B304EE /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 86DF7F222A70516B00B304EE /* FirebaseAnalytics */; };
 		86DF7F252A70516B00B304EE /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 86DF7F242A70516B00B304EE /* FirebaseAuth */; };
 		86DF7F272A70516B00B304EE /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 86DF7F262A70516B00B304EE /* FirebaseFirestore */; };
+		86DF7F392A716A1600B304EE /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86DF7F382A716A1600B304EE /* DataManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +47,7 @@
 		86DF7F192A70394800B304EE /* EditBinView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBinView.swift; sourceTree = "<group>"; };
 		86DF7F1D2A703E4000B304EE /* EditBinViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBinViewModel.swift; sourceTree = "<group>"; };
 		86DF7F1F2A70506000B304EE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		86DF7F382A716A1600B304EE /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -191,6 +193,7 @@
 		86DF7F282A7055B800B304EE /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				86DF7F382A716A1600B304EE /* DataManager.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -287,6 +290,7 @@
 				86DF7F152A6FE8CE00B304EE /* BinsListViewModel.swift in Sources */,
 				86DF7F0C2A6F22AC00B304EE /* WeekDay.swift in Sources */,
 				86DF7EEF2A6EA13B00B304EE /* ContentView.swift in Sources */,
+				86DF7F392A716A1600B304EE /* DataManager.swift in Sources */,
 				86DF7EFD2A6EC5A200B304EE /* Bin.swift in Sources */,
 				86DF7F1E2A703E4000B304EE /* EditBinViewModel.swift in Sources */,
 				86DF7EFB2A6EC4FA00B304EE /* BinCellView.swift in Sources */,

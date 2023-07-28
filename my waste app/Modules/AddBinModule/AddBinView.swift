@@ -100,7 +100,7 @@ struct TypePicker: View {
 }
 
 struct WeekdayList: View {
-    @Binding var selectedRows: Set<UUID>
+    @Binding var selectedRows: Set<String>
     @Binding var days: [WeekDay]
     
     var body: some View {

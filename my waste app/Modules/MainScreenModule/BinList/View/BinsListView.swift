@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct BinsListView: View {
-    @StateObject var vm = BinsListViewModel()
+    @EnvironmentObject var vm: BinsListViewModel
+    
     @State var isEmtyList: Bool = true
     @Binding var path: NavigationPath
     
@@ -16,15 +17,14 @@ struct BinsListView: View {
         Group {
             if !vm.bins.isEmpty {
                 List {
-                    ForEach ($vm.bins) { $bin in
-                        BinCellView(bin: $bin, path: $path)
+                    ForEach ($vm.bins) { bin in
+                        BinCellView(bin: bin, path: $path)
                     }
-                    .onDelete(perform: vm.deleteBin)
                     .listRowSeparator(.hidden, edges: .all)
                     .listRowBackground(Color("primary_bg"))
                 }
                 .navigationDestination(for: Bin.self) { bin in
-//                    EditBinView(bin: $bin)
+                    EditBinView(bin: bin)
                 }
                 .listStyle(.plain)
                 .scrollContentBackground(.hidden)
@@ -37,7 +37,10 @@ struct BinsListView: View {
             }
         }
         .onAppear {
-            vm.getBinsList()
+            withAnimation {
+                vm.getBinsList()
+            }
+            
         }
     }
     

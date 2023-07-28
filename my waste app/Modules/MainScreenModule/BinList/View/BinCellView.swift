@@ -28,7 +28,7 @@ struct BinCellView: View {
                             Text("days:")
                                 .font(.footnote)
                                 .foregroundColor(.gray)
-                            Text(bin.days.map({$0.name}).joined(separator: ", "))
+                            Text(bin.days.joined(separator: ", "))
                                 .font(.footnote)
                                 .foregroundColor(.white)
                         }
@@ -50,8 +50,8 @@ struct BinCellView: View {
     }
 }
 
-struct BinCellView_Previews: PreviewProvider {
-    static var previews: some View {
-        BinCellView(bin: .constant(Bin(color: .blue, type: .glass, days: [WeekDay(name: "Monday")])), path: .constant(NavigationPath()))
-    }
-}
+//struct BinCellView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        BinCellView(bin: .constant(Bin(color: .blue, type: .glass, days: [WeekDay(name: "Monday")])), path: .constant(NavigationPath()))
+//    }
+//}

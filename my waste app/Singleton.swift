@@ -15,8 +15,8 @@ final class Singleton {
         return bins
     }
     func addBin(bin: Bin) {
-        let bin = Bin(color: bin.color, type: bin.type, days: bin.days)
-        self.bins.append(bin)
+//        let bin = Bin(color: bin.color, type: bin.type, days: bin.days)
+//        self.bins.append(bin)
     }
     
     func deleteBin(at offsets: IndexSet) {
@@ -26,6 +26,6 @@ final class Singleton {
     func editBin(at offsets: IndexSet, bin: Bin) {
         
     }
-    
-    let weekdays = [WeekDay(name: "Sunday"), WeekDay(name: "Monday"), WeekDay(name: "Tuesday"), WeekDay(name: "Wedensday"), WeekDay(name: "Thursday"), WeekDay(name: "Friday"), WeekDay(name: "Saturday")]
+//    let weekdays: [WeekDay] = []
+    let weekdays = [WeekDay(id: "1", name: "Sunday"), WeekDay(id: "2", name: "Monday"), WeekDay(id: "3", name: "Tuesday"), WeekDay(id: "4", name: "Wedensday"), WeekDay(id: "5", name: "Thursday"), WeekDay(id: "6", name: "Friday"), WeekDay(id: "7", name: "Saturday")]
 }

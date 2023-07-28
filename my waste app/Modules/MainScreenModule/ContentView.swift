@@ -13,6 +13,8 @@ struct ContentView: View {
     @State var isNotificationBageShown: Bool = true
     @State private var path = NavigationPath()
     
+    @EnvironmentObject var viewModel: BinsListViewModel
+    
     var body: some View {
         NavigationStack(path: $path) {
             ZStack {
