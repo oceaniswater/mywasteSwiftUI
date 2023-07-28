@@ -18,7 +18,6 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 
 @main
 struct my_waste_appApp: App {
-    // register app delegate for Firebase setup
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     
     let binsListViewModel = BinsListViewModel()
@@ -26,6 +25,8 @@ struct my_waste_appApp: App {
     var body: some Scene {
         WindowGroup {
             NavigationView {
+                LoginView()
+                NotificationScreenView()
                 ContentView()
                     .environmentObject(binsListViewModel)
             }

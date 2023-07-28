@@ -11,7 +11,7 @@ struct EditBinView: View {
     
     @Environment(\.dismiss) private var dismiss
     @State var bin: Bin
-    @StateObject var vm = EditBinViewModel()
+    @EnvironmentObject var vm: EditBinViewModel
     
     var body: some View {
         NavigationView {
@@ -36,34 +36,36 @@ struct EditBinView: View {
                         }
                     }
                     .scrollContentBackground(.hidden)
-                    Button {
-//                        vm.addBin()
-                        dismiss()
-                    } label: {
-                        ZStack {
-                            Rectangle()
-                                .frame(width: 355, height: 55)
-                            .cornerRadius(10.0)
-                            Text("Add bin")
-                                .foregroundColor(.white)
+                    HStack {
+                        Button {
+                            vm.deleteBin(at: bin.id)
+                            dismiss()
+                        } label: {
+                            ZStack {
+                                Rectangle()
+                                    .foregroundColor(.red)
+                                    .frame(height: 55)
+                                .cornerRadius(10.0)
+                                Text("Delete bin")
+                                    .foregroundColor(.white)
+                            }
                         }
-                            
-                    }
-                    .padding()
-                    Button {
-                        vm.deleteBin(at: bin.id)
-                        dismiss()
-                    } label: {
-                        ZStack {
-                            Rectangle()
-                                .foregroundColor(.red)
-                                .frame(width: 355, height: 55)
-                            .cornerRadius(10.0)
-                            Text("Delete bin")
-                                .foregroundColor(.white)
+                        Button {
+                            vm.updateBin(bin: bin)
+                            dismiss()
+                        } label: {
+                            ZStack {
+                                Rectangle()
+                                    .frame(height: 55)
+                                .cornerRadius(10.0)
+                                Text("Save bin")
+                                    .foregroundColor(.white)
+                            }
+                                
                         }
-                            
                     }
+                    .padding(.top)
+                    .padding(.horizontal)
 
                 }
             }
@@ -71,11 +73,12 @@ struct EditBinView: View {
     }
 }
 
-//struct EditBinView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        EditBinView(bin: .constant(Bin(color: .black, type: .glass, days: [WeekDay(name: "Monday")])))
-//    }
-//}
+struct EditBinView_Previews: PreviewProvider {
+    static var previews: some View {
+        EditBinView(bin: Bin(id: "asjdhhdajksdkjasdu", color: .black, type: .glass, days: [ "Monday"]))
+            .environmentObject(EditBinViewModel())
+    }
+}
 
 struct ImageBinEdit: View {
     @Binding var colorSelected: BinColor

@@ -65,7 +65,6 @@ struct ImageBin: View {
             .resizable()
             .aspectRatio(contentMode: .fit)
             .frame(maxHeight: 150)
-            .padding()
     }
 }
 

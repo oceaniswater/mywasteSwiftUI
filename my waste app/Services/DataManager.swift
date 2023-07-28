@@ -93,4 +93,32 @@ class DataManager {
             completion(nil)
         }
     }
+    
+    static func updateBin(binId: String, newColor: BinColor?, newType: BinType?, newDays: [String]?, completion: @escaping (Error?) -> Void) {
+        let db = Firestore.firestore()
+        let binRef = db.collection("bins").document(binId)
+        
+        var updateData: [String: Any] = [:]
+        
+        if let newColor = newColor {
+            updateData["color"] = newColor.rawValue
+        }
+        
+        if let newType = newType {
+            updateData["type"] = newType.rawValue
+        }
+        
+        if let newDays = newDays {
+            updateData["weekdays"] = newDays
+        }
+        
+        binRef.updateData(updateData) { error in
+            if let error = error {
+                completion(error)
+                return
+            }
+            completion(nil)
+        }
+    }
+
 }

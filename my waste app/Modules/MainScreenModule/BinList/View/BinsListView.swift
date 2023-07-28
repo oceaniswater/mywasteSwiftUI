@@ -13,6 +13,8 @@ struct BinsListView: View {
     @State var isEmtyList: Bool = true
     @Binding var path: NavigationPath
     
+    let editBinVeiwModel = EditBinViewModel()
+    
     var body: some View {
         Group {
             if !vm.bins.isEmpty {
@@ -25,6 +27,7 @@ struct BinsListView: View {
                 }
                 .navigationDestination(for: Bin.self) { bin in
                     EditBinView(bin: bin)
+                        .environmentObject(editBinVeiwModel)
                 }
                 .listStyle(.plain)
                 .scrollContentBackground(.hidden)

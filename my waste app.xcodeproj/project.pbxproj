@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		86BE857B2A73EB8F003650AE /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86BE857A2A73EB8F003650AE /* LoginView.swift */; };
+		86BE857E2A73FDD5003650AE /* NotificationScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86BE857D2A73FDD5003650AE /* NotificationScreenView.swift */; };
 		86DF7EED2A6EA13B00B304EE /* my_waste_appApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86DF7EEC2A6EA13B00B304EE /* my_waste_appApp.swift */; };
 		86DF7EEF2A6EA13B00B304EE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86DF7EEE2A6EA13B00B304EE /* ContentView.swift */; };
 		86DF7EF12A6EA13C00B304EE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 86DF7EF02A6EA13C00B304EE /* Assets.xcassets */; };
@@ -30,6 +32,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		86BE857A2A73EB8F003650AE /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		86BE857D2A73FDD5003650AE /* NotificationScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationScreenView.swift; sourceTree = "<group>"; };
 		86DF7EE92A6EA13B00B304EE /* my waste app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "my waste app.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		86DF7EEC2A6EA13B00B304EE /* my_waste_appApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = my_waste_appApp.swift; sourceTree = "<group>"; };
 		86DF7EEE2A6EA13B00B304EE /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -64,6 +68,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		86BE85792A73EB29003650AE /* LoginModule */ = {
+			isa = PBXGroup;
+			children = (
+				86BE857A2A73EB8F003650AE /* LoginView.swift */,
+			);
+			path = LoginModule;
+			sourceTree = "<group>";
+		};
+		86BE857C2A73FD89003650AE /* NotificationModule */ = {
+			isa = PBXGroup;
+			children = (
+				86BE857D2A73FDD5003650AE /* NotificationScreenView.swift */,
+			);
+			path = NotificationModule;
+			sourceTree = "<group>";
+		};
 		86DF7EE02A6EA13B00B304EE = {
 			isa = PBXGroup;
 			children = (
@@ -201,6 +221,8 @@
 		86DF7F292A7055CC00B304EE /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				86BE85792A73EB29003650AE /* LoginModule */,
+				86BE857C2A73FD89003650AE /* NotificationModule */,
 				86DF7F032A6EFBFC00B304EE /* MainScreenModule */,
 				86DF7F022A6EFBDE00B304EE /* AddBinModule */,
 				86DF7F182A70390100B304EE /* EditBinModule */,
@@ -290,11 +312,13 @@
 				86DF7F152A6FE8CE00B304EE /* BinsListViewModel.swift in Sources */,
 				86DF7F0C2A6F22AC00B304EE /* WeekDay.swift in Sources */,
 				86DF7EEF2A6EA13B00B304EE /* ContentView.swift in Sources */,
+				86BE857B2A73EB8F003650AE /* LoginView.swift in Sources */,
 				86DF7F392A716A1600B304EE /* DataManager.swift in Sources */,
 				86DF7EFD2A6EC5A200B304EE /* Bin.swift in Sources */,
 				86DF7F1E2A703E4000B304EE /* EditBinViewModel.swift in Sources */,
 				86DF7EFB2A6EC4FA00B304EE /* BinCellView.swift in Sources */,
 				86DF7F132A6FE85C00B304EE /* BinsListView.swift in Sources */,
+				86BE857E2A73FDD5003650AE /* NotificationScreenView.swift in Sources */,
 				86DF7EFF2A6EC66E00B304EE /* Singleton.swift in Sources */,
 				86DF7F0F2A6FCD6D00B304EE /* WeekdayRow.swift in Sources */,
 				86DF7F012A6EFBD500B304EE /* AddBinView.swift in Sources */,

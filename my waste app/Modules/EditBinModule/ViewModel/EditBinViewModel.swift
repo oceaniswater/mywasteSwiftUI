@@ -43,7 +43,19 @@ final class EditBinViewModel: EditBinViewModelProtocol {
         }
     }
     
-    deinit {
-        print("EditBinViewModel deinit")
+    func updateBin(bin: Bin) {
+        var weekdays: [WeekDay] = []
+        for row in selectedRows {
+            for day in days {
+                if day.id == row {
+                    weekdays.append(day)
+                }
+            }
+        }
+        let days = weekdays.map({$0.name})
+        
+        DataManager.updateBin(binId: bin.id, newColor: bin.color, newType: bin.type, newDays: days) { error in
+            print(error)
+        }
     }
 }
