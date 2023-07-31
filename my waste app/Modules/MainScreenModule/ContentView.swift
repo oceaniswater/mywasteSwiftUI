@@ -32,13 +32,18 @@ struct ContentView: View {
                         
                 }
             }
+            .navigationBarBackButtonHidden(true)
+            .navigationBarHidden(true)
         }
+        .navigationBarBackButtonHidden(true)
+        .navigationBarHidden(true)
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+            .environmentObject(BinsListViewModel())
     }
 }
 

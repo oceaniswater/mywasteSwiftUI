@@ -7,7 +7,12 @@
 
 import SwiftUI
 
+
 struct LoginView: View {
+    @Binding var showLoginScreen: Bool
+    @Binding var showNotificationView: Bool
+    @StateObject var vm = AuthViewModel()
+    
     var body: some View {
         ZStack {
             Color("primary_bg")
@@ -23,23 +28,23 @@ struct LoginView: View {
                     .multilineTextAlignment(.center)
                     .padding()
                 Button {
-                    //
-                } label: {
-                    ZStack {
-                        Rectangle()
-                            .foregroundColor(.white)
-                            .cornerRadius(10)
-                            .frame(width: 250,height: 44)
-                        HStack {
-                            Image(systemName: "apple.logo")
-                            Text("Sign in with Apple")
+                    //                        UserDefaults.standard.set("test1", forKey: "userId")
+                    Task {
+                        do {
+                            try await vm.signInApple()
+                            showLoginScreen = false
+                            showNotificationView = true
+                        } catch {
+                            
                         }
-                        .foregroundColor(.black)
                     }
+                } label: {
+                    SignInWithAppleButtonViewRepresentable(type: .signIn, style: .white)
+                        .allowsTightening(false)
+                        .frame(width: 250,height: 44)
                 }
                 Spacer()
 
-                
             }
         }
     }
@@ -47,6 +52,6 @@ struct LoginView: View {
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
-        LoginView()
+        LoginView(showLoginScreen: .constant(true), showNotificationView: .constant(false))
     }
 }

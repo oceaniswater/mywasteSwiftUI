@@ -7,13 +7,13 @@
 
 import Foundation
 
-protocol BinsListViewModelProtocol {
+protocol BinsListViewModelProtocol: ObservableObject {
     func getBinsList()
     func deleteBin(at id: String)
     func editBin(at offsets: IndexSet)
 }
 
-final class BinsListViewModel: ObservableObject, BinsListViewModelProtocol {
+final class BinsListViewModel:  BinsListViewModelProtocol {
     func editBin(at offsets: IndexSet) {
         //
     }

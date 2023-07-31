@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		860620082A77B58D00E8123C /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 860620072A77B58D00E8123C /* RootView.swift */; };
+		8606200A2A77C27800E8123C /* AuthenticationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 860620092A77C27800E8123C /* AuthenticationManager.swift */; };
+		8606200D2A77D74700E8123C /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8606200C2A77D74700E8123C /* LoginViewModel.swift */; };
+		860620102A77EC5200E8123C /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8606200F2A77EC5200E8123C /* Utilities.swift */; };
+		860620122A77F27000E8123C /* SignInAppleHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 860620112A77F27000E8123C /* SignInAppleHelper.swift */; };
 		86BE857B2A73EB8F003650AE /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86BE857A2A73EB8F003650AE /* LoginView.swift */; };
 		86BE857E2A73FDD5003650AE /* NotificationScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86BE857D2A73FDD5003650AE /* NotificationScreenView.swift */; };
 		86DF7EED2A6EA13B00B304EE /* my_waste_appApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86DF7EEC2A6EA13B00B304EE /* my_waste_appApp.swift */; };
@@ -32,6 +37,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		860620072A77B58D00E8123C /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
+		860620092A77C27800E8123C /* AuthenticationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationManager.swift; sourceTree = "<group>"; };
+		8606200B2A77D00900E8123C /* my waste app.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "my waste app.entitlements"; sourceTree = "<group>"; };
+		8606200C2A77D74700E8123C /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		8606200F2A77EC5200E8123C /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		860620112A77F27000E8123C /* SignInAppleHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInAppleHelper.swift; sourceTree = "<group>"; };
 		86BE857A2A73EB8F003650AE /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		86BE857D2A73FDD5003650AE /* NotificationScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationScreenView.swift; sourceTree = "<group>"; };
 		86DF7EE92A6EA13B00B304EE /* my waste app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "my waste app.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -68,10 +79,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8606200E2A77EC3500E8123C /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				8606200F2A77EC5200E8123C /* Utilities.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
 		86BE85792A73EB29003650AE /* LoginModule */ = {
 			isa = PBXGroup;
 			children = (
 				86BE857A2A73EB8F003650AE /* LoginView.swift */,
+				8606200C2A77D74700E8123C /* LoginViewModel.swift */,
 			);
 			path = LoginModule;
 			sourceTree = "<group>";
@@ -103,6 +123,8 @@
 		86DF7EEB2A6EA13B00B304EE /* my waste app */ = {
 			isa = PBXGroup;
 			children = (
+				8606200E2A77EC3500E8123C /* Utilities */,
+				8606200B2A77D00900E8123C /* my waste app.entitlements */,
 				86DF7EEC2A6EA13B00B304EE /* my_waste_appApp.swift */,
 				86DF7F292A7055CC00B304EE /* Modules */,
 				86DF7F282A7055B800B304EE /* Services */,
@@ -110,6 +132,7 @@
 				86DF7EF22A6EA13C00B304EE /* Preview Content */,
 				86DF7EFE2A6EC66E00B304EE /* Singleton.swift */,
 				86DF7F1F2A70506000B304EE /* GoogleService-Info.plist */,
+				860620072A77B58D00E8123C /* RootView.swift */,
 			);
 			path = "my waste app";
 			sourceTree = "<group>";
@@ -214,6 +237,8 @@
 			isa = PBXGroup;
 			children = (
 				86DF7F382A716A1600B304EE /* DataManager.swift */,
+				860620092A77C27800E8123C /* AuthenticationManager.swift */,
+				860620112A77F27000E8123C /* SignInAppleHelper.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -312,18 +337,23 @@
 				86DF7F152A6FE8CE00B304EE /* BinsListViewModel.swift in Sources */,
 				86DF7F0C2A6F22AC00B304EE /* WeekDay.swift in Sources */,
 				86DF7EEF2A6EA13B00B304EE /* ContentView.swift in Sources */,
+				8606200A2A77C27800E8123C /* AuthenticationManager.swift in Sources */,
+				860620082A77B58D00E8123C /* RootView.swift in Sources */,
 				86BE857B2A73EB8F003650AE /* LoginView.swift in Sources */,
 				86DF7F392A716A1600B304EE /* DataManager.swift in Sources */,
 				86DF7EFD2A6EC5A200B304EE /* Bin.swift in Sources */,
 				86DF7F1E2A703E4000B304EE /* EditBinViewModel.swift in Sources */,
 				86DF7EFB2A6EC4FA00B304EE /* BinCellView.swift in Sources */,
 				86DF7F132A6FE85C00B304EE /* BinsListView.swift in Sources */,
+				860620122A77F27000E8123C /* SignInAppleHelper.swift in Sources */,
 				86BE857E2A73FDD5003650AE /* NotificationScreenView.swift in Sources */,
 				86DF7EFF2A6EC66E00B304EE /* Singleton.swift in Sources */,
 				86DF7F0F2A6FCD6D00B304EE /* WeekdayRow.swift in Sources */,
 				86DF7F012A6EFBD500B304EE /* AddBinView.swift in Sources */,
 				86DF7EED2A6EA13B00B304EE /* my_waste_appApp.swift in Sources */,
 				86DF7F1A2A70394800B304EE /* EditBinView.swift in Sources */,
+				8606200D2A77D74700E8123C /* LoginViewModel.swift in Sources */,
+				860620102A77EC5200E8123C /* Utilities.swift in Sources */,
 				86DF7F172A6FF36F00B304EE /* AddBinViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -450,6 +480,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "my waste app/my waste app.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"my waste app/Preview Content\"";
@@ -468,6 +500,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.markgolubev.my-waste-app";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -479,6 +512,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "my waste app/my waste app.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"my waste app/Preview Content\"";
@@ -497,6 +532,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.markgolubev.my-waste-app";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

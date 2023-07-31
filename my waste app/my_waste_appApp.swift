@@ -24,12 +24,13 @@ struct my_waste_appApp: App {
     
     var body: some Scene {
         WindowGroup {
-            NavigationView {
-                LoginView()
-                NotificationScreenView()
-                ContentView()
-                    .environmentObject(binsListViewModel)
-            }
+//                if let _ = UserDefaults.standard.string(forKey: "userId") {
+//                    ContentView()
+//                        .environmentObject(binsListViewModel)
+//                } else {
+//                    LoginView()
+//                }
+            RootView()
         }
     }
 }

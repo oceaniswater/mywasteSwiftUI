@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct BinsListView: View {
-    @EnvironmentObject var vm: BinsListViewModel
+    @StateObject var vm: BinsListViewModel = BinsListViewModel()
     
     @State var isEmtyList: Bool = true
     @Binding var path: NavigationPath
