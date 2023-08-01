@@ -11,6 +11,7 @@ struct ContentView: View {
     
     @State var notificationEnabled: Bool = false
     @State var isNotificationBageShown: Bool = true
+    @State var showSettingsScreen: Bool = false
     @State private var path = NavigationPath()
     
     @EnvironmentObject var viewModel: BinsListViewModel
@@ -21,7 +22,7 @@ struct ContentView: View {
                 Color("primary_bg")
                     .edgesIgnoringSafeArea(.all)
                 VStack {
-                    SettingsBarView()
+                    SettingsBarView(showSettingsScreen: $showSettingsScreen)
                     if !notificationEnabled {
                         if isNotificationBageShown {
                             NotificationBageView(isNotificationBageShown: $isNotificationBageShown)
@@ -30,6 +31,11 @@ struct ContentView: View {
                     YourBinsHeaderView()
                     BinsListView(path: $path)
                         
+                }
+            }
+            .fullScreenCover(isPresented: $showSettingsScreen) {
+                NavigationStack {
+                    SettingsView(showSettingsScreen: $showSettingsScreen)
                 }
             }
             .navigationBarBackButtonHidden(true)
@@ -48,11 +54,12 @@ struct ContentView_Previews: PreviewProvider {
 }
 
 struct SettingsBarView: View {
+    @Binding var showSettingsScreen: Bool
     var body: some View {
         HStack() {
             Spacer()
             Button {
-                // action
+                showSettingsScreen = true
             } label: {
                 Image(systemName: "gear")
                     .font(.title2)

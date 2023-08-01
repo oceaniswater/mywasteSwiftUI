@@ -20,6 +20,8 @@ final class AddBinViewModel: ObservableObject, AddBinViewModelProtocol {
     @Published var selectedRows = Set<String>()
     @Published var days: [WeekDay] = Singleton.shared.weekdays
     
+    let userId = UserDefaults.standard.string(forKey: "userId")
+    
     func addBin() {
         var weekdays: [WeekDay] = []
         for row in selectedRows {
@@ -33,7 +35,7 @@ final class AddBinViewModel: ObservableObject, AddBinViewModelProtocol {
         let id = UUID()
         let bin = Bin(id: "\(id)", color: colorSelected, type: typeSelected, days: days)
         
-        DataManager.addBin(bin: bin, for: "01968288-7A95-4417-B2E6-D585DE49C18C") { error in
+        DataManager.addBin(bin: bin, for: userId ?? "") { error in
             print(error)
         }
     }

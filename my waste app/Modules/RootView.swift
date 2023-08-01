@@ -30,7 +30,6 @@ struct RootView: View {
         .fullScreenCover(isPresented: $showLoginView) {
             NavigationStack {
                 LoginView(showLoginScreen: $showLoginView, showNotificationView: $showNotificationView)
-//                    .transition(.move(edge: .top))
             }
         }
         .fullScreenCover(isPresented: $showNotificationView) {

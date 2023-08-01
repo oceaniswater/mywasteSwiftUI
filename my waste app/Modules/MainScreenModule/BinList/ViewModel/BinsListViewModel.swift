@@ -14,13 +14,14 @@ protocol BinsListViewModelProtocol: ObservableObject {
 }
 
 final class BinsListViewModel:  BinsListViewModelProtocol {
+    
     func editBin(at offsets: IndexSet) {
         //
     }
     
     @Published var bins: [Bin] = []
     func getBinsList() {
-        DataManager.fetchBinsAndWeekdays(for: "01968288-7A95-4417-B2E6-D585DE49C18C") { bins in
+        DataManager.fetchBinsAndWeekdays(for: UserDefaults.standard.string(forKey: "userId") ?? "") { bins in
             self.bins = bins
         }
     }

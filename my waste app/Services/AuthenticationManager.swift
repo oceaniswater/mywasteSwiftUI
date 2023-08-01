@@ -45,6 +45,10 @@ final class AuthenticationManager {
         }
         return providers
     }
+    
+    func signOut() throws {
+        try Auth.auth().signOut()
+    }
 }
 
 extension AuthenticationManager {

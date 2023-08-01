@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct NotificationScreenView: View {
+    @StateObject private var nm = NotificationManager()
 //    @State private var showMainScreen = false
     @Binding var showNotificationView: Bool
 //    let binsListViewModel = BinsListViewModel()
@@ -28,7 +29,11 @@ struct NotificationScreenView: View {
                         .multilineTextAlignment(.center)
                         .padding()
                     Button {
-                        //
+                        Task {
+                            await nm.request()
+                            showNotificationView = false
+
+                        }
                     } label: {
                         ZStack {
                             Rectangle()
@@ -42,10 +47,9 @@ struct NotificationScreenView: View {
                             .foregroundColor(.black)
                         }
                     }
+                    .disabled(nm.hasPermisions)
                     Button {
-                        withAnimation {
-                            showNotificationView = false
-                        }
+                        showNotificationView = false
                     } label: {
                         ZStack {
                             Rectangle()
@@ -62,6 +66,9 @@ struct NotificationScreenView: View {
                         }
                     }
                     Spacer()
+                }
+                .task {
+                    await nm.getAuthStatus()
                 }
 //                .overlay(
 //                    Group {
