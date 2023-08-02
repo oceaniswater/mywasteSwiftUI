@@ -12,12 +12,12 @@ struct ContentView: View {
     @State var notificationEnabled: Bool = false
     @State var isNotificationBageShown: Bool = true
     @State var showSettingsScreen: Bool = false
-    @State private var path = NavigationPath()
+    @StateObject var routerManager = NavigationRouter()
     
     @EnvironmentObject var viewModel: BinsListViewModel
     
     var body: some View {
-        NavigationStack(path: $path) {
+        NavigationStack(path: $routerManager.routes) {
             ZStack {
                 Color("primary_bg")
                     .edgesIgnoringSafeArea(.all)
@@ -29,20 +29,23 @@ struct ContentView: View {
                         }
                     }
                     YourBinsHeaderView()
-                    BinsListView(path: $path)
+                    BinsListView(path: $routerManager.routes)
                         
                 }
             }
-            .fullScreenCover(isPresented: $showSettingsScreen) {
-                NavigationStack {
-                    SettingsView(showSettingsScreen: $showSettingsScreen)
-                }
-            }
-            .navigationBarBackButtonHidden(true)
-            .navigationBarHidden(true)
+            .sheet(isPresented: $showSettingsScreen, content: {
+                SettingsView(showSettingsScreen: $showSettingsScreen)
+            })
+//            .fullScreenCover(isPresented: $showSettingsScreen) {
+//                NavigationStack {
+//                    SettingsView(showSettingsScreen: $showSettingsScreen)
+//                }
+//            }
+//            .navigationBarBackButtonHidden(true)
+//            .navigationBarHidden(true)
         }
-        .navigationBarBackButtonHidden(true)
-        .navigationBarHidden(true)
+//        .navigationBarBackButtonHidden(true)
+//        .navigationBarHidden(true)
     }
 }
 

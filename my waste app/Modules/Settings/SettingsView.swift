@@ -12,6 +12,8 @@ struct SettingsView: View {
     @StateObject var vm = SettingsViewModel()
     @Binding var showSettingsScreen: Bool
     @State var showRoot: Bool = false
+    @State var isNotificationEnabled: Bool = false
+    @State var selectedDate = Date()
     
     var body: some View {
         ZStack {
@@ -23,21 +25,26 @@ struct SettingsView: View {
                     .frame(alignment: .leading)
                     .foregroundColor(.white)
                 List {
-                    Text("Notifications")
-                    Text("Time")
-                }
-                Button("Log out") {
-                    Task {
-                        do {
-                            try await vm.signOut()
-                            UserDefaults.standard.removeObject(forKey: "userId")
-                            self.showSettingsScreen = false
-                        } catch {
-                            
+                    Section {
+                        Toggle("Notifications", isOn: $isNotificationEnabled)
+                        DatePicker("Time", selection: $selectedDate, displayedComponents: .hourAndMinute)
+                    }
+                    Button("Log out") {
+                        Task {
+                            do {
+                                try await vm.signOut()
+                                UserDefaults.standard.removeObject(forKey: "userId")
+                                self.showSettingsScreen = false
+                            } catch {
+                                
+                            }
                         }
                     }
                 }
-                Spacer()
+
+                .listStyle(.grouped)
+                .scrollContentBackground(.hidden)
+
                 Button("Back") {
                     withAnimation {
                         showSettingsScreen = false
