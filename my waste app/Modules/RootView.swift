@@ -35,7 +35,6 @@ struct RootView: View {
         .fullScreenCover(isPresented: $showNotificationView) {
             NavigationView {
                 NotificationScreenView(showNotificationView: $showNotificationView)
-                    .transition(.move(edge: .top))
             }
         }
     }

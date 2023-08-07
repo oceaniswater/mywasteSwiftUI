@@ -9,9 +9,10 @@ import SwiftUI
 
 struct NotificationScreenView: View {
     @StateObject private var nm = NotificationManager()
-//    @State private var showMainScreen = false
     @Binding var showNotificationView: Bool
-//    let binsListViewModel = BinsListViewModel()
+    @State var isRotating = false
+
+    
     
     var body: some View {
         NavigationView {
@@ -20,10 +21,16 @@ struct NotificationScreenView: View {
                     .edgesIgnoringSafeArea(.all)
                 VStack {
                     Spacer()
-                    Image("yellow")
+                    Image(systemName: "bell.fill")
                         .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(maxHeight: 150)
+                        .frame(width: 70, height: 70)
+                        .foregroundColor(.yellow)
+                        .rotationEffect(.degrees(isRotating ? 45.0 : -20.0))
+                        .onAppear {
+                            withAnimation(.easeInOut(duration: 1.0).repeatForever(autoreverses: true)) {
+                                self.isRotating = true
+                            }
+                        }
                     Text("Turn on your push notificatons\nto do not miss collection day. You can do it later in settings.")
                         .foregroundColor(.white)
                         .multilineTextAlignment(.center)
@@ -69,15 +76,6 @@ struct NotificationScreenView: View {
                 .task {
                     await nm.getAuthStatus()
                 }
-//                .overlay(
-//                    Group {
-//                        if showMainScreen {
-//                            ContentView()
-//                                .environmentObject(binsListViewModel)
-//                                .transition(.move(edge: .top))
-//                        }
-//                    }
-//                )
             }
         }
     }
