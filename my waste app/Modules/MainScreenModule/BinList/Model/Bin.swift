@@ -8,17 +8,13 @@
 import Foundation
 
 enum BinType: String, CaseIterable, Identifiable {
-    case general = "General waste"
-    case paper = "Paper waste"
-    case glass = "Glass waste"
-    case plastic = "Plastic waste"
-    case metal = "Metal waste"
+    case general, paper, glass, plastic, metal, cardboard, electronics, garden, organic, recycle
     
     var id: Self { self }
 }
 
 enum BinColor: String, CaseIterable, Identifiable {
-    case green, red, blue, yellow, black, orange
+    case green, red, blue, yellow, black, orange, brown, gray, purple, purple2, pink
     var id: Self { self }
 }
 

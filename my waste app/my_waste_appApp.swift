@@ -42,6 +42,10 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
 extension AppDelegate: MessagingDelegate {
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         Messaging.messaging().apnsToken = deviceToken
+        guard let userId = UserDefaults.standard.string(forKey: "userId") else { return }
+        DataManager.setUser(forUserId: userId, withFcmToken: deviceToken.description) { error in
+            //
+        }
     }
     
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {

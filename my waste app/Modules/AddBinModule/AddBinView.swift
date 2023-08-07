@@ -18,7 +18,7 @@ struct AddBinView: View {
                 Color("primary_bg")
                     .edgesIgnoringSafeArea(.all)
                 VStack {
-                    ImageBin(colorSelected: $vm.colorSelected)
+                    ImageBin(colorSelected: $vm.colorSelected, typeSelected: $vm.typeSelected)
                     Form {
                         Section {
                             ColorPicker(colorSelected: $vm.colorSelected)
@@ -60,11 +60,19 @@ struct AddBinView_Previews: PreviewProvider {
 
 struct ImageBin: View {
     @Binding var colorSelected: BinColor
+    @Binding var typeSelected: BinType
+    
     var body: some View {
-        Image(colorSelected.rawValue)
-            .resizable()
-            .aspectRatio(contentMode: .fit)
+        ZStack {
+            Image(colorSelected.rawValue)
+                .resizable()
+                .aspectRatio(contentMode: .fit)
             .frame(maxHeight: 150)
+            Image(typeSelected.rawValue)
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(maxWidth: 55)
+        }
     }
 }
 

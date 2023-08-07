@@ -19,6 +19,10 @@ final class AuthViewModel: NSObject, ObservableObject {
         let tokens = try await helper.startingSigInWithAplleFlow()
         let user = try await AuthenticationManager.shared.signInWithApple(tokens: tokens)
         UserDefaults.standard.set(user.uid, forKey: "userId")
+        DataManager.setUser(forUserId: user.uid, withFcmToken: nil) { error in
+            //
+        }
+        
     }
   
 }

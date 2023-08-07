@@ -9,48 +9,58 @@ import SwiftUI
 
 struct SettingsView: View {
     
+    @Environment(\.dismiss) private var dismiss
     @StateObject var vm = SettingsViewModel()
     @Binding var showSettingsScreen: Bool
     @State var showRoot: Bool = false
-    @State var isNotificationEnabled: Bool = false
-    @State var selectedDate = Date()
     
     var body: some View {
-        ZStack {
-            Color("primary_bg")
-                .ignoresSafeArea()
-            VStack {
-                Text("Settings")
-                    .font(.largeTitle)
-                    .frame(alignment: .leading)
-                    .foregroundColor(.white)
-                List {
-                    Section {
-                        Toggle("Notifications", isOn: $isNotificationEnabled)
-                        DatePicker("Time", selection: $selectedDate, displayedComponents: .hourAndMinute)
-                    }
-                    Button("Log out") {
-                        Task {
-                            do {
-                                try await vm.signOut()
-                                UserDefaults.standard.removeObject(forKey: "userId")
-                                self.showSettingsScreen = false
-                            } catch {
-                                
+        NavigationView {
+            ZStack {
+                Color("primary_bg")
+                    .ignoresSafeArea()
+                VStack(alignment: .leading) {
+                    Text("Settings")
+                        .font(.largeTitle)
+                        .frame(alignment: .leading)
+                        .foregroundColor(.white)
+                        .padding()
+                    Form {
+                        Section {
+                            Toggle("Notifications", isOn: $vm.isNotificationEnabled)
+                                .disabled(vm.isNotificationEnabled)
+                        }
+                        Section {
+                            DatePicker("Time", selection: $vm.selectedDate, displayedComponents: .hourAndMinute)
+                        }
+                        .onAppear {
+                            Task {
+                                vm.getDate()
                             }
                         }
+                        
+                        Button("Log out") {
+                            Task {
+                                do {
+                                    try await vm.signOut()
+                                    UserDefaults.standard.removeObject(forKey: "userId")
+                                    dismiss()
+                                } catch {
+                                    
+                                }
+                            }
+                        }
+                        Button("Save") {
+                            Task {
+                                try vm.saveSettings()
+                                dismiss()
+                            }
+                        }
+                        .foregroundColor(.red)
                     }
+                    .listStyle(.plain)
+                    .scrollContentBackground(.hidden)
                 }
-
-                .listStyle(.grouped)
-                .scrollContentBackground(.hidden)
-
-                Button("Back") {
-                    withAnimation {
-                        showSettingsScreen = false
-                    }
-                }
-                .foregroundColor(.red)
             }
         }
     }

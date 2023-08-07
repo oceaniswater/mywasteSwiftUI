@@ -19,7 +19,7 @@ struct EditBinView: View {
                 Color("primary_bg")
                     .edgesIgnoringSafeArea(.all)
                 VStack {
-                    ImageBin(colorSelected: $bin.color)
+                    ImageBin(colorSelected: $bin.color, typeSelected: $bin.type)
                     Form {
                         Section {
                             ColorPicker(colorSelected: $bin.color)

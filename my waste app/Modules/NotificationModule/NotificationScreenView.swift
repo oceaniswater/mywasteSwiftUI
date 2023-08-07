@@ -47,7 +47,6 @@ struct NotificationScreenView: View {
                             .foregroundColor(.black)
                         }
                     }
-                    .disabled(nm.hasPermisions)
                     Button {
                         showNotificationView = false
                     } label: {

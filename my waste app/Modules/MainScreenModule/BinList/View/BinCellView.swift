@@ -15,25 +15,27 @@ struct BinCellView: View {
         ZStack {
             Color(.clear)
             HStack(alignment: .top) {
-                Image(bin.color.rawValue)
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 70, alignment: .center)
-                VStack(alignment: .leading) {
-                    Text("\(bin.type.rawValue) bin")
-                        .foregroundColor(.white)
-                    Spacer()
-                    HStack {
-                        HStack {
-                            Text("days:")
-                                .font(.footnote)
-                                .foregroundColor(.gray)
-                            Text(bin.days.joined(separator: ", "))
-                                .font(.footnote)
-                                .foregroundColor(.white)
-                        }
-                    }
+                ZStack {
+                    Image(bin.color.rawValue)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 70, alignment: .center)
+                    Image(bin.type.rawValue)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(maxWidth: 25)
                 }
+                VStack(alignment: .leading, spacing: 4.0) {
+                    Text("\(bin.type.rawValue.capitalized(with: .current)) waste bin")
+                        .foregroundColor(.white)
+                    Text(bin.days.joined(separator: ", "))
+                        .lineLimit(nil)
+                        .multilineTextAlignment(.leading)
+                        .font(.footnote)
+                        .foregroundColor(.gray)
+                        .frame(height: 35.0)
+                }
+                .padding()
                 Spacer()
                 Button {
                     path.append(bin)
@@ -50,8 +52,9 @@ struct BinCellView: View {
     }
 }
 
-//struct BinCellView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        BinCellView(bin: .constant(Bin(color: .blue, type: .glass, days: [WeekDay(name: "Monday")])), path: .constant(NavigationPath()))
-//    }
-//}
+struct BinCellView_Previews: PreviewProvider {
+    static var previews: some View {
+        BinCellView(bin: .constant(Bin(id: "123", color: .blue, type: .glass, days: ["Sunday", "Monday"])), path: .constant(NavigationPath()))
+            .padding()
+    }
+}
