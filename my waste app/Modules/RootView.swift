@@ -28,12 +28,12 @@ struct RootView: View {
             self.showLoginView = authUser == nil
         }
         .fullScreenCover(isPresented: $showLoginView) {
-            NavigationStack {
+            NavigationView {
                 LoginView(showLoginScreen: $showLoginView, showNotificationView: $showNotificationView)
             }
         }
         .fullScreenCover(isPresented: $showNotificationView) {
-            NavigationStack {
+            NavigationView {
                 NotificationScreenView(showNotificationView: $showNotificationView)
                     .transition(.move(edge: .top))
             }

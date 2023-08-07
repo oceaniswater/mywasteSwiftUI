@@ -12,6 +12,7 @@ struct LoginView: View {
     @Binding var showLoginScreen: Bool
     @Binding var showNotificationView: Bool
     @StateObject var vm = AuthViewModel()
+    @State var isRotating = false
     
     var body: some View {
         ZStack {
@@ -19,10 +20,23 @@ struct LoginView: View {
                 .edgesIgnoringSafeArea(.all)
             VStack {
                 Spacer()
-                Image("red")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(maxHeight: 150)
+                ZStack {
+                    Image("red")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(maxHeight: 150)
+                    Image("recycle")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(maxWidth: 55)
+                        .offset(y: 10)
+                }
+                .rotationEffect(.degrees(isRotating ? 30.0 : 0.0))
+                .onAppear {
+                    withAnimation(.easeInOut(duration: 1.0).repeatForever(autoreverses: true)) {
+                        self.isRotating = true
+                    }
+                }
                 Text("Simply login with your Apple id\nto save your bins. We don't store your personal data.")
                     .foregroundColor(.white)
                     .multilineTextAlignment(.center)
