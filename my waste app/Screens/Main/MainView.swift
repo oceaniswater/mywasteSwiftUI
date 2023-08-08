@@ -7,62 +7,46 @@
 
 import SwiftUI
 
-struct ContentView: View {
-    
-    @State var notificationEnabled: Bool = false
-    @State var isNotificationBageShown: Bool = true
+struct MainView: View {
+
     @State var showSettingsScreen: Bool = false
-    @StateObject var routerManager = NavigationRouter()
     
-    @EnvironmentObject var viewModel: BinsListViewModel
+    @EnvironmentObject var vm: MainViewModel
     
     var body: some View {
-        NavigationStack(path: $routerManager.routes) {
             ZStack {
                 Color("primary_bg")
                     .edgesIgnoringSafeArea(.all)
                 VStack {
-                    SettingsBarView(showSettingsScreen: $showSettingsScreen)
-                    if !notificationEnabled {
-                        if isNotificationBageShown {
-                            NotificationBageView(isNotificationBageShown: $isNotificationBageShown)
+                    SettingsBarView()
+                    if !vm.notificationEnabled {
+                        if vm.isNotificationBageShown {
+                            NotificationBageView(isNotificationBageShown: $vm.isNotificationBageShown)
                         }
                     }
                     YourBinsHeaderView()
-                    BinsListView(path: $routerManager.routes)
+                    BinsListView()
                         
                 }
             }
-            .sheet(isPresented: $showSettingsScreen, content: {
-                SettingsView(showSettingsScreen: $showSettingsScreen)
-            })
-//            .fullScreenCover(isPresented: $showSettingsScreen) {
-//                NavigationStack {
-//                    SettingsView(showSettingsScreen: $showSettingsScreen)
-//                }
-//            }
-//            .navigationBarBackButtonHidden(true)
-//            .navigationBarHidden(true)
-        }
-//        .navigationBarBackButtonHidden(true)
-//        .navigationBarHidden(true)
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
-            .environmentObject(BinsListViewModel())
+        MainView()
+            .environmentObject(MainViewModel())
     }
 }
 
 struct SettingsBarView: View {
-    @Binding var showSettingsScreen: Bool
+    @EnvironmentObject var vm: MainViewModel
+
     var body: some View {
         HStack() {
             Spacer()
             Button {
-                showSettingsScreen = true
+                vm.showSettings()
             } label: {
                 Image(systemName: "gear")
                     .font(.title2)
@@ -77,22 +61,23 @@ struct SettingsBarView: View {
 }
 
 struct YourBinsHeaderView: View {
+    @EnvironmentObject var vm: MainViewModel
+    
     var body: some View {
         HStack {
             Text("Your Bins")
                 .font(.title2)
                 .foregroundColor(.white)
             Spacer()
-                NavigationLink {
-                    AddBinView()
-                } label: {
-                    Image(systemName: "plus")
-                        .tint(Color("primary_elements"))
-                        .padding()
-                        .cornerRadius(10.0)
-                        .font(.title2)
+            Button {
+                vm.showAddBinView()
+            } label: {
+                Image(systemName: "plus")
+                    .tint(Color("primary_elements"))
+                    .padding()
+                    .cornerRadius(10.0)
+                    .font(.title2)
             }
-            
         }
         .padding(.horizontal)
     }

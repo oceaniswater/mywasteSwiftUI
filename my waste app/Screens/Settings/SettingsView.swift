@@ -10,9 +10,7 @@ import SwiftUI
 struct SettingsView: View {
     
     @Environment(\.dismiss) private var dismiss
-    @StateObject var vm = SettingsViewModel()
-    @Binding var showSettingsScreen: Bool
-    @State var showRoot: Bool = false
+    @StateObject var vm: SettingsViewModel
     
     var body: some View {
         NavigationView {
@@ -44,7 +42,7 @@ struct SettingsView: View {
                                 do {
                                     try await vm.signOut()
                                     UserDefaults.standard.removeObject(forKey: "userId")
-                                    dismiss()
+                                    vm.backToRoot()
                                 } catch {
                                     
                                 }
@@ -68,6 +66,6 @@ struct SettingsView: View {
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsView(showSettingsScreen: .constant(true))
+        SettingsAssembley().build()
     }
 }

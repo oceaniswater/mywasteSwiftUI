@@ -11,7 +11,7 @@ struct EditBinView: View {
     
     @Environment(\.dismiss) private var dismiss
     @State var bin: Bin
-    @EnvironmentObject var vm: EditBinViewModel
+    @StateObject var vm: EditBinViewModel
     
     var body: some View {
         NavigationView {
@@ -75,8 +75,7 @@ struct EditBinView: View {
 
 struct EditBinView_Previews: PreviewProvider {
     static var previews: some View {
-        EditBinView(bin: Bin(id: "asjdhhdajksdkjasdu", color: .black, type: .glass, days: [ "Monday"]))
-            .environmentObject(EditBinViewModel())
+        EditBinAssembley().build(for: Bin(id: "asjdhhdajksdkjasdu", color: .black, type: .glass, days: [ "Monday"]))
     }
 }
 

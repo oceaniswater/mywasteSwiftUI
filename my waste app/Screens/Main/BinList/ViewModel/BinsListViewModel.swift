@@ -20,6 +20,9 @@ final class BinsListViewModel:  BinsListViewModelProtocol {
     }
     
     @Published var bins: [Bin] = []
+    @Published  var isEmptyList: Bool = true
+    var router = Router.shared
+    
     func getBinsList() {
         DataManager.fetchBinsAndWeekdays(for: UserDefaults.standard.string(forKey: "userId") ?? "") { bins in
             self.bins = bins
@@ -32,7 +35,11 @@ final class BinsListViewModel:  BinsListViewModelProtocol {
         }
     }
     
-    func isEmpty() -> Bool {
-        return bins.isEmpty
+    func isEmpty() {
+        isEmptyList = bins.isEmpty
+    }
+        
+    func showEditBin(bin: Bin) {
+        self.router.showEditBin(bin: bin)
     }
 }

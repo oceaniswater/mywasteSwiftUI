@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct NotificationScreenView: View {
+struct NotificationView: View {
     @StateObject private var nm = NotificationManager()
     @Binding var showNotificationView: Bool
     @State var isRotating = false
@@ -55,7 +55,7 @@ struct NotificationScreenView: View {
                         }
                     }
                     Button {
-                        showNotificationView = false
+//                        showNotificationView = false
                     } label: {
                         ZStack {
                             Rectangle()
@@ -83,6 +83,6 @@ struct NotificationScreenView: View {
 
 struct NotificationScreenView_Previews: PreviewProvider {
     static var previews: some View {
-        NotificationScreenView(showNotificationView: .constant(true))
+        NotificationView(showNotificationView: .constant(true))
     }
 }

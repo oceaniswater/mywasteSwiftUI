@@ -8,26 +8,20 @@
 import SwiftUI
 
 struct BinsListView: View {
-    @StateObject var vm: BinsListViewModel = BinsListViewModel()
-    
-    @State var isEmtyList: Bool = true
-    @Binding var path: NavigationPath
-    
-    let editBinVeiwModel = EditBinViewModel()
+    @StateObject var vm = BinsListViewModel()
     
     var body: some View {
         Group {
             if !vm.bins.isEmpty {
                 List {
-                    ForEach ($vm.bins) { bin in
-                        BinCellView(bin: bin, path: $path)
+                    ForEach(vm.bins) { bin in
+                        BinCellView(bin: bin)
+                            .onTapGesture {
+                                vm.showEditBin(bin: bin)
+                            }
                     }
                     .listRowSeparator(.hidden, edges: .all)
                     .listRowBackground(Color("primary_bg"))
-                }
-                .navigationDestination(for: Bin.self) { bin in
-                    EditBinView(bin: bin)
-                        .environmentObject(editBinVeiwModel)
                 }
                 .listStyle(.plain)
                 .scrollContentBackground(.hidden)
@@ -38,6 +32,7 @@ struct BinsListView: View {
                 Spacer()
                 Spacer()
             }
+
         }
         .onAppear {
             withAnimation {
@@ -49,8 +44,8 @@ struct BinsListView: View {
     
 }
 
-struct BinListView_Previews: PreviewProvider {
-    static var previews: some View {
-        BinsListView(path: .constant(NavigationPath()))
-    }
-}
+//struct BinListView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        BinsListView(path: .constant(NavigationPath()))
+//    }
+//}
