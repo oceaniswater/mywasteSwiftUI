@@ -10,7 +10,7 @@ import SwiftUI
 struct AddBinView: View {
     
     @Environment(\.dismiss) private var dismiss
-    @StateObject var vm = AddBinViewModel()
+    @StateObject var vm: AddBinViewModel
     
     var body: some View {
         NavigationView {
@@ -54,7 +54,7 @@ struct AddBinView: View {
 
 struct AddBinView_Previews: PreviewProvider {
     static var previews: some View {
-        AddBinView()
+        AddBinAssembley().build()
     }
 }
 

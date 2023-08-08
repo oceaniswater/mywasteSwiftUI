@@ -6,19 +6,36 @@
 //
 
 import Foundation
+import SwiftUI
 
 enum Route: Hashable {
-    case mainScreen(bins: Bin)
+    case editBin(Bin)
+    case addBin
+    case settings
+}
+
+final class Router: ObservableObject {
+    static let shared = Router()
+
+    @Published var path = [Route]()
     
-    
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(self.hashValue)
+    func showEditBin(bin: Bin) {
+        path.append(.editBin(bin))
+    }
+
+    func showAddBin() {
+        path.append(.addBin)
     }
     
-    static func == (lhs: Route, rhs: Route) -> Bool {
-        switch (lhs, rhs) {
-        case (.mainScreen(bins: let lhsItem), .mainScreen(bins: let rhsItem)):
-            return lhsItem.id == rhsItem.id
-        }
+    func showSettings() {
+        path.append(.settings)
+    }
+    
+    func backToRoot() {
+        path.removeAll()
+    }
+    
+    func back() {
+        path.removeLast()
     }
 }

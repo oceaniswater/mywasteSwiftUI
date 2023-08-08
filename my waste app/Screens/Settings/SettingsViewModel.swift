@@ -12,8 +12,11 @@ final class SettingsViewModel: ObservableObject {
     @Published var isNotificationEnabled: Bool = false
     @Published var selectedDate = Date()
     let nm = NotificationManager()
+    private let router: Router
     
-    init() {
+    init(router: Router) {
+        self.router = router
+        
         Task {
             await nm.getAuthStatus()
             isNotificationEnabled = nm.hasPermisions
@@ -58,5 +61,9 @@ final class SettingsViewModel: ObservableObject {
     
     func isNotificationsEnabled() {
         
+    }
+    
+    func backToRoot() {
+        self.router.backToRoot()
     }
 }

@@ -12,6 +12,11 @@ protocol EditBinViewModelProtocol: ObservableObject { }
 final class EditBinViewModel: EditBinViewModelProtocol {
     @Published var days: [WeekDay] = Singleton.shared.weekdays
     @Published var selectedRows = Set<String>()
+    private let router: Router
+    
+    init(router: Router) {
+        self.router = router
+    }
     
     func makeSelectedRowSet(weekdays: [String]) {
         selectedRows.removeAll()

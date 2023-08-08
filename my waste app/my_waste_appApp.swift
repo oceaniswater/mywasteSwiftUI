@@ -61,16 +61,24 @@ struct my_waste_appApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     
     let binsListViewModel = BinsListViewModel()
+    @ObservedObject var router = Router.shared
     
     var body: some Scene {
         WindowGroup {
-            //                if let _ = UserDefaults.standard.string(forKey: "userId") {
-            //                    ContentView()
-            //                        .environmentObject(binsListViewModel)
-            //                } else {
-            //                    LoginView()
-            //                }
-            RootView()
+            NavigationStack(path: $router.path) {
+                RootAssembly().build()
+                    .navigationDestination(for: Route.self) { route in
+                        switch route {
+                        case .addBin:
+                            AddBinAssembley().build()
+                        case .settings:
+                            SettingsAssembley().build()
+                        case .editBin(let bin):
+                            EditBinAssembley().build(for: bin)
+                        }
+                        
+                    }
+            }
         }
     }
 }

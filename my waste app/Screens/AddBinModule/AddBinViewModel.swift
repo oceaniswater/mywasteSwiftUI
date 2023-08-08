@@ -20,6 +20,12 @@ final class AddBinViewModel: ObservableObject, AddBinViewModelProtocol {
     @Published var selectedRows = Set<String>()
     @Published var days: [WeekDay] = Singleton.shared.weekdays
     
+    private let router: Router
+    
+    init(router: Router) {
+        self.router = router
+    }
+    
     let userId = UserDefaults.standard.string(forKey: "userId")
     
     func addBin() {

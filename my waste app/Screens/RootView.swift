@@ -10,17 +10,18 @@ import SwiftUI
 struct RootView: View {
     @State var showLoginView: Bool = false
     @State var showNotificationView: Bool = false
-//    let binsListVeiwModel = BinsListViewModel()
+    @ObservedObject var viewModel: RootViewModel
+    
+    @ObservedObject var mainViewModel = MainViewModel()
+
     
     var body: some View {
         ZStack {
             Color("primary_bg")
             
             if !showLoginView && !showNotificationView {
-                NavigationStack {
-                    ContentView()
-//                        .environmentObject(binsListVeiwModel)
-                }
+                MainView()
+                    .environmentObject(mainViewModel)
             }
         }
         .onAppear {
@@ -28,21 +29,19 @@ struct RootView: View {
             self.showLoginView = authUser == nil
         }
         .fullScreenCover(isPresented: $showLoginView) {
-            NavigationView {
-                LoginView(showLoginScreen: $showLoginView, showNotificationView: $showNotificationView)
-            }
+            LoginView(showLoginScreen: $showLoginView, showNotificationView: $showNotificationView)
+
         }
         .fullScreenCover(isPresented: $showNotificationView) {
-            NavigationView {
-                NotificationScreenView(showNotificationView: $showNotificationView)
-            }
+            NotificationView(showNotificationView: $showNotificationView)
+
         }
     }
 }
 
 struct RootView_Previews: PreviewProvider {
     static var previews: some View {
-        RootView()
+        RootAssembly().build()
             .environmentObject(BinsListViewModel())
     }
 }
