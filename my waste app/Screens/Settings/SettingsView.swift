@@ -18,11 +18,6 @@ struct SettingsView: View {
                 Color("primary_bg")
                     .ignoresSafeArea()
                 VStack(alignment: .leading) {
-                    Text("Settings")
-                        .font(.largeTitle)
-                        .frame(alignment: .leading)
-                        .foregroundColor(.white)
-                        .padding()
                     Form {
                         Section {
                             Toggle("Notifications", isOn: $vm.isNotificationEnabled)
