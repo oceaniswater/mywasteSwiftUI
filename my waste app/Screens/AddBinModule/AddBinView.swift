@@ -27,6 +27,8 @@ struct AddBinView: View {
                                 .frame(height: 30)
                         }
                         Section {
+                            DatePicker("Time", selection: $vm.selectedDate, displayedComponents: .hourAndMinute)
+
                             WeekdayList(selectedRows: $vm.selectedRows, days: $vm.days)
                                 .frame(height: 30)
                         }
@@ -107,15 +109,12 @@ struct TypePicker: View {
 }
 
 struct WeekdayList: View {
-    @Binding var selectedRows: Set<String>
-    @Binding var days: [WeekDay]
+    @Binding var selectedRows: Set<Day>
+    @Binding var days: Day.AllCases
     
     var body: some View {
-        List(selection: $selectedRows) {
-            ForEach(days) { day in
-                WeekdayRow(weekday: day, selectedItems: $selectedRows)
-                    
-            }
+        List(Day.allCases, id: \.rawValue, selection: $selectedRows) {day in
+            WeekdayRow(day: day, selectedItems: $selectedRows)
         }
         .listStyle(.automatic)
         .scrollContentBackground(.hidden)

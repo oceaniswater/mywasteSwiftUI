@@ -9,7 +9,8 @@ import Foundation
 import SwiftUI
 
 enum Route: Hashable {
-    case editBin(Bin)
+    
+//    case editBin
     case addBin
     case settings
 }
@@ -20,7 +21,7 @@ final class Router: ObservableObject {
     @Published var path = [Route]()
     
     func showEditBin(bin: Bin) {
-        path.append(.editBin(bin))
+//        path.append(.editBin(bin))
     }
 
     func showAddBin() {

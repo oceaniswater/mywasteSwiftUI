@@ -10,8 +10,9 @@ import SwiftUI
 struct MainView: View {
 
     @State var showSettingsScreen: Bool = false
+    @State var showNotificationView: Bool = false
     
-    @EnvironmentObject var vm: MainViewModel
+    @StateObject var vm: MainViewModel
     
     var body: some View {
             ZStack {
@@ -26,16 +27,26 @@ struct MainView: View {
                     }
                     YourBinsHeaderView()
                     BinsListView()
-                        
                 }
+            }
+            .onAppear {
+                let l = UserDefaults.standard.bool(forKey: "notFirstTime")
+                if UserDefaults.standard.bool(forKey: "notFirstTime") != true {
+                    withAnimation {
+                        showNotificationView = true
+                    }
+                }
+            }
+            .fullScreenCover(isPresented: $showNotificationView) {
+                NotificationView(showNotificationView: $showNotificationView)
+                
             }
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        MainView()
-            .environmentObject(MainViewModel())
+        MainAssembley().build()
     }
 }
 

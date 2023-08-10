@@ -10,13 +10,12 @@ import Foundation
 final class Singleton {
     static let shared = Singleton()
     private init() {}
-    private var bins: [Bin] = []
+    private var bins: [Bin] = [Bin(selectDays: [.Fri, .Mon])]
     func getBins() -> [Bin] {
         return bins
     }
     func addBin(bin: Bin) {
-//        let bin = Bin(color: bin.color, type: bin.type, days: bin.days)
-//        self.bins.append(bin)
+        bins.append(bin)
     }
     
     func deleteBin(at offsets: IndexSet) {

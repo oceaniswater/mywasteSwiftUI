@@ -8,16 +8,16 @@
 import SwiftUI
 
 struct WeekdayRow: View {
-    var weekday: WeekDay
-    @Binding var selectedItems: Set<String>
+    var day: Day
+    @Binding var selectedItems: Set<Day>
     
     var isSelected: Bool {
-        selectedItems.contains(weekday.id)
+        selectedItems.contains(day)
     }
     
     var body: some View {
         HStack {
-            Text(weekday.name)
+            Text(day.dayString)
             Spacer()
             if isSelected {
                 Image(systemName: "trash.fill")
@@ -29,9 +29,9 @@ struct WeekdayRow: View {
         .frame(height: 55)
         .onTapGesture {
             if isSelected {
-                self.selectedItems.remove(weekday.id)
+                self.selectedItems.remove(day)
             } else {
-                self.selectedItems.insert(weekday.id)
+                self.selectedItems.insert(day)
             }
         }
         
@@ -41,6 +41,6 @@ struct WeekdayRow: View {
 struct WeekdayRow_Previews: PreviewProvider {
     static var previews: some View {
         let id = "2"
-        WeekdayRow(weekday: WeekDay(id: "2", name: "Monday"), selectedItems: .constant([id]))
+        WeekdayRow(day: .Fri, selectedItems: .constant([.Fri, .Mon]))
     }
 }

@@ -17,8 +17,9 @@ final class AddBinViewModel: ObservableObject, AddBinViewModelProtocol {
     @Published var colorSelected: BinColor = .red
     @Published var typeSelected: BinType = .glass
     
-    @Published var selectedRows = Set<String>()
-    @Published var days: [WeekDay] = Singleton.shared.weekdays
+    @Published var selectedRows = Set<Day>()
+    @Published var days = Day.allCases
+    @Published var selectedDate = Date()
     
     private let router: Router
     
@@ -26,24 +27,12 @@ final class AddBinViewModel: ObservableObject, AddBinViewModelProtocol {
         self.router = router
     }
     
-    let userId = UserDefaults.standard.string(forKey: "userId")
-    
     func addBin() {
-        var weekdays: [WeekDay] = []
-        for row in selectedRows {
-            for day in days {
-                if day.id == row {
-                    weekdays.append(day)
-                }
-            }
-        }
-        let days = weekdays.map({$0.name})
-        let id = UUID()
-        let bin = Bin(id: "\(id)", color: colorSelected, type: typeSelected, days: days)
+        let bin = Bin(date: selectedDate, type: typeSelected, color: colorSelected, selectDays: selectedRows)
+        UserNotification.shared.addNotificationRequest(bin: bin)
+        UserNotification.shared.check(bin.id.uuidString)
         
-        DataManager.addBin(bin: bin, for: userId ?? "") { error in
-            print(error)
-        }
+        Singleton.shared.addBin(bin: bin)
     }
     
     func isBinExist(bin: Bin) -> Bool {
