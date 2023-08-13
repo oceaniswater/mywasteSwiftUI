@@ -8,9 +8,7 @@
 import Foundation
 
 protocol BinsListViewModelProtocol: ObservableObject {
-//    func getBinsList()
-//    func deleteBin(at id: String)
-//    func editBin(at offsets: IndexSet)
+
 }
 
 final class BinsListViewModel:  BinsListViewModelProtocol {
@@ -21,6 +19,7 @@ final class BinsListViewModel:  BinsListViewModelProtocol {
     
     @Published var bins: [Bin] = []
     @Published  var isEmptyList: Bool = true
+    
     var router = Router.shared
     
     func getBinsList() {

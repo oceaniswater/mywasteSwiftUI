@@ -8,15 +8,12 @@
 import Foundation
 
 protocol AddBinViewModelProtocol {
-    func addBin()
+    func addNotification(_ bin: Bin)
     func isBinExist(bin: Bin) -> Bool
 }
 
 final class AddBinViewModel: ObservableObject, AddBinViewModelProtocol {
-    
-    @Published var colorSelected: BinColor = .red
-    @Published var typeSelected: BinType = .glass
-    
+        
     @Published var selectedRows = Set<Day>()
     @Published var days = Day.allCases
     @Published var selectedDate = Date()
@@ -27,12 +24,9 @@ final class AddBinViewModel: ObservableObject, AddBinViewModelProtocol {
         self.router = router
     }
     
-    func addBin() {
-        let bin = Bin(date: selectedDate, type: typeSelected, color: colorSelected, selectDays: selectedRows)
+    func addNotification(_ bin: Bin) {
         UserNotification.shared.addNotificationRequest(bin: bin)
         UserNotification.shared.check(bin.id.uuidString)
-        
-        Singleton.shared.addBin(bin: bin)
     }
     
     func isBinExist(bin: Bin) -> Bool {

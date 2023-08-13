@@ -26,7 +26,7 @@ struct WeekdayRow: View {
 
         .padding(.horizontal)
         .contentShape(Rectangle())
-        .frame(height: 55)
+        .frame(height: 20)
         .onTapGesture {
             if isSelected {
                 self.selectedItems.remove(day)

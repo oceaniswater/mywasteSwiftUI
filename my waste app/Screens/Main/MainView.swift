@@ -29,6 +29,7 @@ struct MainView: View {
                     BinsListView()
                 }
             }
+            .environmentObject(vm)
             .onAppear {
                 let l = UserDefaults.standard.bool(forKey: "notFirstTime")
                 if UserDefaults.standard.bool(forKey: "notFirstTime") != true {
