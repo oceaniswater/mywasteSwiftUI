@@ -35,7 +35,7 @@ class UserNotification{
         if bin.selectDays.isEmpty {
             triggerRequest(dateComponents: dateComponents, bin: bin, isRepeat: false)
         } else {
-            let weekdays = bin.selectDays.map { $0.componentWeekday }
+            let weekdays = bin.remindDays.map { $0.componentWeekday }
             weekdays.forEach { weekDay in
                 dateComponents.weekday = weekDay
                 triggerRequest(dateComponents: dateComponents, bin: bin)

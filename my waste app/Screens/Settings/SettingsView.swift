@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+
 struct SettingsView: View {
     
     @Environment(\.dismiss) private var dismiss
@@ -26,26 +27,10 @@ struct SettingsView: View {
                         Section {
                             DatePicker("Time", selection: $vm.selectedDate, displayedComponents: .hourAndMinute)
                         }
-                        .onAppear {
-                            Task {
-                                vm.getDate()
-                            }
-                        }
-                        
-                        Button("Log out") {
-                            Task {
-                                do {
-                                    try await vm.signOut()
-                                    UserDefaults.standard.removeObject(forKey: "userId")
-                                    vm.backToRoot()
-                                } catch {
-                                    
-                                }
-                            }
-                        }
+
                         Button("Save") {
                             Task {
-                                try vm.saveSettings()
+                                vm.saveSettings()
                                 dismiss()
                             }
                         }

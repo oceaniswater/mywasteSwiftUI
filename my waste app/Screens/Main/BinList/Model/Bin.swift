@@ -1,12 +1,6 @@
-//
-//  BinInfo.swift
-//  my waste app
-//
-//  Created by Mark Golubev on 10/08/2023.
-//
-
 import Foundation
 import UserNotifications
+import SwiftData
 
 enum BinType: String, CaseIterable, Identifiable, Codable {
     case general, paper, glass, plastic, metal, cardboard, electronics, garden, organic, recycle
@@ -19,54 +13,62 @@ enum BinColor: String, CaseIterable, Identifiable, Codable {
     var id: Self { self }
 }
 
-struct Bin: Codable, Identifiable {
+@Model
+class Bin: Identifiable {
     
-    var id = UUID()
-    var date: Date = Date()
-    var type: BinType = .cardboard
-    var color: BinColor = .red
+    @Attribute(.unique) var id: UUID
+    var date: Date
+    var type: BinType
+    var color: BinColor
     
-    
-    var note:String = "Alarm"
-    var noteLabel:String{
+    var noteLabel: String {
         var days: [String] = []
         for day in selectDays {
             days.append(day.dayText)
         }
         return days.joined(separator: ", ")
     }
-    
-//    var isOn: Bool = true {
-//        didSet{
-//            if isOn{
-//                UserNotification.shared.addNotificationRequest(bin: self)
-//            }else{
-//                // 刪除推播
-//                UNUserNotificationCenter.current().removeDeliveredNotifications(withIdentifiers: ["\(self.id.uuidString)"])
-//                UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: ["\(self.id.uuidString)"])
-//            }
-//        }
-//    }
-    
-    var selectDays:Set<Day> = []
-    
-    var isEdit = false
-    
-    var repeatDay:String{
-        switch selectDays{
-        case [.Sat, .Sun]:
-            return "Weekend"
-        case [.Sun, .Mon, .Tue, .Wed, .Thu, .Fri, .Sat]:
-            return "Every day"
-        case [.Mon, .Tue, .Wed, .Thu, .Fri]:
-            return "Weekdays"
-        case []:
-            return "Never"
-        default:
-            let day = selectDays.sorted(by: {$0.rawValue < $1.rawValue}).map{$0.dayText}.joined(separator: " ")
-            return day
+    var selectDays: Set<Day>
+    var atTheSameDay: Bool
+    var remindDays: Set<Day> {
+        if atTheSameDay {
+            return selectDays
+        } else {
+            var remindSet: Set<Day> = []
+            for selectDay in selectDays {
+                if selectDay.componentWeekday > 1 {
+                    let day = selectDay.componentWeekday - 1
+                    switch day {
+                    case 0:
+                        remindSet.insert(.Sun)
+                    case 1:
+                        remindSet.insert(.Mon)
+                    case 3:
+                        remindSet.insert(.Tue)
+                    case 4:
+                        remindSet.insert(.Wed)
+                    case 5:
+                        remindSet.insert(.Thu)
+                    case 6:
+                        remindSet.insert(.Fri)
+                    default:
+                        continue
+                    }
+                } else {
+                    remindSet.insert(.Sat)
+                }
+            }
+            return remindSet
         }
+
+    }
+    
+    init(id: UUID = UUID(), date: Date, type: BinType, color: BinColor, selectDays: Set<Day>, atTheSameDay: Bool = true) {
+        self.id = id
+        self.date = date
+        self.type = type
+        self.color = color
+        self.selectDays = selectDays
+        self.atTheSameDay = atTheSameDay
     }
 }
-
-

@@ -1,10 +1,3 @@
-//
-//  Day.swift
-//  my waste app
-//
-//  Created by Mark Golubev on 10/08/2023.
-//
-
 import Foundation
 
 enum Day:Int, Codable, CaseIterable{
