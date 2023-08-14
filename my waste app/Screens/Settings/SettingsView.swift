@@ -28,9 +28,17 @@ struct SettingsView: View {
                             DatePicker("Time", selection: $vm.selectedDate, displayedComponents: .hourAndMinute)
                         }
 
-                        Button("Save") {
+                        Button("delete notif") {
                             Task {
-                                vm.saveSettings()
+//                                vm.saveSettings()
+                                UserNotification.shared.removeAllNot()
+                                dismiss()
+                            }
+                        }
+                        Button("check") {
+                            Task {
+//                                vm.saveSettings()
+                                UserNotification.shared.check(_: nil)
                                 dismiss()
                             }
                         }

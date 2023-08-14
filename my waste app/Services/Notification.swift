@@ -18,7 +18,7 @@ class UserNotification{
     let content = UNMutableNotificationContent()
     
     func addNotificationRequest(bin: Bin) {
-        current.removeAllPendingNotificationRequests()
+
         content.title = "Waste collection day soon!"
         content.body = "Don't forget take out your \(bin.type.rawValue.capitalized(with: .current)) waste bin"
         content.categoryIdentifier = "alarm"
@@ -32,7 +32,7 @@ class UserNotification{
         dateComponents.hour = hour
         dateComponents.minute = minute
         
-        if bin.selectDays.isEmpty {
+        if bin.remindDays.isEmpty {
             triggerRequest(dateComponents: dateComponents, bin: bin, isRepeat: false)
         } else {
             let weekdays = bin.remindDays.map { $0.componentWeekday }
@@ -45,7 +45,7 @@ class UserNotification{
     
     func triggerRequest(dateComponents: DateComponents, bin: Bin, isRepeat: Bool = true) {
         let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: isRepeat)
-        let request = UNNotificationRequest(identifier: bin.id.uuidString, content: content, trigger: trigger)
+        let request = UNNotificationRequest(identifier: bin.id.uuidString + String(describing: dateComponents.weekday), content: content, trigger: trigger)
         current.add(request) { error in
             if(error == nil){
                 print("successfully")
@@ -55,14 +55,57 @@ class UserNotification{
         }
     }
     
-    func check(_ id: String) {
-        UNUserNotificationCenter.current().getPendingNotificationRequests { requests in
-            let isScheduled = requests.contains { $0.identifier == id }
-            if isScheduled {
-                print("Notification is scheduled.")
-            } else {
-                print("Notification is not scheduled.")
+    func check(_ id: String?) {
+        if let id = id {
+            UNUserNotificationCenter.current().getPendingNotificationRequests { requests in
+                let isScheduled = requests.contains { $0.identifier == id }
+                let d = requests.count
+                dump(requests)
+                if isScheduled {
+                    print("Notification is scheduled.")
+                } else {
+                    print("Notification is not scheduled.")
+                }
             }
+        } else {
+            UNUserNotificationCenter.current().getPendingNotificationRequests { requests in
+                let d = requests.count
+                dump(requests)
+            }
+        }
+    }
+    
+    func removeNotification(id: String) {
+        var ids: [String] = []
+        UNUserNotificationCenter.current().getPendingNotificationRequests { [weak self] requests in
+            for request in requests {
+                if request.identifier.hasPrefix(id) {
+                    ids.append(request.identifier)
+                }
+            }
+            self?.current.removeDeliveredNotifications(withIdentifiers: ids)
+            self?.current.removePendingNotificationRequests(withIdentifiers: ids)
+        }
+        
+
+    }
+    
+    func removeAllNot() {
+        current.removeAllDeliveredNotifications()
+        current.removeAllPendingNotificationRequests()
+    }
+    
+    func updateNotification(for bin: Bin) {
+        var ids: [String] = []
+        UNUserNotificationCenter.current().getPendingNotificationRequests { [weak self] requests in
+            for request in requests {
+                if request.identifier.hasPrefix(bin.id.uuidString) {
+                    ids.append(request.identifier)
+                }
+            }
+            self?.current.removeDeliveredNotifications(withIdentifiers: ids)
+            self?.current.removePendingNotificationRequests(withIdentifiers: ids)
+            self?.addNotificationRequest(bin: bin)
         }
     }
 

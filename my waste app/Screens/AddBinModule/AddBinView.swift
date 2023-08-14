@@ -41,7 +41,7 @@ struct AddBinView: View {
                     .scrollContentBackground(.hidden)
                     Button {
                         modelContext.insert(newBin)
-                        //                        vm.addNotification(newBin)
+                        vm.addNotification(newBin)
                         dismiss()
                     } label: {
                         ZStack {

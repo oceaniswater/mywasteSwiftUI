@@ -18,10 +18,8 @@ final class EditBinViewModel: EditBinViewModelProtocol {
         self.router = router
     }
     
-    func deleteBin(at id: String) {
-
-    }
-    
-    func updateBin(bin: Bin) {
+    func updateNotifications(bin: Bin) {
+        UserNotification.shared.updateNotification(for: bin)
+        
     }
 }

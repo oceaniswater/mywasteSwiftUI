@@ -50,7 +50,9 @@ struct BinsListView: View {
             for index in offsets {
                 let bin = bins[index]
                 // delete notification
-                
+
+                vm.deleteNotifications(for: bin.id.uuidString)
+
                 // delete bin
                 modelContext.delete(bins[index])
             }

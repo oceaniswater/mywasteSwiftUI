@@ -51,6 +51,15 @@ struct EditBinView: View {
                 }
                 .onChange(of: bin.selectDays) { oldValue, newValue in
                     // change notifications!
+                    if !newValue.isEmpty {
+                        vm.updateNotifications(bin: bin)
+                    }
+                    
+                }
+                
+                .onChange(of: bin.selectDays) { oldValue, newValue in
+                    // change notifications!
+                    vm.updateNotifications(bin: bin)
                 }
             }
         }

@@ -58,7 +58,7 @@ struct SettingsBarView: View {
         HStack() {
             Spacer()
             Button {
-//                vm.showSettings()
+                vm.showSettings()
             } label: {
                 Image(systemName: "gear")
                     .font(.title2)
