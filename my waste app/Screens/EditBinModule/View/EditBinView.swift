@@ -36,6 +36,21 @@ struct EditBinView: View {
                         }
                     }
                     .scrollContentBackground(.hidden)
+                    Button {
+                        dismiss()
+                    } label: {
+                        ZStack {
+                            Rectangle()
+                                .frame(width: 355, height: 55)
+                            .cornerRadius(10.0)
+                            Text("Back")
+                                .foregroundColor(.white)
+                        }
+                            
+                    }
+                }
+                .onChange(of: bin.selectDays) { oldValue, newValue in
+                    // change notifications!
                 }
             }
         }

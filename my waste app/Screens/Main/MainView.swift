@@ -58,7 +58,7 @@ struct SettingsBarView: View {
         HStack() {
             Spacer()
             Button {
-                vm.showSettings()
+//                vm.showSettings()
             } label: {
                 Image(systemName: "gear")
                     .font(.title2)
@@ -74,6 +74,7 @@ struct SettingsBarView: View {
 
 struct YourBinsHeaderView: View {
     @EnvironmentObject var vm: MainViewModel
+    @State var isAddBinPresented: Bool = false
     
     var body: some View {
         HStack {
@@ -82,7 +83,8 @@ struct YourBinsHeaderView: View {
                 .foregroundColor(.white)
             Spacer()
             Button {
-                vm.showAddBinView()
+//                vm.showAddBinView()
+                isAddBinPresented.toggle()
             } label: {
                 Image(systemName: "plus")
                     .tint(Color("primary_elements"))
@@ -91,6 +93,9 @@ struct YourBinsHeaderView: View {
                     .font(.title2)
             }
         }
+        .sheet(isPresented: $isAddBinPresented, content: {
+            AddBinAssembley().build()
+        })
         .padding(.horizontal)
     }
 }
