@@ -43,7 +43,7 @@ struct EditBinView: View {
                             Rectangle()
                                 .frame(width: 355, height: 55)
                             .cornerRadius(10.0)
-                            Text("Back")
+                            Text("Done")
                                 .foregroundColor(.white)
                         }
                             
@@ -57,7 +57,7 @@ struct EditBinView: View {
                     
                 }
                 
-                .onChange(of: bin.selectDays) { oldValue, newValue in
+                .onChange(of: bin.date) { oldValue, newValue in
                     // change notifications!
                     vm.updateNotifications(bin: bin)
                 }

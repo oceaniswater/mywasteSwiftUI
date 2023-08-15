@@ -16,7 +16,7 @@ struct AddBinView: View {
     @State private var newBin = Bin(date: .now, type: .cardboard, color: .blue, selectDays: [])
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ZStack {
                 Color("primary_bg")
                     .edgesIgnoringSafeArea(.all)
@@ -48,7 +48,7 @@ struct AddBinView: View {
                             Rectangle()
                                 .frame(width: 355, height: 55)
                             .cornerRadius(10.0)
-                            Text("Add bin")
+                            Text("Save")
                                 .foregroundColor(.white)
                         }
                             
