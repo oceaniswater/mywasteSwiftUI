@@ -6,41 +6,49 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct AddBinView: View {
     
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.modelContext) private var modelContext
     @StateObject var vm: AddBinViewModel
+    @State private var newBin = Bin(date: .now, type: .cardboard, color: .blue, selectDays: [])
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ZStack {
                 Color("primary_bg")
                     .edgesIgnoringSafeArea(.all)
                 VStack {
-                    ImageBin(colorSelected: $vm.colorSelected, typeSelected: $vm.typeSelected)
+                    ImageBin(colorSelected: $newBin.color, typeSelected: $newBin.type)
                     Form {
                         Section {
-                            ColorPicker(colorSelected: $vm.colorSelected)
+                            ColorPicker(colorSelected: $newBin.color)
                                 .frame(height: 30)
-                            TypePicker(typeSelected: $vm.typeSelected)
+                            TypePicker(typeSelected: $newBin.type)
                                 .frame(height: 30)
                         }
                         Section {
-                            WeekdayList(selectedRows: $vm.selectedRows, days: $vm.days)
-                                .frame(height: 30)
+                            DatePicker("Time reminder", selection: $newBin.date, displayedComponents: .hourAndMinute)
+                            Toggle("At day of collecton", isOn: $newBin.atTheSameDay)
+                        }
+
+                        NavigationLink("Collection days") {
+                                WeekdayList(selectedRows: $newBin.selectDays, days: $vm.days)
                         }
                     }
                     .scrollContentBackground(.hidden)
                     Button {
-                        vm.addBin()
+                        modelContext.insert(newBin)
+                        vm.addNotification(newBin)
                         dismiss()
                     } label: {
                         ZStack {
                             Rectangle()
                                 .frame(width: 355, height: 55)
                             .cornerRadius(10.0)
-                            Text("Add bin")
+                            Text("Save")
                                 .foregroundColor(.white)
                         }
                             
@@ -107,17 +115,13 @@ struct TypePicker: View {
 }
 
 struct WeekdayList: View {
-    @Binding var selectedRows: Set<String>
-    @Binding var days: [WeekDay]
+    @Binding var selectedRows: Set<Day>
+    @Binding var days: Day.AllCases
     
     var body: some View {
-        List(selection: $selectedRows) {
-            ForEach(days) { day in
-                WeekdayRow(weekday: day, selectedItems: $selectedRows)
-                    
-            }
+        List(Day.allCases, id: \.rawValue, selection: $selectedRows) {day in
+            WeekdayRow(day: day, selectedItems: $selectedRows)
         }
         .listStyle(.automatic)
-        .scrollContentBackground(.hidden)
     }
 }

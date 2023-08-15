@@ -21,16 +21,23 @@ struct NotificationView: View {
                     .edgesIgnoringSafeArea(.all)
                 VStack {
                     Spacer()
-                    Image(systemName: "bell.fill")
-                        .resizable()
-                        .frame(width: 70, height: 70)
-                        .foregroundColor(.yellow)
-                        .rotationEffect(.degrees(isRotating ? 45.0 : -20.0))
-                        .onAppear {
-                            withAnimation(.easeInOut(duration: 1.0).repeatForever(autoreverses: true)) {
-                                self.isRotating = true
-                            }
+                    ZStack {
+                        Image("red")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(maxHeight: 150)
+                        Image("recycle")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(maxWidth: 55)
+                            .offset(y: 10)
+                    }
+                    .rotationEffect(.degrees(isRotating ? 30.0 : 0.0))
+                    .onAppear {
+                        withAnimation(.easeInOut(duration: 1.0).repeatForever(autoreverses: true)) {
+                            self.isRotating = true
                         }
+                    }
                     Text("Turn on your push notificatons\nto do not miss collection day. You can do it later in settings.")
                         .foregroundColor(.white)
                         .multilineTextAlignment(.center)
@@ -39,7 +46,7 @@ struct NotificationView: View {
                         Task {
                             await nm.request()
                             showNotificationView = false
-
+                            UserDefaults.standard.setValue(true, forKey: "notFirstTime")
                         }
                     } label: {
                         ZStack {
@@ -55,7 +62,8 @@ struct NotificationView: View {
                         }
                     }
                     Button {
-//                        showNotificationView = false
+                        showNotificationView = false
+                        UserDefaults.standard.setValue(true, forKey: "notFirstTime")
                     } label: {
                         ZStack {
                             Rectangle()

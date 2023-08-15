@@ -10,7 +10,7 @@ import SwiftUI
 struct EditBinView: View {
     
     @Environment(\.dismiss) private var dismiss
-    @State var bin: Bin
+    @Bindable var bin: Bin
     @StateObject var vm: EditBinViewModel
     
     var body: some View {
@@ -28,45 +28,38 @@ struct EditBinView: View {
                                 .frame(height: 30)
                         }
                         Section {
-                            WeekdayList(selectedRows: $vm.selectedRows, days: $vm.days)
-                                .frame(height: 30)
-                                .onAppear {
-                                    vm.makeSelectedRowSet(weekdays: bin.days)
-                                }
+                            DatePicker("Time", selection: $bin.date, displayedComponents: .hourAndMinute)
+                            Toggle("At day of collecton", isOn: $bin.atTheSameDay)
+                        }
+                        NavigationLink("Collection days") {
+                                WeekdayList(selectedRows: $bin.selectDays, days: $vm.days)
                         }
                     }
                     .scrollContentBackground(.hidden)
-                    HStack {
-                        Button {
-                            vm.deleteBin(at: bin.id)
-                            dismiss()
-                        } label: {
-                            ZStack {
-                                Rectangle()
-                                    .foregroundColor(.red)
-                                    .frame(height: 55)
-                                .cornerRadius(10.0)
-                                Text("Delete bin")
-                                    .foregroundColor(.white)
-                            }
+                    Button {
+                        dismiss()
+                    } label: {
+                        ZStack {
+                            Rectangle()
+                                .frame(width: 355, height: 55)
+                            .cornerRadius(10.0)
+                            Text("Done")
+                                .foregroundColor(.white)
                         }
-                        Button {
-                            vm.updateBin(bin: bin)
-                            dismiss()
-                        } label: {
-                            ZStack {
-                                Rectangle()
-                                    .frame(height: 55)
-                                .cornerRadius(10.0)
-                                Text("Save bin")
-                                    .foregroundColor(.white)
-                            }
-                                
-                        }
+                            
                     }
-                    .padding(.top)
-                    .padding(.horizontal)
-
+                }
+                .onChange(of: bin.selectDays) { oldValue, newValue in
+                    // change notifications!
+                    if !newValue.isEmpty {
+                        vm.updateNotifications(bin: bin)
+                    }
+                    
+                }
+                
+                .onChange(of: bin.date) { oldValue, newValue in
+                    // change notifications!
+                    vm.updateNotifications(bin: bin)
                 }
             }
         }
@@ -75,7 +68,7 @@ struct EditBinView: View {
 
 struct EditBinView_Previews: PreviewProvider {
     static var previews: some View {
-        EditBinAssembley().build(for: Bin(id: "asjdhhdajksdkjasdu", color: .black, type: .glass, days: [ "Monday"]))
+        EditBinAssembley().build(for: Bin(date: .now, type: .cardboard, color: .blue, selectDays: [.Fri]))
     }
 }
 
@@ -117,22 +110,6 @@ struct TypePickerEdit: View {
         }
         .scrollContentBackground(.hidden)
         .frame(height: 80)
-    }
-}
-
-struct WeekdayListEdit: View {
-    @Binding var selectedRows: Set<String>
-    @Binding var days: [WeekDay]
-    
-    var body: some View {
-        List(selection: $selectedRows) {
-            ForEach(days) { day in
-                WeekdayRow(weekday: day, selectedItems: $selectedRows)
-                    
-            }
-        }
-        .listStyle(.automatic)
-        .scrollContentBackground(.hidden)
     }
 }
 

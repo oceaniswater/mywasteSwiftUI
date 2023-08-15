@@ -11,7 +11,11 @@ final class MainViewModel: ObservableObject {
     @Published var notificationEnabled: Bool = false
     @Published var isNotificationBageShown: Bool = true
     
-    private let router = Router.shared
+    private let router: Router
+    
+    init(router: Router) {
+        self.router = router
+    }
     
     func showAddBinView() {
         self.router.showAddBin()

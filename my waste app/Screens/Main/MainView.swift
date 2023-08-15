@@ -10,8 +10,9 @@ import SwiftUI
 struct MainView: View {
 
     @State var showSettingsScreen: Bool = false
+    @State var showNotificationView: Bool = false
     
-    @EnvironmentObject var vm: MainViewModel
+    @StateObject var vm: MainViewModel
     
     var body: some View {
             ZStack {
@@ -26,16 +27,27 @@ struct MainView: View {
                     }
                     YourBinsHeaderView()
                     BinsListView()
-                        
                 }
+            }
+            .environmentObject(vm)
+            .onAppear {
+                let l = UserDefaults.standard.bool(forKey: "notFirstTime")
+                if UserDefaults.standard.bool(forKey: "notFirstTime") != true {
+                    withAnimation {
+                        showNotificationView = true
+                    }
+                }
+            }
+            .fullScreenCover(isPresented: $showNotificationView) {
+                NotificationView(showNotificationView: $showNotificationView)
+                
             }
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        MainView()
-            .environmentObject(MainViewModel())
+        MainAssembley().build()
     }
 }
 
@@ -62,6 +74,7 @@ struct SettingsBarView: View {
 
 struct YourBinsHeaderView: View {
     @EnvironmentObject var vm: MainViewModel
+    @State var isAddBinPresented: Bool = false
     
     var body: some View {
         HStack {
@@ -70,7 +83,8 @@ struct YourBinsHeaderView: View {
                 .foregroundColor(.white)
             Spacer()
             Button {
-                vm.showAddBinView()
+//                vm.showAddBinView()
+                isAddBinPresented.toggle()
             } label: {
                 Image(systemName: "plus")
                     .tint(Color("primary_elements"))
@@ -79,6 +93,9 @@ struct YourBinsHeaderView: View {
                     .font(.title2)
             }
         }
+        .sheet(isPresented: $isAddBinPresented, content: {
+            AddBinAssembley().build()
+        })
         .padding(.horizontal)
     }
 }
