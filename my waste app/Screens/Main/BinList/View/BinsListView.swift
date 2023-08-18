@@ -21,7 +21,8 @@ struct BinsListView: View {
                     ForEach(bins) { bin in
                         BinCellView(bin: bin)
                             .onTapGesture {
-                                selectedBin = bin
+//                                selectedBin = bin
+                                vm.showEditBin(bin: bin)
                             }
                         
                     }
@@ -40,9 +41,9 @@ struct BinsListView: View {
             }
 
         }
-        .sheet(item: $selectedBin, content: {bin in
-                EditBinAssembley().build(for: bin)
-        })
+//        .sheet(item: $selectedBin, content: {bin in
+//                EditBinAssembley().build(for: bin)
+//        })
     }
     
     private func deleteItems(offsets: IndexSet) {
@@ -55,6 +56,7 @@ struct BinsListView: View {
 
                 // delete bin
                 modelContext.delete(bins[index])
+                try? modelContext.save()
             }
         }
     }

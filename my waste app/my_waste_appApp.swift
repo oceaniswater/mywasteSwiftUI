@@ -47,8 +47,9 @@ struct my_waste_appApp: App {
                         }
                         
                     }
-            }
-            .modelContainer(for: [Bin.self])
+            } 
         }
+        .modelContainer(for: Bin.self, isAutosaveEnabled: false)
+
     }
 }
