@@ -35,6 +35,10 @@
 		86F9D7DB2A851CAD00F9765C /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86F9D7DA2A851CAD00F9765C /* Notification.swift */; };
 		86F9D7DF2A851D5E00F9765C /* Day.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86F9D7DE2A851D5E00F9765C /* Day.swift */; };
 		86F9D7E12A851E7B00F9765C /* Bin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86F9D7E02A851E7B00F9765C /* Bin.swift */; };
+		86FA52192A8F824A00D3495A /* Subscriptions.storekit in Resources */ = {isa = PBXBuildFile; fileRef = 86FA52182A8F824A00D3495A /* Subscriptions.storekit */; };
+		86FA521C2A8F826E00D3495A /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86FA521B2A8F826E00D3495A /* StoreKit.framework */; };
+		86FA52202A8F89B100D3495A /* ProductsConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86FA521F2A8F89B100D3495A /* ProductsConstants.swift */; };
+		86FA52222A8F8A3300D3495A /* SubscriptionStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86FA52212A8F8A3300D3495A /* SubscriptionStore.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -68,6 +72,10 @@
 		86F9D7DA2A851CAD00F9765C /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		86F9D7DE2A851D5E00F9765C /* Day.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day.swift; sourceTree = "<group>"; };
 		86F9D7E02A851E7B00F9765C /* Bin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bin.swift; sourceTree = "<group>"; };
+		86FA52182A8F824A00D3495A /* Subscriptions.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = Subscriptions.storekit; sourceTree = "<group>"; };
+		86FA521B2A8F826E00D3495A /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		86FA521F2A8F89B100D3495A /* ProductsConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsConstants.swift; sourceTree = "<group>"; };
+		86FA52212A8F8A3300D3495A /* SubscriptionStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionStore.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +83,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				86FA521C2A8F826E00D3495A /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -123,6 +132,7 @@
 			children = (
 				86DF7EEB2A6EA13B00B304EE /* my waste app */,
 				86DF7EEA2A6EA13B00B304EE /* Products */,
+				86FA521A2A8F826E00D3495A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -260,6 +270,7 @@
 		86DF7F292A7055CC00B304EE /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				86FA52152A8F81EF00D3495A /* Subscriptions */,
 				86DF7F032A6EFBFC00B304EE /* Main */,
 				860620132A7803CF00E8123C /* Settings */,
 				86BE857C2A73FD89003650AE /* Notification */,
@@ -267,6 +278,24 @@
 				86DF7F182A70390100B304EE /* EditBinModule */,
 			);
 			path = Screens;
+			sourceTree = "<group>";
+		};
+		86FA52152A8F81EF00D3495A /* Subscriptions */ = {
+			isa = PBXGroup;
+			children = (
+				86FA52182A8F824A00D3495A /* Subscriptions.storekit */,
+				86FA521F2A8F89B100D3495A /* ProductsConstants.swift */,
+				86FA52212A8F8A3300D3495A /* SubscriptionStore.swift */,
+			);
+			path = Subscriptions;
+			sourceTree = "<group>";
+		};
+		86FA521A2A8F826E00D3495A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				86FA521B2A8F826E00D3495A /* StoreKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -333,6 +362,7 @@
 			files = (
 				86DF7EF42A6EA13C00B304EE /* Preview Assets.xcassets in Resources */,
 				86DF7EF12A6EA13C00B304EE /* Assets.xcassets in Resources */,
+				86FA52192A8F824A00D3495A /* Subscriptions.storekit in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -369,6 +399,8 @@
 				867328F62A7A689500BEA07D /* Route.swift in Sources */,
 				860620152A7803EE00E8123C /* SettingsView.swift in Sources */,
 				867329072A826E8700BEA07D /* MainViewModel.swift in Sources */,
+				86FA52222A8F8A3300D3495A /* SubscriptionStore.swift in Sources */,
+				86FA52202A8F89B100D3495A /* ProductsConstants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
