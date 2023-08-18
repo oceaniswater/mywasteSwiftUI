@@ -16,7 +16,6 @@ struct AddBinView: View {
     @State private var newBin = Bin(date: .now, type: .cardboard, color: .blue, selectDays: [])
     
     var body: some View {
-        NavigationStack {
             ZStack {
                 Color("primary_bg")
                     .edgesIgnoringSafeArea(.all)
@@ -41,6 +40,7 @@ struct AddBinView: View {
                     .scrollContentBackground(.hidden)
                     Button {
                         modelContext.insert(newBin)
+                        try? modelContext.save()
                         vm.addNotification(newBin)
                         dismiss()
                     } label: {
@@ -56,7 +56,6 @@ struct AddBinView: View {
 
                 }
             }
-        }
     }
 }
 
@@ -119,9 +118,14 @@ struct WeekdayList: View {
     @Binding var days: Day.AllCases
     
     var body: some View {
-        List(Day.allCases, id: \.rawValue, selection: $selectedRows) {day in
-            WeekdayRow(day: day, selectedItems: $selectedRows)
+        ZStack {
+            Color("primary_bg")
+                .edgesIgnoringSafeArea(.all)
+            List(Day.allCases, id: \.rawValue, selection: $selectedRows) {day in
+                WeekdayRow(day: day, selectedItems: $selectedRows)
+            }
+            .listStyle(.automatic)
+            .scrollContentBackground(.hidden)
         }
-        .listStyle(.automatic)
     }
 }

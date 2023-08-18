@@ -13,6 +13,7 @@ struct MainView: View {
     @State var showNotificationView: Bool = false
     
     @StateObject var vm: MainViewModel
+    @StateObject var nm = NotificationManager()
     
     var body: some View {
             ZStack {
@@ -20,7 +21,7 @@ struct MainView: View {
                     .edgesIgnoringSafeArea(.all)
                 VStack {
                     SettingsBarView()
-                    if !vm.notificationEnabled {
+                    if !nm.hasPermisions {
                         if vm.isNotificationBageShown {
                             NotificationBageView(isNotificationBageShown: $vm.isNotificationBageShown)
                         }
@@ -36,6 +37,10 @@ struct MainView: View {
                     withAnimation {
                         showNotificationView = true
                     }
+                }
+                
+                Task {
+                    await nm.getAuthStatus()
                 }
             }
             .fullScreenCover(isPresented: $showNotificationView) {
@@ -83,8 +88,8 @@ struct YourBinsHeaderView: View {
                 .foregroundColor(.white)
             Spacer()
             Button {
-//                vm.showAddBinView()
-                isAddBinPresented.toggle()
+                vm.showAddBinView()
+//                isAddBinPresented.toggle()
             } label: {
                 Image(systemName: "plus")
                     .tint(Color("primary_elements"))
@@ -93,9 +98,9 @@ struct YourBinsHeaderView: View {
                     .font(.title2)
             }
         }
-        .sheet(isPresented: $isAddBinPresented, content: {
-            AddBinAssembley().build()
-        })
+//        .sheet(isPresented: $isAddBinPresented, content: {
+//            AddBinAssembley().build()
+//        })
         .padding(.horizontal)
     }
 }
@@ -104,35 +109,50 @@ struct NotificationBageView: View {
     @Binding var isNotificationBageShown: Bool
     
     var body: some View {
-        HStack(alignment: .top, content: {
-            Image(systemName: "bell.badge.fill")
-                .font(.title2)
-                .foregroundColor(.white)
-                .padding(.all, 4)
-                .background(Color("primary_elements"))
-                .cornerRadius(10.0)
-            Spacer()
-            VStack(alignment: .leading, content: {
-                Text("Enable push notification")
-                    .font(.headline)
-                    .foregroundColor(.white)
-                Text("The application will notify you  about the waste date")
-                    .foregroundColor(.gray)
-            })
-            Button {
-                withAnimation {
-                    isNotificationBageShown = !isNotificationBageShown
+        Button {
+            Task {
+                if let url = URL(string: UIApplication.openNotificationSettingsURLString) {
+                    // Ask the system to open that URL.
+                    await UIApplication.shared.open(url)
                 }
-            } label: {
-                Image(systemName: "xmark.circle.fill")
-                    .tint(Color(.black))
             }
-            
-        })
-        .padding(.all, 20)
-        .background(Color("primary_cell"))
-        .cornerRadius(10.0)
-        .padding(.horizontal)
+            isNotificationBageShown = !isNotificationBageShown
+        } label: {
+            HStack(alignment: .top) {
+                Image(systemName: "bell.badge.fill")
+                    .font(.title2)
+                    .foregroundColor(.white)
+                    .padding(.all, 4)
+                    .background(Color("primary_elements"))
+                    .cornerRadius(10.0)
+                Spacer()
+                VStack(alignment: .leading, spacing: 4) {
+                    Text("Enable push notifications")
+                        .font(.headline)
+                        .foregroundColor(.white)
+                    Text("The app will notify you about the next day of collection")
+                        .font(.subheadline)
+                        .foregroundColor(.gray)
+                        
+                }
+                Spacer()
+                Button {
+                    withAnimation {
+                        isNotificationBageShown = !isNotificationBageShown
+                    }
+                } label: {
+                    Image(systemName: "xmark.circle.fill")
+                        .tint(Color(.black))
+                }
+                
+            }
+            .padding(.all, 20)
+            .background(Color("primary_cell"))
+            .cornerRadius(10.0)
+            .padding(.horizontal)
+        }
+
+
     }
 }
 

@@ -10,11 +10,12 @@ import SwiftUI
 struct EditBinView: View {
     
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.modelContext) private var modelContext
     @Bindable var bin: Bin
     @StateObject var vm: EditBinViewModel
     
     var body: some View {
-        NavigationView {
+
             ZStack {
                 Color("primary_bg")
                     .edgesIgnoringSafeArea(.all)
@@ -37,32 +38,34 @@ struct EditBinView: View {
                     }
                     .scrollContentBackground(.hidden)
                     Button {
+                        try? modelContext.save()
+                        vm.updateNotifications(bin: bin)
                         dismiss()
                     } label: {
                         ZStack {
                             Rectangle()
                                 .frame(width: 355, height: 55)
-                            .cornerRadius(10.0)
-                            Text("Done")
+                                .cornerRadius(10.0)
+                            Text("Save")
                                 .foregroundColor(.white)
                         }
                             
                     }
                 }
-                .onChange(of: bin.selectDays) { oldValue, newValue in
-                    // change notifications!
-                    if !newValue.isEmpty {
-                        vm.updateNotifications(bin: bin)
-                    }
-                    
-                }
-                
-                .onChange(of: bin.date) { oldValue, newValue in
-                    // change notifications!
-                    vm.updateNotifications(bin: bin)
-                }
+//                .onChange(of: bin.selectDays) { oldValue, newValue in
+//                    // change notifications!
+//                    if !newValue.isEmpty {
+//                        vm.updateNotifications(bin: bin)
+//                    }
+//                    
+//                }
+//                
+//                .onChange(of: bin.date) { oldValue, newValue in
+//                    // change notifications!
+//                    vm.updateNotifications(bin: bin)
+//                }
             }
-        }
+
     }
 }
 

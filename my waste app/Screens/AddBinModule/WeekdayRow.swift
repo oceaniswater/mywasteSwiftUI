@@ -20,7 +20,7 @@ struct WeekdayRow: View {
             Text(day.dayString)
             Spacer()
             if isSelected {
-                Image(systemName: "trash.fill")
+                Image(systemName: "checkmark")
             }
         }
 
