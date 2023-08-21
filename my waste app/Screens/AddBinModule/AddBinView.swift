@@ -12,8 +12,13 @@ struct AddBinView: View {
     
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var modelContext
+    @EnvironmentObject var store: SubscriptionStore
+    
+    @Query private var bins: [Bin]
     @StateObject var vm: AddBinViewModel
     @State private var newBin = Bin(date: .now, type: .cardboard, color: .blue, selectDays: [])
+    @State var showSubscriptions = false
+    @State var showThanks = false
     
     var body: some View {
             ZStack {
@@ -39,12 +44,17 @@ struct AddBinView: View {
                     }
                     .scrollContentBackground(.hidden)
                     Button {
-                        if newBin.selectDays.isEmpty {
-                            vm.hasError = true
+                        if !store.isUserHasSubscription() && bins.count == 2 {
+                            showSubscriptions.toggle()
                         } else {
-                            modelContext.insert(newBin)
-                            vm.addNotification(newBin)
-                            dismiss()
+                            if newBin.selectDays.isEmpty {
+                                vm.hasError = true
+                            } else {
+                                modelContext.insert(newBin)
+                                vm.addNotification(newBin)
+                                dismiss()
+                            }
+                            
                         }
 
                     } label: {
@@ -63,8 +73,58 @@ struct AddBinView: View {
             .alert("You should chose at least one day of collection", isPresented: $vm.hasError) {
                 Button("OK", role: .cancel) { }
             }
+            .overlay(alignment: .bottom) {
+                
+                if showThanks {
+                    ThanksView(didTapClose: {
+                        showThanks.toggle()
+                    })
+                }
+             
+            }
+            .overlay {
+                        
+                        if showSubscriptions {
+                            Color.black.opacity(0.7)
+                                .ignoresSafeArea()
+                                .transition(.opacity)
+                                .onTapGesture {
+                                    showSubscriptions.toggle()
+                                    
+                                }
+                            SubscriptionsView(title: "Unlock all app functions!", description: "Unlock all app functions. With subscriptions you will be able add unlimited amout of bins") {
+                                showSubscriptions.toggle()
+                            }
+                                .transition(.move(edge: .bottom).combined(with: .opacity))
+                                .onDisappear(perform: {
+                                    Task {
+                                        await store.updateCurrentEntitlements()
+                                    }
+                                })
+                        }
+                    }
+                    .animation(.spring(), value: showSubscriptions)
+                    .animation(.spring(), value: showThanks)
+                    .onChange(of: store.action) { action in
+                                    
+                        if action == .successful {
+                            
+                            showSubscriptions = false
+                            
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                
+                                    showThanks.toggle()
+
+                            }
+                            
+                            store.reset()
+                        }
+                        
+                    }
+                    .alert(isPresented: $store.hasError, error: store.error) { }
+                }
     }
-}
+
 
 struct AddBinView_Previews: PreviewProvider {
     static var previews: some View {

@@ -133,9 +133,9 @@ extension SubscriptionStore {
         
         Task { [weak self] in
             
-//            for await result in Transaction.updates {
-//                await self?.handle(transactionVerification: result)
-//            }
+            //            for await result in Transaction.updates {
+            //                await self?.handle(transactionVerification: result)
+            //            }
             
             do {
                 
@@ -180,8 +180,10 @@ extension SubscriptionStore {
         case .success(let verification):
             print("Purchase was a success, now it's time to verify their purchase")
             let transaction = try checkVerified(verification)
-          
+            
             action = .successful
+            
+            UserDefaults.standard.set(true, forKey: "hasSubscription")
             
             await transaction.finish()
             
@@ -209,29 +211,30 @@ extension SubscriptionStore {
     }
     
     func updateCurrentEntitlements() async {
-      for await result in Transaction.currentEntitlements {
-        await self.handle(transactionVerification: result)
-            }
+        for await result in Transaction.currentEntitlements {
+            await self.handle(transactionVerification: result)
         }
-    
-    private func handle(transactionVerification result: VerificationResult <Transaction> ) async {
-      switch result {
-        case let.verified(transaction):
-          guard
-          let product = self.items.first(where: {
-            $0.id == transaction.productID
-          })
-          else {
-            return
-          }
-          self.purchasedNonConsumables.insert(product)
-          await transaction.finish()
-        default:
-          return
-      }
     }
     
-    func isEmpty() -> Bool {
-        return self.purchasedNonConsumables.isEmpty
+    private func handle(transactionVerification result: VerificationResult <Transaction> ) async {
+        switch result {
+        case let.verified(transaction):
+            guard
+                let product = self.items.first(where: {
+                    $0.id == transaction.productID
+                })
+            else {
+                return
+            }
+            self.purchasedNonConsumables.insert(product)
+            UserDefaults.standard.set(!self.purchasedNonConsumables.isEmpty, forKey: "hasSubscription")
+            await transaction.finish()
+        default:
+            return
+        }
+    }
+    
+    func isUserHasSubscription() -> Bool {
+        return UserDefaults.standard.bool(forKey: "hasSubscription")
     }
 }
