@@ -60,6 +60,9 @@ enum SubscriptionAction: Equatable {
 class SubscriptionStore: ObservableObject {
     
     @Published private(set) var items = [Product]()
+    @Published var purchasedNonConsumables = Set<Product>()
+    
+    
     @Published private(set) var action: SubscriptionAction? {
         didSet {
             switch action {
@@ -89,6 +92,8 @@ class SubscriptionStore: ObservableObject {
         
         Task {
             await retrieveProducts()
+            
+            await updateCurrentEntitlements()
         }
     }
     
@@ -114,14 +119,22 @@ class SubscriptionStore: ObservableObject {
     func reset() {
         action = nil
     }
+    
+    func restore() async throws {
+        try await AppStore.sync()
+    }
 }
 
-private extension SubscriptionStore {
+extension SubscriptionStore {
     
     /// Create a listener for transactions that don't come directly via the purchase function
     func configureTransactionListener() -> TransactionLister {
         
         Task { [weak self] in
+            
+//            for await result in Transaction.updates {
+//                await self?.handle(transactionVerification: result)
+//            }
             
             do {
                
@@ -132,12 +145,17 @@ private extension SubscriptionStore {
                     self?.action = .successful
                     
                     await transaction?.finish()
+
                 }
                 
             } catch {
                 self?.action = .failed(.system(error))
             }
+            
+            
         }
+        
+        
     }
     
     /// Get all of the products that are on offer
@@ -185,5 +203,32 @@ private extension SubscriptionStore {
         case .verified(let safe):
             return safe
         }
+    }
+    
+    func updateCurrentEntitlements() async {
+      for await result in Transaction.currentEntitlements {
+        await self.handle(transactionVerification: result)
+            }
+        }
+    
+    private func handle(transactionVerification result: VerificationResult <Transaction> ) async {
+      switch result {
+        case let.verified(transaction):
+          guard
+          let product = self.items.first(where: {
+            $0.id == transaction.productID
+          })
+          else {
+            return
+          }
+          self.purchasedNonConsumables.insert(product)
+          await transaction.finish()
+        default:
+          return
+      }
+    }
+    
+    func isEmpty() -> Bool {
+        return self.purchasedNonConsumables.isEmpty
     }
 }

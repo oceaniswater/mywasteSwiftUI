@@ -12,7 +12,7 @@ struct MainView: View {
 
     @State var showSettingsScreen: Bool = false
     @State var showNotificationView: Bool = false
-    @State var showSubscriptions: Bool = true
+    @State var showSubscriptions: Bool = false
     
     @StateObject var vm: MainViewModel
     @StateObject var nm = NotificationManager()
@@ -23,14 +23,9 @@ struct MainView: View {
                 Color("primary_bg")
                     .edgesIgnoringSafeArea(.all)
                 VStack {
-                    HStack {
-                        Button(action: {
-                            showSubscriptions.toggle()
-                        }, label: {
-                            Image(systemName: "rectangle.inset.filled.and.person.filled")
-                        })
-                        SettingsBarView()
-                    }
+
+                    SettingsBarView(showSubscriptions: $showSubscriptions)
+
                     if !nm.hasPermisions {
                         if vm.isNotificationBageShown {
                             NotificationBageView(isNotificationBageShown: $vm.isNotificationBageShown)
@@ -65,6 +60,11 @@ struct MainView: View {
                                 }
                             cardVw
                                 .transition(.move(edge: .bottom).combined(with: .opacity))
+                                .onDisappear(perform: {
+                                    Task {
+                                        await store.updateCurrentEntitlements()
+                                    }
+                                })
                         }
                     }
                     .animation(.spring(), value: showSubscriptions)
@@ -89,8 +89,7 @@ struct MainView: View {
                 }
         
             .fullScreenCover(isPresented: $showNotificationView) {
-                NotificationView(showNotificationView: $showNotificationView)
-                
+                NotificationView(showNotificationView: $showNotificationView)                
             }
     }
 }
@@ -104,14 +103,15 @@ struct ContentView_Previews: PreviewProvider {
 
 struct SettingsBarView: View {
     @EnvironmentObject var vm: MainViewModel
+    @Binding var showSubscriptions: Bool
 
     var body: some View {
         HStack() {
             Spacer()
             Button {
-                vm.showSettings()
+                showSubscriptions.toggle()
             } label: {
-                Image(systemName: "gear")
+                Image(systemName: "crown.fill")
                     .font(.title2)
                     .tint(Color("primary_elements"))
                     .padding()
@@ -189,7 +189,7 @@ struct NotificationBageView: View {
                     }
                 } label: {
                     Image(systemName: "xmark.circle.fill")
-                        .tint(Color(.black))
+                        .foregroundStyle(.gray, .gray.opacity(0.2))
                 }
                 
             }
@@ -207,51 +207,66 @@ private extension MainView {
     
     var cardVw: some View {
                 
-        VStack(spacing: 8) {
-            
-            HStack {
-                Spacer()
-                Button {
-                    showSubscriptions.toggle()
-                } label: {
-                    
-                    Image(systemName: "xmark")
-                        .symbolVariant(.circle.fill)
-                        .font(.system(.largeTitle, design: .rounded).bold())
-                        .symbolRenderingMode(.palette)
-                        .foregroundStyle(.gray, .gray.opacity(0.2))
-                }
-            }
-            
-            Text("Unlock all app functions!")
-                .foregroundStyle(.white)
-                .font(.system(.title2, design: .rounded).bold())
-                .multilineTextAlignment(.center)
+            VStack(spacing: 8) {
                 
-            
-            Text("Unlock all app functions. All subscriptions goes with 1 week free trial. Try. Enjoy. Cancel any time in Apple Subscriptions.")
-                .foregroundStyle(.gray)
-                .font(.system(.body, design: .rounded))
-                .multilineTextAlignment(.center)
+                HStack {
+                    Spacer()
+                    Button {
+                        showSubscriptions.toggle()
+                    } label: {
+                        
+                        Image(systemName: "xmark")
+                            .symbolVariant(.circle.fill)
+                            .font(.system(.largeTitle, design: .rounded).bold())
+                            .symbolRenderingMode(.palette)
+                            .foregroundStyle(.gray, .gray.opacity(0.2))
+                    }
+                }
+                
+                Text("Unlock all app functions!")
+                    .foregroundStyle(.white)
+                    .font(.system(.title2, design: .rounded).bold())
+                    .multilineTextAlignment(.center)
+                
+                
+                Text("Unlock all app functions. All subscriptions goes with 1 week free trial. Try. Enjoy. Cancel any time in Apple Subscriptions.")
+                    .foregroundStyle(.gray)
+                    .font(.system(.body, design: .rounded))
+                    .multilineTextAlignment(.center)
+                    .padding(.bottom, 16)
+                
+                ForEach(store.items) { item in
+                    configureProductVw(item)
+                }
+                
+                Text(!store.purchasedNonConsumables.isEmpty ? "You already has subscription" : "")
+                    .foregroundStyle(.gray)
+                    .font(.system(.body, design: .rounded))
+                    .multilineTextAlignment(.center)
+                    .padding(.bottom, 16)
+                
+                Button("Restore purchase") {
+                    Task {
+                        try? await store.restore()
+                    }
+                }
+                .foregroundStyle(Color("primary_elements").opacity(0.6))
                 .padding(.bottom, 16)
-            
-            ForEach(store.items) { item in
-                configureProductVw(item)
+                
             }
-            
-        }
-        .padding(16)
-        .background(Color("primary_bg"), in: RoundedRectangle(cornerRadius: 10, style: .continuous))
-        .padding(8)
-        .overlay(alignment: .top) {
-            Image("logo")
-                .resizable()
-                .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
-                .frame(width: 60, height: 60)
-//                .padding(2)
-//                .background(Color.accentColor, in: RoundedRectangle(cornerRadius: 10, style: .continuous))
-                .offset(y: -25)
-        }
+            .padding(16)
+            .background(Color("primary_bg"), in: RoundedRectangle(cornerRadius: 10, style: .continuous))
+            .padding(8)
+            .overlay(alignment: .top) {
+                Image("logo")
+                    .resizable()
+                    .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+                    .frame(width: 60, height: 60)
+                //                .padding(2)
+                //                .background(Color.accentColor, in: RoundedRectangle(cornerRadius: 10, style: .continuous))
+                    .offset(y: -25)
+            }
+        
     }
     
     func configureProductVw(_ item: Product) -> some View {
