@@ -17,6 +17,7 @@ final class AddBinViewModel: ObservableObject, AddBinViewModelProtocol {
     @Published var selectedRows = Set<Day>()
     @Published var days = Day.allCases
     @Published var selectedDate = Date()
+    @Published var hasError: Bool = false
     
     private let router: Router
     

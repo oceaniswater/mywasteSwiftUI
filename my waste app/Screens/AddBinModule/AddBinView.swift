@@ -39,9 +39,14 @@ struct AddBinView: View {
                     }
                     .scrollContentBackground(.hidden)
                     Button {
-                        modelContext.insert(newBin)
-                        vm.addNotification(newBin)
-                        dismiss()
+                        if newBin.selectDays.isEmpty {
+                            vm.hasError = true
+                        } else {
+                            modelContext.insert(newBin)
+                            vm.addNotification(newBin)
+                            dismiss()
+                        }
+
                     } label: {
                         ZStack {
                             Rectangle()
@@ -54,6 +59,9 @@ struct AddBinView: View {
                     }
 
                 }
+            }
+            .alert("You should chose at least one day of collection", isPresented: $vm.hasError) {
+                Button("OK", role: .cancel) { }
             }
     }
 }

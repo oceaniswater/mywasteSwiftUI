@@ -19,6 +19,8 @@ final class EditBinViewModel: EditBinViewModelProtocol {
     @Published var atTheSameDay: Bool
     @Published var selectDays: Set<Day>
     
+    @Published var hasError: Bool = false
+    
     private let router: Router
     
     init(router: Router, bin: Bin) {
