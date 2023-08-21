@@ -50,7 +50,7 @@ struct my_waste_appApp: App {
             }
             .environmentObject(store)
         }
-        .modelContainer(for: Bin.self, isAutosaveEnabled: false)
+        .modelContainer(for: Bin.self)
 
     }
 }

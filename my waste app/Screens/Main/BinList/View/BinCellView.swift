@@ -40,7 +40,7 @@ struct BinCellView: View {
 //                    path.append(bin)
                 } label: {
                     Image(systemName: "slider.horizontal.3")
-                        .foregroundColor(.black)
+                        .foregroundStyle(.gray, .gray.opacity(0.2))
                 }
             }
             .padding(.all, 10)

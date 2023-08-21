@@ -20,25 +20,30 @@ struct EditBinView: View {
                 Color("primary_bg")
                     .edgesIgnoringSafeArea(.all)
                 VStack {
-                    ImageBin(colorSelected: $bin.color, typeSelected: $bin.type)
+                    ImageBin(colorSelected: $vm.color, typeSelected: $vm.type)
                     Form {
                         Section {
-                            ColorPicker(colorSelected: $bin.color)
+                            ColorPicker(colorSelected: $vm.color)
                                 .frame(height: 30)
-                            TypePicker(typeSelected: $bin.type)
+                            TypePicker(typeSelected: $vm.type)
                                 .frame(height: 30)
                         }
                         Section {
-                            DatePicker("Time", selection: $bin.date, displayedComponents: .hourAndMinute)
-                            Toggle("At day of collecton", isOn: $bin.atTheSameDay)
+                            DatePicker("Time", selection: $vm.date, displayedComponents: .hourAndMinute)
+                            Toggle("At day of collecton", isOn: $vm.atTheSameDay)
                         }
                         NavigationLink("Collection days") {
-                                WeekdayList(selectedRows: $bin.selectDays, days: $vm.days)
+                            WeekdayList(selectedRows: $vm.selectDays, days: $vm.days)
                         }
                     }
                     .scrollContentBackground(.hidden)
                     Button {
-                        try? modelContext.save()
+                        bin.color = vm.color
+                        bin.type = vm.type
+                        bin.date = vm.date
+                        bin.atTheSameDay = vm.atTheSameDay
+                        bin.selectDays = vm.selectDays
+                        
                         vm.updateNotifications(bin: bin)
                         dismiss()
                     } label: {

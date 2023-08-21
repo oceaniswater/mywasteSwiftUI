@@ -56,7 +56,6 @@ struct BinsListView: View {
 
                 // delete bin
                 modelContext.delete(bins[index])
-                try? modelContext.save()
             }
         }
     }
