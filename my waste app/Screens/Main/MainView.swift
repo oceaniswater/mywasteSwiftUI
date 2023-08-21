@@ -52,33 +52,6 @@ struct MainView: View {
             .overlay(alignment: .bottom) {
                 
                 if showThanks {
-                    
-//                    VStack(spacing: 8) {
-//                        
-//                        Text("Thank You 💕")
-//                            .foregroundStyle(Color.white)
-//                            .font(.system(.title2, design: .rounded).bold())
-//                            .multilineTextAlignment(.center)
-//                        
-//                        Text("Now you have ability to use all power of this app. In the future we gonna add more fetures into it. And you will use it for free too.")
-//                            .foregroundStyle(Color.gray)
-//                            .font(.system(.body, design: .rounded))
-//                            .multilineTextAlignment(.center)
-//                            .padding(.bottom, 16)
-//                        
-//                        Button {
-//                            showThanks.toggle()
-//                        } label: {
-//                            Text("Close")
-//                                .font(.system(.title3, design: .rounded).bold())
-//                                .tint(.white)
-//                                .frame(height: 55)
-//                                .frame(maxWidth: .infinity)
-//                                .background(.blue, in: RoundedRectangle(cornerRadius: 10,
-//                                                                        style: .continuous))
-//
-//                        }
-//                    }
                     ThanksView(didTapClose: {
                         showThanks.toggle()
                     })
@@ -167,8 +140,8 @@ struct YourBinsHeaderView: View {
     var body: some View {
         HStack {
             Text("Your Bins")
-                .font(.title2)
-                .foregroundColor(.white)
+                .font(.system(.title2, design: .rounded))
+                .foregroundStyle(Color.white)
             Spacer()
             Button {
                 vm.showAddBinView()
@@ -276,7 +249,7 @@ private extension MainView {
                     configureProductVw(item)
                 }
                 
-                Text(!store.purchasedNonConsumables.isEmpty ? "You already has subscription" : "")
+                Text(!store.purchasedNonConsumables.isEmpty ? "You already have subscription" : "")
                     .foregroundStyle(.gray)
                     .font(.system(.body, design: .rounded))
                     .multilineTextAlignment(.center)
