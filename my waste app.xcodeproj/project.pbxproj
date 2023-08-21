@@ -40,6 +40,7 @@
 		86FA52202A8F89B100D3495A /* ProductsConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86FA521F2A8F89B100D3495A /* ProductsConstants.swift */; };
 		86FA52222A8F8A3300D3495A /* SubscriptionStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86FA52212A8F8A3300D3495A /* SubscriptionStore.swift */; };
 		86FA52242A93827B00D3495A /* ThanksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86FA52232A93827B00D3495A /* ThanksView.swift */; };
+		86FA52262A93918900D3495A /* SubscriptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86FA52252A93918900D3495A /* SubscriptionsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -78,6 +79,7 @@
 		86FA521F2A8F89B100D3495A /* ProductsConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsConstants.swift; sourceTree = "<group>"; };
 		86FA52212A8F8A3300D3495A /* SubscriptionStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionStore.swift; sourceTree = "<group>"; };
 		86FA52232A93827B00D3495A /* ThanksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThanksView.swift; sourceTree = "<group>"; };
+		86FA52252A93918900D3495A /* SubscriptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -289,6 +291,7 @@
 				86FA521F2A8F89B100D3495A /* ProductsConstants.swift */,
 				86FA52212A8F8A3300D3495A /* SubscriptionStore.swift */,
 				86FA52232A93827B00D3495A /* ThanksView.swift */,
+				86FA52252A93918900D3495A /* SubscriptionsView.swift */,
 			);
 			path = Subscriptions;
 			sourceTree = "<group>";
@@ -379,6 +382,7 @@
 				86DF7F152A6FE8CE00B304EE /* BinsListViewModel.swift in Sources */,
 				867329002A8245DD00BEA07D /* AddBinAssembley.swift in Sources */,
 				867329052A825D0B00BEA07D /* EditBinAssembley.swift in Sources */,
+				86FA52262A93918900D3495A /* SubscriptionsView.swift in Sources */,
 				867328FE2A82438200BEA07D /* MainAssembley.swift in Sources */,
 				860620172A78040600E8123C /* SettingsViewModel.swift in Sources */,
 				86DF7F0C2A6F22AC00B304EE /* WeekDay.swift in Sources */,
