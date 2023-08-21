@@ -122,6 +122,7 @@ class SubscriptionStore: ObservableObject {
     
     func restore() async throws {
         try await AppStore.sync()
+        await updateCurrentEntitlements()
     }
 }
 
