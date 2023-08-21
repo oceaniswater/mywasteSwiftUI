@@ -38,14 +38,18 @@ struct EditBinView: View {
                     }
                     .scrollContentBackground(.hidden)
                     Button {
-                        bin.color = vm.color
-                        bin.type = vm.type
-                        bin.date = vm.date
-                        bin.atTheSameDay = vm.atTheSameDay
-                        bin.selectDays = vm.selectDays
-                        
-                        vm.updateNotifications(bin: bin)
-                        dismiss()
+                        if vm.selectDays.isEmpty {
+                            vm.hasError = true
+                        } else {
+                            bin.color = vm.color
+                            bin.type = vm.type
+                            bin.date = vm.date
+                            bin.atTheSameDay = vm.atTheSameDay
+                            bin.selectDays = vm.selectDays
+                            
+                            vm.updateNotifications(bin: bin)
+                            dismiss()
+                        }
                     } label: {
                         ZStack {
                             Rectangle()
@@ -70,7 +74,9 @@ struct EditBinView: View {
 //                    vm.updateNotifications(bin: bin)
 //                }
             }
-
+            .alert("You should chose at least one day of collection", isPresented: $vm.hasError) {
+                Button("OK", role: .cancel) { }
+            }
     }
 }
 
