@@ -9,7 +9,7 @@ import Foundation
 import StoreKit
 
 typealias PurchaseResult = Product.PurchaseResult
-typealias TransactionLister = Task<Void, Error>
+typealias TransactionListener = Task<Void, Error>
 
 enum SubscriptoinsError: LocalizedError {
     case failedVerification
@@ -75,7 +75,7 @@ class SubscriptionStore: ObservableObject {
     }
     @Published var hasError = false
     
-    private var transactionListener: TransactionLister?
+    private var transactionListener: TransactionListener?
     
     var error: SubscriptoinsError? {
         switch action {
@@ -129,7 +129,7 @@ class SubscriptionStore: ObservableObject {
 extension SubscriptionStore {
     
     /// Create a listener for transactions that don't come directly via the purchase function
-    func configureTransactionListener() -> TransactionLister {
+    func configureTransactionListener() -> TransactionListener {
         
         Task { [weak self] in
             
@@ -138,15 +138,17 @@ extension SubscriptionStore {
 //            }
             
             do {
-               
+                
                 for await result in Transaction.updates {
+                    
+                    await self?.handle(transactionVerification: result)
                     
                     let transaction = try self?.checkVerified(result)
                     
                     self?.action = .successful
                     
                     await transaction?.finish()
-
+                    
                 }
                 
             } catch {

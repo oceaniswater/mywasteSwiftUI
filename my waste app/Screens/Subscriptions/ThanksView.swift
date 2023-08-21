@@ -19,7 +19,7 @@ struct ThanksView: View {
                 .font(.system(.title2, design: .rounded).bold())
                 .multilineTextAlignment(.center)
             
-            Text("Now you have ability to use all power of this app. In the future we gonna add more fetures into it. And you will use it for free to.")
+            Text("Now you have ability to use all power of this app. In the future we gonna add more fetures into it. And you will use it for free too.")
                 .foregroundStyle(Color.gray)
                 .font(.system(.body, design: .rounded))
                 .multilineTextAlignment(.center)
