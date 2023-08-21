@@ -29,7 +29,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
 struct my_waste_appApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     
-    let binsListViewModel = BinsListViewModel()
+    @StateObject var store = SubscriptionStore()
     @ObservedObject var router = Router.shared
     
     var body: some Scene {
@@ -47,9 +47,10 @@ struct my_waste_appApp: App {
                         }
                         
                     }
-            } 
+            }
+            .environmentObject(store)
         }
-        .modelContainer(for: Bin.self, isAutosaveEnabled: false)
+        .modelContainer(for: Bin.self)
 
     }
 }

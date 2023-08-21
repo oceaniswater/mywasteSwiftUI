@@ -26,12 +26,13 @@ struct BinCellView: View {
                 }
                 VStack(alignment: .leading, spacing: 4.0) {
                     Text("\(bin.type.rawValue.capitalized(with: .current)) waste bin")
-                        .foregroundColor(.white)
+                        .font(.system(.headline, design: .rounded))
+                        .foregroundStyle(Color.white)
                     Text(bin.noteLabel)
                         .lineLimit(nil)
                         .multilineTextAlignment(.leading)
-                        .font(.footnote)
-                        .foregroundColor(.gray)
+                        .font(.system(.footnote, design: .rounded))
+                        .foregroundStyle(Color.gray)
                         .frame(height: 35.0)
                 }
                 .padding()
@@ -40,7 +41,7 @@ struct BinCellView: View {
 //                    path.append(bin)
                 } label: {
                     Image(systemName: "slider.horizontal.3")
-                        .foregroundColor(.black)
+                        .foregroundStyle(.gray, .gray.opacity(0.2))
                 }
             }
             .padding(.all, 10)

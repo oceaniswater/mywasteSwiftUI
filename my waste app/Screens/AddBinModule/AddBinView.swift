@@ -40,7 +40,6 @@ struct AddBinView: View {
                     .scrollContentBackground(.hidden)
                     Button {
                         modelContext.insert(newBin)
-                        try? modelContext.save()
                         vm.addNotification(newBin)
                         dismiss()
                     } label: {

@@ -6,21 +6,27 @@
 //
 
 import SwiftUI
+import StoreKit
 
 struct MainView: View {
 
     @State var showSettingsScreen: Bool = false
     @State var showNotificationView: Bool = false
+    @State var showSubscriptions: Bool = false
+    @State var showThanks: Bool = false
     
     @StateObject var vm: MainViewModel
     @StateObject var nm = NotificationManager()
+    @EnvironmentObject var store: SubscriptionStore
     
     var body: some View {
             ZStack {
                 Color("primary_bg")
                     .edgesIgnoringSafeArea(.all)
                 VStack {
-                    SettingsBarView()
+
+                    SettingsBarView(showSubscriptions: $showSubscriptions)
+
                     if !nm.hasPermisions {
                         if vm.isNotificationBageShown {
                             NotificationBageView(isNotificationBageShown: $vm.isNotificationBageShown)
@@ -29,7 +35,7 @@ struct MainView: View {
                     YourBinsHeaderView()
                     BinsListView()
                 }
-            }
+                
             .environmentObject(vm)
             .onAppear {
                 let l = UserDefaults.standard.bool(forKey: "notFirstTime")
@@ -43,9 +49,57 @@ struct MainView: View {
                     await nm.getAuthStatus()
                 }
             }
+            .overlay(alignment: .bottom) {
+                
+                if showThanks {
+                    ThanksView(didTapClose: {
+                        showThanks.toggle()
+                    })
+                }
+             
+            }
+            .overlay {
+                        
+                        if showSubscriptions {
+                            Color.black.opacity(0.7)
+                                .ignoresSafeArea()
+                                .transition(.opacity)
+                                .onTapGesture {
+                                    showSubscriptions.toggle()
+                                    
+                                }
+                            cardVw
+                                .transition(.move(edge: .bottom).combined(with: .opacity))
+                                .onDisappear(perform: {
+                                    Task {
+                                        await store.updateCurrentEntitlements()
+                                    }
+                                })
+                        }
+                    }
+                    .animation(.spring(), value: showSubscriptions)
+                    .animation(.spring(), value: showThanks)
+                    .onChange(of: store.action) { action in
+                                    
+                        if action == .successful {
+                            
+                            showSubscriptions = false
+                            
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                
+                                    showThanks.toggle()
+
+                            }
+                            
+                            store.reset()
+                        }
+                        
+                    }
+                    .alert(isPresented: $store.hasError, error: store.error) { }
+                }
+        
             .fullScreenCover(isPresented: $showNotificationView) {
                 NotificationView(showNotificationView: $showNotificationView)
-                
             }
     }
 }
@@ -53,19 +107,21 @@ struct MainView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         MainAssembley().build()
+            .environmentObject(SubscriptionStore())
     }
 }
 
 struct SettingsBarView: View {
     @EnvironmentObject var vm: MainViewModel
+    @Binding var showSubscriptions: Bool
 
     var body: some View {
         HStack() {
             Spacer()
             Button {
-                vm.showSettings()
+                showSubscriptions.toggle()
             } label: {
-                Image(systemName: "gear")
+                Image(systemName: "crown.fill")
                     .font(.title2)
                     .tint(Color("primary_elements"))
                     .padding()
@@ -84,8 +140,8 @@ struct YourBinsHeaderView: View {
     var body: some View {
         HStack {
             Text("Your Bins")
-                .font(.title2)
-                .foregroundColor(.white)
+                .font(.system(.title2, design: .rounded))
+                .foregroundStyle(Color.white)
             Spacer()
             Button {
                 vm.showAddBinView()
@@ -133,6 +189,7 @@ struct NotificationBageView: View {
                     Text("The app will notify you about the next day of collection")
                         .font(.subheadline)
                         .foregroundColor(.gray)
+                        .multilineTextAlignment(.leading)
                         
                 }
                 Spacer()
@@ -142,7 +199,7 @@ struct NotificationBageView: View {
                     }
                 } label: {
                     Image(systemName: "xmark.circle.fill")
-                        .tint(Color(.black))
+                        .foregroundStyle(.gray, .gray.opacity(0.2))
                 }
                 
             }
@@ -156,4 +213,100 @@ struct NotificationBageView: View {
     }
 }
 
-
+private extension MainView {
+    
+    var cardVw: some View {
+                
+            VStack(spacing: 8) {
+                
+                HStack {
+                    Spacer()
+                    Button {
+                        showSubscriptions.toggle()
+                    } label: {
+                        
+                        Image(systemName: "xmark")
+                            .symbolVariant(.circle.fill)
+                            .font(.system(.largeTitle, design: .rounded).bold())
+                            .symbolRenderingMode(.palette)
+                            .foregroundStyle(.gray, .gray.opacity(0.2))
+                    }
+                }
+                
+                Text("Unlock all app functions!")
+                    .foregroundStyle(.white)
+                    .font(.system(.title2, design: .rounded).bold())
+                    .multilineTextAlignment(.center)
+                
+                
+                Text("Unlock all app functions. All subscriptions goes with 1 week free trial. Try. Enjoy. Cancel any time in Apple Subscriptions.")
+                    .foregroundStyle(.gray)
+                    .font(.system(.body, design: .rounded))
+                    .multilineTextAlignment(.center)
+                    .padding(.bottom, 16)
+                
+                ForEach(store.items) { item in
+                    configureProductVw(item)
+                }
+                
+                Text(!store.purchasedNonConsumables.isEmpty ? "You already have subscription" : "")
+                    .foregroundStyle(.gray)
+                    .font(.system(.body, design: .rounded))
+                    .multilineTextAlignment(.center)
+                    .padding(.bottom, 16)
+                
+                Button("Restore purchase") {
+                    Task {
+                        try? await store.restore()
+                    }
+                }
+                .foregroundStyle(Color("primary_elements").opacity(0.6))
+                .padding(.bottom, 16)
+                
+            }
+            .padding(16)
+            .background(Color("primary_bg"), in: RoundedRectangle(cornerRadius: 10, style: .continuous))
+            .padding(8)
+            .overlay(alignment: .top) {
+                Image("logo")
+                    .resizable()
+                    .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+                    .frame(width: 60, height: 60)
+                //                .padding(2)
+                //                .background(Color.accentColor, in: RoundedRectangle(cornerRadius: 10, style: .continuous))
+                    .offset(y: -25)
+            }
+        
+    }
+    
+    func configureProductVw(_ item: Product) -> some View {
+        
+        HStack {
+            
+            VStack(alignment: .leading,
+                   spacing: 3) {
+                Text(item.displayName)
+                    .font(.system(.title3, design: .rounded).bold())
+                    .foregroundStyle(.white)
+                Text(item.description)
+                    .font(.system(.callout, design: .rounded).weight(.regular))
+                    .foregroundStyle(.gray)
+            }
+            
+            Spacer()
+            
+            Button(item.displayPrice) {
+                Task {
+                    await store.purchase(item)
+                }
+            }
+            .tint((Color("primary_elements")))
+            .buttonStyle(.bordered)
+            .font(.callout.bold())
+        }
+        .padding(16)
+        .background(Color("primary_cell"),
+                    in: RoundedRectangle(cornerRadius: 10, style: .continuous))
+        
+    }
+}

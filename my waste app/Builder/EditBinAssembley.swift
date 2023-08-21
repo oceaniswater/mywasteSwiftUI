@@ -10,7 +10,7 @@ import Foundation
 final class EditBinAssembley {
     func build(for bin: Bin) -> EditBinView {
         let router = Router.shared
-        let viewModel = EditBinViewModel(router: router)
+        let viewModel = EditBinViewModel(router: router, bin: bin)
         return EditBinView(bin: bin, vm: viewModel)
     }
 }
