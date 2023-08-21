@@ -13,6 +13,7 @@ struct MainView: View {
     @State var showSettingsScreen: Bool = false
     @State var showNotificationView: Bool = false
     @State var showSubscriptions: Bool = false
+    @State var showThanks: Bool = false
     
     @StateObject var vm: MainViewModel
     @StateObject var nm = NotificationManager()
@@ -48,6 +49,42 @@ struct MainView: View {
                     await nm.getAuthStatus()
                 }
             }
+            .overlay(alignment: .bottom) {
+                
+                if showThanks {
+                    
+//                    VStack(spacing: 8) {
+//                        
+//                        Text("Thank You 💕")
+//                            .foregroundStyle(Color.white)
+//                            .font(.system(.title2, design: .rounded).bold())
+//                            .multilineTextAlignment(.center)
+//                        
+//                        Text("Now you have ability to use all power of this app. In the future we gonna add more fetures into it. And you will use it for free too.")
+//                            .foregroundStyle(Color.gray)
+//                            .font(.system(.body, design: .rounded))
+//                            .multilineTextAlignment(.center)
+//                            .padding(.bottom, 16)
+//                        
+//                        Button {
+//                            showThanks.toggle()
+//                        } label: {
+//                            Text("Close")
+//                                .font(.system(.title3, design: .rounded).bold())
+//                                .tint(.white)
+//                                .frame(height: 55)
+//                                .frame(maxWidth: .infinity)
+//                                .background(.blue, in: RoundedRectangle(cornerRadius: 10,
+//                                                                        style: .continuous))
+//
+//                        }
+//                    }
+                    ThanksView(didTapClose: {
+                        showThanks.toggle()
+                    })
+                }
+             
+            }
             .overlay {
                         
                         if showSubscriptions {
@@ -68,7 +105,7 @@ struct MainView: View {
                         }
                     }
                     .animation(.spring(), value: showSubscriptions)
-//                        .animation(.spring(), value: showThanks)
+                    .animation(.spring(), value: showThanks)
                     .onChange(of: store.action) { action in
                                     
                         if action == .successful {
@@ -77,7 +114,7 @@ struct MainView: View {
                             
                             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                                 
-//                                    showThanks.toggle()
+                                    showThanks.toggle()
 
                             }
                             
@@ -89,7 +126,7 @@ struct MainView: View {
                 }
         
             .fullScreenCover(isPresented: $showNotificationView) {
-                NotificationView(showNotificationView: $showNotificationView)                
+                NotificationView(showNotificationView: $showNotificationView)
             }
     }
 }

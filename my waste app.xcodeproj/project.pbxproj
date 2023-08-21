@@ -39,6 +39,7 @@
 		86FA521C2A8F826E00D3495A /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86FA521B2A8F826E00D3495A /* StoreKit.framework */; };
 		86FA52202A8F89B100D3495A /* ProductsConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86FA521F2A8F89B100D3495A /* ProductsConstants.swift */; };
 		86FA52222A8F8A3300D3495A /* SubscriptionStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86FA52212A8F8A3300D3495A /* SubscriptionStore.swift */; };
+		86FA52242A93827B00D3495A /* ThanksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86FA52232A93827B00D3495A /* ThanksView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -76,6 +77,7 @@
 		86FA521B2A8F826E00D3495A /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		86FA521F2A8F89B100D3495A /* ProductsConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsConstants.swift; sourceTree = "<group>"; };
 		86FA52212A8F8A3300D3495A /* SubscriptionStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionStore.swift; sourceTree = "<group>"; };
+		86FA52232A93827B00D3495A /* ThanksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThanksView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -286,6 +288,7 @@
 				86FA52182A8F824A00D3495A /* Subscriptions.storekit */,
 				86FA521F2A8F89B100D3495A /* ProductsConstants.swift */,
 				86FA52212A8F8A3300D3495A /* SubscriptionStore.swift */,
+				86FA52232A93827B00D3495A /* ThanksView.swift */,
 			);
 			path = Subscriptions;
 			sourceTree = "<group>";
@@ -388,6 +391,7 @@
 				86BE857E2A73FDD5003650AE /* NotificationScreenView.swift in Sources */,
 				86DF7EFF2A6EC66E00B304EE /* Singleton.swift in Sources */,
 				86DF7F0F2A6FCD6D00B304EE /* WeekdayRow.swift in Sources */,
+				86FA52242A93827B00D3495A /* ThanksView.swift in Sources */,
 				86DF7F012A6EFBD500B304EE /* AddBinView.swift in Sources */,
 				86DF7EED2A6EA13B00B304EE /* my_waste_appApp.swift in Sources */,
 				86DF7F1A2A70394800B304EE /* EditBinView.swift in Sources */,
