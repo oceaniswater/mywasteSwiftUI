@@ -49,7 +49,7 @@ struct SubscriptionsView: View {
                     configureProductVw(item)
                 }
                 
-                Text(!store.purchasedNonConsumables.isEmpty ? "You already have subscription" : "")
+                Text(store.isUserHasSubscription() ? "You already have subscription" : "")
                     .foregroundStyle(.gray)
                     .font(.system(.body, design: .rounded))
                     .multilineTextAlignment(.center)
