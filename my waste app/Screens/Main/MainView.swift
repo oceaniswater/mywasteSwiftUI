@@ -24,13 +24,7 @@ struct MainView: View {
                 Color("primary_bg")
                     .edgesIgnoringSafeArea(.all)
                 VStack {
-
-                    HStack {
-                        Button("test") {
-                            vm.showSettings()
-                        }
-                        SettingsBarView(showSubscriptions: $showSubscriptions)
-                    }
+                    SettingsBarView(showSubscriptions: $showSubscriptions)
 
                     if !nm.hasPermisions {
                         if vm.isNotificationBageShown {

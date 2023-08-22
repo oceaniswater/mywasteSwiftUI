@@ -31,14 +31,14 @@ struct SettingsView: View {
                         Button("delete notif") {
                             Task {
 //                                vm.saveSettings()
-                                UserNotification.shared.removeAllNot()
+//                                UserNotification.shared.removeAllNot()
                                 dismiss()
                             }
                         }
                         Button("check") {
                             Task {
 //                                vm.saveSettings()
-                                UserNotification.shared.check(_: nil)
+//                                UserNotification.shared.check(_: nil)
                                 dismiss()
                             }
                         }

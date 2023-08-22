@@ -7,27 +7,27 @@
 
 import Foundation
 
-@MainActor
+
 final class SettingsViewModel: ObservableObject {
     
     @Published var isNotificationEnabled: Bool = false
     @Published var selectedDate = Date()
-    let nm = NotificationManager()
+//    let nm = NotificationManager()
     private let router: Router
     
     init(router: Router) {
         self.router = router
         
-        Task {
-            if let date = UserDefaults.standard.value(forKey: "notificationTime") {
-                selectedDate = date as! Date
-            }
-            isNotificationEnabled = nm.hasPermisions
-        }
+//        Task {
+//            if let date = UserDefaults.standard.value(forKey: "notificationTime") {
+//                selectedDate = date as! Date
+//            }
+//            isNotificationEnabled = nm.hasPermisions
+//        }
     }
     
     func saveSettings() {
-        UserDefaults.standard.setValue(selectedDate, forKey: "notificationTime")
+//        UserDefaults.standard.setValue(selectedDate, forKey: "notificationTime")
     }
     
     func isNotificationsEnabled() {
