@@ -34,11 +34,14 @@ struct BinsListView: View {
                 .listStyle(.plain)
                 .scrollContentBackground(.hidden)
             } else {
-                Spacer()
                 Text("Add your first bin")
+                    .foregroundStyle(Color.gray)
+                    .frame(height: 35.0)
+                    .offset(y: 60.0)
                 Spacer()
                 Spacer()
                 Spacer()
+                
             }
 
         }
@@ -67,5 +70,6 @@ struct BinsListView: View {
 struct BinListView_Previews: PreviewProvider {
     static var previews: some View {
         BinsListView()
+            .environmentObject(NotificationManager())
     }
 }
