@@ -21,6 +21,12 @@ final class EditBinViewModel: EditBinViewModelProtocol {
     
     @Published var hasError: Bool = false
     
+    var nm: NotificationManager?
+    
+    func setup(_ nm: NotificationManager) {
+        self.nm = nm
+    }
+    
     private let router: Router
     
     init(router: Router, bin: Bin) {
@@ -32,8 +38,8 @@ final class EditBinViewModel: EditBinViewModelProtocol {
         self.selectDays = bin.selectDays
     }
     
-    func updateNotifications(bin: Bin) {
-        UserNotification.shared.updateNotification(for: bin)
+    func updateNotifications(bin: Bin) async {
+        await nm?.updateNotification(for: bin)
         
     }
 }

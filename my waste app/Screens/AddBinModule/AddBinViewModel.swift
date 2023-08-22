@@ -6,10 +6,11 @@
 //
 
 import Foundation
+import SwiftUI
 
 protocol AddBinViewModelProtocol {
-    func addNotification(_ bin: Bin)
-    func isBinExist(bin: Bin) -> Bool
+//    func addNotification(_ bin: Bin)
+//    func isBinExist(bin: Bin) -> Bool
 }
 
 final class AddBinViewModel: ObservableObject, AddBinViewModelProtocol {
@@ -19,15 +20,20 @@ final class AddBinViewModel: ObservableObject, AddBinViewModelProtocol {
     @Published var selectedDate = Date()
     @Published var hasError: Bool = false
     
+    var nm: NotificationManager?
+    
+    func setup(_ nm: NotificationManager) {
+        self.nm = nm
+    }
+    
     private let router: Router
     
     init(router: Router) {
         self.router = router
     }
     
-    func addNotification(_ bin: Bin) {
-        UserNotification.shared.addNotificationRequest(bin: bin)
-        UserNotification.shared.check(bin.id.uuidString)
+    func addNotification(_ bin: Bin) async {
+        await nm?.addNotificationRequest(bin: bin)
     }
     
     func isBinExist(bin: Bin) -> Bool {

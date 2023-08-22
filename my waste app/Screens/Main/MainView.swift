@@ -24,7 +24,6 @@ struct MainView: View {
                 Color("primary_bg")
                     .edgesIgnoringSafeArea(.all)
                 VStack {
-
                     SettingsBarView(showSubscriptions: $showSubscriptions)
 
                     if !nm.hasPermisions {
@@ -38,7 +37,6 @@ struct MainView: View {
                 
             .environmentObject(vm)
             .onAppear {
-                let l = UserDefaults.standard.bool(forKey: "notFirstTime")
                 if UserDefaults.standard.bool(forKey: "notFirstTime") != true {
                     withAnimation {
                         showNotificationView = true

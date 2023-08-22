@@ -13,6 +13,7 @@ struct AddBinView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var modelContext
     @EnvironmentObject var store: SubscriptionStore
+    @EnvironmentObject var nm: NotificationManager
     
     @Query private var bins: [Bin]
     @StateObject var vm: AddBinViewModel
@@ -51,7 +52,9 @@ struct AddBinView: View {
                                 vm.hasError = true
                             } else {
                                 modelContext.insert(newBin)
-                                vm.addNotification(newBin)
+                                Task {
+                                    await vm.addNotification(newBin)
+                                }
                                 dismiss()
                             }
                             
@@ -73,6 +76,9 @@ struct AddBinView: View {
             .alert("You should chose at least one day of collection", isPresented: $vm.hasError) {
                 Button("OK", role: .cancel) { }
             }
+            .onAppear(perform: {
+                self.vm.setup(nm)
+            })
             .overlay(alignment: .bottom) {
                 
                 if showThanks {

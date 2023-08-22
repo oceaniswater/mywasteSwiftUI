@@ -10,6 +10,7 @@ import SwiftData
 
 struct BinsListView: View {
     @Environment(\.modelContext) private var modelContext
+    @EnvironmentObject var nm: NotificationManager
     @Query private var bins: [Bin]
     @StateObject var vm = BinsListViewModel()
     @State var selectedBin: Bin?
@@ -41,9 +42,9 @@ struct BinsListView: View {
             }
 
         }
-//        .sheet(item: $selectedBin, content: {bin in
-//                EditBinAssembley().build(for: bin)
-//        })
+        .onAppear {
+            vm.setup(nm)
+        }
     }
     
     private func deleteItems(offsets: IndexSet) {
@@ -52,7 +53,9 @@ struct BinsListView: View {
                 let bin = bins[index]
                 // delete notification
 
-                vm.deleteNotifications(for: bin.id.uuidString)
+                Task {
+                    await vm.deleteNotifications(for: bin.id.uuidString)
+                }
 
                 // delete bin
                 modelContext.delete(bins[index])

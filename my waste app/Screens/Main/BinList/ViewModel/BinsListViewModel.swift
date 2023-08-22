@@ -12,25 +12,22 @@ protocol BinsListViewModelProtocol: ObservableObject {
 }
 
 final class BinsListViewModel:  BinsListViewModelProtocol {
+    @Published  var isEmptyList: Bool = true
+    
+    var nm: NotificationManager?
+    
+    var router = Router.shared
+    
+    func setup(_ nm: NotificationManager) {
+        self.nm = nm
+    }
     
     func editBin(at offsets: IndexSet) {
         //
     }
-
-    @Published  var isEmptyList: Bool = true
     
-    var router = Router.shared
-    
-    func getBinsList() {
-//        DataManager.fetchBinsAndWeekdays(for: UserDefaults.standard.string(forKey: "userId") ?? "") { bins in
-//            self.bins = bins
-//        bins = Singleton.shared.getBins()
-//        }
-    }
-    
-    func deleteNotifications(for id: String) {
-        UserNotification.shared.removeNotification(id: id)
-        UserNotification.shared.check(id)
+    func deleteNotifications(for id: String) async {
+        await nm?.removeNotification(id: id)
     }
     
     func isEmpty() {
