@@ -36,7 +36,7 @@ struct AddBinView: View {
                         }
                         Section {
                             DatePicker("Time reminder", selection: $newBin.date, displayedComponents: .hourAndMinute)
-                            Toggle("At day of collecton", isOn: $newBin.atTheSameDay)
+                            Toggle(newBin.atTheSameDay ? "At the day of collecton" : "At the previous day of collection", isOn: $newBin.atTheSameDay)
                         }
 
                         NavigationLink("Collection days") {
@@ -135,6 +135,8 @@ struct AddBinView: View {
 struct AddBinView_Previews: PreviewProvider {
     static var previews: some View {
         AddBinAssembley().build()
+            .environmentObject(NotificationManager())
+            .environmentObject(SubscriptionStore())
     }
 }
 
