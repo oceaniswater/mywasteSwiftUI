@@ -11,6 +11,8 @@ struct EditBinView: View {
     
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var modelContext
+    @EnvironmentObject var nm: NotificationManager
+    
     @Bindable var bin: Bin
     @StateObject var vm: EditBinViewModel
     
@@ -47,7 +49,9 @@ struct EditBinView: View {
                             bin.atTheSameDay = vm.atTheSameDay
                             bin.selectDays = vm.selectDays
                             
-                            vm.updateNotifications(bin: bin)
+                            Task {
+                                await vm.updateNotifications(bin: bin)
+                            }
                             dismiss()
                         }
                     } label: {
@@ -74,6 +78,9 @@ struct EditBinView: View {
 //                    vm.updateNotifications(bin: bin)
 //                }
             }
+            .onAppear(perform: {
+                vm.setup(nm)
+            })
             .alert("You should chose at least one day of collection", isPresented: $vm.hasError) {
                 Button("OK", role: .cancel) { }
             }

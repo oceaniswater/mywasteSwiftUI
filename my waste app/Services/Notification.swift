@@ -60,7 +60,6 @@ class UserNotification{
             UNUserNotificationCenter.current().getPendingNotificationRequests { requests in
                 let isScheduled = requests.contains { $0.identifier == id }
                 let d = requests.count
-                dump(requests)
                 if isScheduled {
                     print("Notification is scheduled.")
                 } else {

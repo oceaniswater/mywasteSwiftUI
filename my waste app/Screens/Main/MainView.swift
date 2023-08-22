@@ -25,7 +25,12 @@ struct MainView: View {
                     .edgesIgnoringSafeArea(.all)
                 VStack {
 
-                    SettingsBarView(showSubscriptions: $showSubscriptions)
+                    HStack {
+                        Button("test") {
+                            vm.showSettings()
+                        }
+                        SettingsBarView(showSubscriptions: $showSubscriptions)
+                    }
 
                     if !nm.hasPermisions {
                         if vm.isNotificationBageShown {
@@ -38,7 +43,6 @@ struct MainView: View {
                 
             .environmentObject(vm)
             .onAppear {
-                let l = UserDefaults.standard.bool(forKey: "notFirstTime")
                 if UserDefaults.standard.bool(forKey: "notFirstTime") != true {
                     withAnimation {
                         showNotificationView = true

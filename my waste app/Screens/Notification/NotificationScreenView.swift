@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct NotificationView: View {
-    @StateObject private var nm = NotificationManager()
+    
+    @EnvironmentObject var nm: NotificationManager
     @Binding var showNotificationView: Bool
     @State var isRotating = false
 
