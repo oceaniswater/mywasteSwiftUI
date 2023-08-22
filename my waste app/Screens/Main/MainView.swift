@@ -16,7 +16,7 @@ struct MainView: View {
     @State var showThanks: Bool = false
     
     @StateObject var vm: MainViewModel
-    @StateObject var nm = NotificationManager()
+    @EnvironmentObject var nm: NotificationManager
     @EnvironmentObject var store: SubscriptionStore
     
     var body: some View {
@@ -110,6 +110,7 @@ struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         MainAssembley().build()
             .environmentObject(SubscriptionStore())
+            .environmentObject(NotificationManager())
     }
 }
 
