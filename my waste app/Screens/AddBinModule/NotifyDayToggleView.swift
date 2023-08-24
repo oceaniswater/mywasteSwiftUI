@@ -14,18 +14,19 @@ struct NotifyDayToggleView: View {
     var body: some View {
         ZStack {
             Color.white
-            VStack(spacing:10) {
+            VStack(spacing:5) {
                 Text("When app should notify you?")
                     .font(.system(.headline, design: .rounded))
                     .foregroundStyle(Color.black)
                 HStack(spacing: 30) {
-                    VStack(spacing:10) {
+                    VStack(spacing:5) {
                         Text("At the collection day")
                             .multilineTextAlignment(.leading)
                             .font(.system(.footnote, design: .rounded))
                             .foregroundStyle(Color.black)
                             .frame(height: 35.0)
-                        Image(systemName: atTheSameDay ? "circle.fill" : "circle")
+                        Image(systemName: atTheSameDay ? "bell.badge.fill" : "bell.badge")
+                            .foregroundStyle(.blue)
                             .onTapGesture {
                                 withAnimation {
                                     atTheSameDay.toggle()
@@ -33,23 +34,15 @@ struct NotifyDayToggleView: View {
                                     
                                 }
                             }
-//                        Button(action: {
-//                            withAnimation {
-//                                atTheSameDay.toggle()
-//                                atTheDayBefore.toggle()
-//                            }
-//                        }, label: {
-//                            Image(systemName: atTheSameDay ? "circle.fill" : "circle")
-//                        })
-                        
                     }
-                    VStack(spacing:10) {
+                    VStack(spacing:5) {
                         Text("At the day before")
                             .multilineTextAlignment(.leading)
                             .font(.system(.footnote, design: .rounded))
                             .foregroundStyle(Color.black)
                             .frame(height: 35.0)
-                        Image(systemName: atTheDayBefore ? "circle.fill" : "circle")
+                        Image(systemName: atTheDayBefore ? "bell.badge.fill" : "bell.badge")
+                            .foregroundStyle(.blue)
                             .onTapGesture {
                                 withAnimation {
                                     atTheSameDay.toggle()
@@ -57,14 +50,6 @@ struct NotifyDayToggleView: View {
                                     
                                 }
                             }
-//                        Button(action: {
-//                            withAnimation {
-//                                atTheSameDay.toggle()
-//                                atTheDayBefore.toggle()
-//                            }
-//                        }, label: {
-//                            Image(systemName: atTheDayBefore ? "circle.fill" : "circle")
-//                        })
                     }
                 }
             }
