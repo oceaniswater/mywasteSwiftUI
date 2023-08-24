@@ -32,7 +32,7 @@ struct EditBinView: View {
                         }
                         
                         Section {
-                            NavigationLink("Collection days") {
+                            NavigationLink(vm.selectDays.isEmpty ? "Set collection days" : vm.noteLabel) {
                                 WeekdayList(selectedRows: $vm.selectDays, days: $vm.days)
                             }
                         }

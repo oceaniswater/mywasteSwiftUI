@@ -19,6 +19,14 @@ final class EditBinViewModel: EditBinViewModelProtocol {
     @Published var atTheSameDay: Bool
     @Published var atTheDayBefore: Bool
     @Published var selectDays: Set<Day>
+    var noteLabel: String {
+        var days: [Day] = []
+        for day in selectDays {
+            days.append(day)
+        }
+        days.sort(by: { $0.componentWeekday < $1.componentWeekday})
+        return days.map(\.dayText).joined(separator: ", ")
+    }
     
     @Published var hasError: Bool = false
     

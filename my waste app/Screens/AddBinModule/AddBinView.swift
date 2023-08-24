@@ -37,7 +37,7 @@ struct AddBinView: View {
                     }
                     
                     Section {
-                        NavigationLink("Collection days") {
+                        NavigationLink(newBin.selectDays.isEmpty ? "Set collection days" : newBin.noteLabel) {
                             WeekdayList(selectedRows: $newBin.selectDays, days: $vm.days)
                         }
                     }
