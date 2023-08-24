@@ -22,114 +22,123 @@ struct AddBinView: View {
     @State var showThanks = false
     
     var body: some View {
-            ZStack {
-                Color("primary_bg")
-                    .edgesIgnoringSafeArea(.all)
-                VStack {
-                    ImageBin(colorSelected: $newBin.color, typeSelected: $newBin.type)
-                    Form {
-                        Section {
-                            ColorPicker(colorSelected: $newBin.color)
-                                .frame(height: 30)
-                            TypePicker(typeSelected: $newBin.type)
-                                .frame(height: 30)
-                        }
-                        Section {
-                            DatePicker("Time reminder", selection: $newBin.date, displayedComponents: .hourAndMinute)
-                            Toggle(newBin.atTheSameDay ? "At the day of collecton" : "At the previous day of collection", isOn: $newBin.atTheSameDay)
-                        }
-
-                        NavigationLink("Collection days") {
-                                WeekdayList(selectedRows: $newBin.selectDays, days: $vm.days)
-                        }
-                    }
-                    .scrollContentBackground(.hidden)
-                    Button {
-                        if !store.isUserHasSubscription() && bins.count == 2 {
-                            showSubscriptions.toggle()
-                        } else {
-                            if newBin.selectDays.isEmpty {
-                                vm.hasError = true
-                            } else {
-                                modelContext.insert(newBin)
-                                Task {
-                                    await vm.addNotification(newBin)
-                                }
-                                dismiss()
-                            }
-                            
-                        }
-
-                    } label: {
-                        ZStack {
-                            Rectangle()
-                                .frame(width: 355, height: 55)
-                            .cornerRadius(10.0)
-                            Text("Save")
-                                .foregroundColor(.white)
-                        }
-                            
-                    }
-
-                }
-            }
-            .alert("You should chose at least one day of collection", isPresented: $vm.hasError) {
-                Button("OK", role: .cancel) { }
-            }
-            .onAppear(perform: {
-                self.vm.setup(nm)
-            })
-            .overlay(alignment: .bottom) {
+        ZStack {
+            Color("primary_bg")
+                .edgesIgnoringSafeArea(.all)
+            VStack(spacing:20) {
+                ImageBin(colorSelected: $newBin.color, typeSelected: $newBin.type)
                 
-                if showThanks {
-                    ThanksView(didTapClose: {
-                        showThanks.toggle()
-                    })
+                Form {
+                    Section {
+                        ColorPicker(colorSelected: $newBin.color)
+                            .frame(height: 30)
+                        TypePicker(typeSelected: $newBin.type)
+                            .frame(height: 30)
+                    }
+                    
+                    Section {
+                        NavigationLink("Collection days") {
+                            WeekdayList(selectedRows: $newBin.selectDays, days: $vm.days)
+                        }
+                    }
+                    
+                    Section {
+                        DatePicker("Time reminder", selection: $newBin.date, displayedComponents: .hourAndMinute)
+                            .clipShape(RoundedRectangle(cornerRadius: 10.00))
+                        NotifyDayToggleView(atTheSameDay: $newBin.atTheSameDay, atTheDayBefore: $newBin.atTheDayBefore)
+                            .frame(height: 100)
+                    }
                 }
-             
+                .scrollContentBackground(.hidden)
+                
+                
+                
+                Button {
+                    if !store.isUserHasSubscription() && bins.count == 2 {
+                        showSubscriptions.toggle()
+                    } else {
+                        if newBin.selectDays.isEmpty {
+                            vm.hasError = true
+                        } else {
+                            modelContext.insert(newBin)
+                            Task {
+                                await vm.addNotification(newBin)
+                            }
+                            dismiss()
+                        }
+                        
+                    }
+                    
+                } label: {
+                    ZStack {
+                        Rectangle()
+                            .frame(width: 355, height: 55)
+                            .cornerRadius(10.0)
+                        Text("Save")
+                            .foregroundColor(.white)
+                    }
+                    
+                }
+                
             }
-            .overlay {
-                        
-                        if showSubscriptions {
-                            Color.black.opacity(0.7)
-                                .ignoresSafeArea()
-                                .transition(.opacity)
-                                .onTapGesture {
-                                    showSubscriptions.toggle()
-                                    
-                                }
-                            SubscriptionsView(title: "Unlock all app functions!", description: "Unlock all app functions. With subscriptions you will be able add unlimited amout of bins") {
-                                showSubscriptions.toggle()
-                            }
-                                .transition(.move(edge: .bottom).combined(with: .opacity))
-                                .onDisappear(perform: {
-                                    Task {
-                                        await store.updateCurrentEntitlements()
-                                    }
-                                })
-                        }
-                    }
-                    .animation(.spring(), value: showSubscriptions)
-                    .animation(.spring(), value: showThanks)
-                    .onChange(of: store.action) { action in
-                                    
-                        if action == .successful {
-                            
-                            showSubscriptions = false
-                            
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                                
-                                    showThanks.toggle()
-
-                            }
-                            
-                            store.reset()
-                        }
+        }
+        .alert("You should chose at least one day of collection", isPresented: $vm.hasError) {
+            Button("OK", role: .cancel) { }
+        }
+        .onAppear(perform: {
+            self.vm.setup(nm)
+        })
+        .overlay(alignment: .bottom) {
+            
+            if showThanks {
+                ThanksView(didTapClose: {
+                    showThanks.toggle()
+                })
+            }
+            
+        }
+        .overlay {
+            
+            if showSubscriptions {
+                Color.black.opacity(0.7)
+                    .ignoresSafeArea()
+                    .transition(.opacity)
+                    .onTapGesture {
+                        showSubscriptions.toggle()
                         
                     }
-                    .alert(isPresented: $store.hasError, error: store.error) { }
+                SubscriptionsView(title: "Unlock all app functions!", description: "Unlock all app functions. With subscriptions you will be able add unlimited amout of bins") {
+                    showSubscriptions.toggle()
                 }
+                .transition(.move(edge: .bottom).combined(with: .opacity))
+                .onDisappear(perform: {
+                    Task {
+                        await store.updateCurrentEntitlements()
+                    }
+                })
+            }
+        }
+        .animation(.spring(), value: showSubscriptions)
+        .animation(.spring(), value: showThanks)
+        .onChange(of: store.action) { action in
+            
+            if action == .successful {
+                
+                showSubscriptions = false
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    
+                    showThanks.toggle()
+                    
+                }
+                
+                store.reset()
+            }
+            
+        }
+        .alert(isPresented: $store.hasError, error: store.error) { }
     }
+}
 
 
 struct AddBinView_Previews: PreviewProvider {
@@ -149,7 +158,7 @@ struct ImageBin: View {
             Image(colorSelected.rawValue)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-            .frame(maxHeight: 150)
+                .frame(maxHeight: 150)
             Image(typeSelected.rawValue)
                 .resizable()
                 .aspectRatio(contentMode: .fit)

@@ -17,6 +17,7 @@ final class EditBinViewModel: EditBinViewModelProtocol {
     @Published var type: BinType
     @Published var date: Date
     @Published var atTheSameDay: Bool
+    @Published var atTheDayBefore: Bool
     @Published var selectDays: Set<Day>
     
     @Published var hasError: Bool = false
@@ -35,6 +36,7 @@ final class EditBinViewModel: EditBinViewModelProtocol {
         self.type = bin.type
         self.date = bin.date
         self.atTheSameDay = bin.atTheSameDay
+        self.atTheDayBefore = bin.atTheDayBefore
         self.selectDays = bin.selectDays
     }
     

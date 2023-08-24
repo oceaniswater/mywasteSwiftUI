@@ -31,6 +31,7 @@ class Bin: Identifiable {
     }
     var selectDays: Set<Day>
     var atTheSameDay: Bool
+    var atTheDayBefore: Bool
     var remindDays: Set<Day> {
         if atTheSameDay {
             return selectDays
@@ -64,12 +65,13 @@ class Bin: Identifiable {
 
     }
     
-    init(id: UUID = UUID(), date: Date, type: BinType, color: BinColor, selectDays: Set<Day>, atTheSameDay: Bool = true) {
+    init(id: UUID = UUID(), date: Date, type: BinType, color: BinColor, selectDays: Set<Day>, atTheSameDay: Bool = false, atTheDayBefore: Bool = true) {
         self.id = id
         self.date = date
         self.type = type
         self.color = color
         self.selectDays = selectDays
         self.atTheSameDay = atTheSameDay
+        self.atTheDayBefore = atTheDayBefore
     }
 }
