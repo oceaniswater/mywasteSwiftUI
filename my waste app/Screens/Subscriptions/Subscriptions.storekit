@@ -106,7 +106,7 @@
               "locale" : "en_GB"
             }
           ],
-          "productID" : "everymonth",
+          "productID" : "uk.co.markgolubev.mywasteapp.monthly",
           "recurringSubscriptionPeriod" : "P1M",
           "referenceName" : "every month",
           "subscriptionGroupID" : "30B9EA1F",
@@ -135,7 +135,7 @@
               "locale" : "en_US"
             }
           ],
-          "productID" : "anual",
+          "productID" : "uk.co.markgolubev.mywasteapp.annual",
           "recurringSubscriptionPeriod" : "P1Y",
           "referenceName" : "anual",
           "subscriptionGroupID" : "30B9EA1F",

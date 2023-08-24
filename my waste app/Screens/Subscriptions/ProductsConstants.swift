@@ -8,7 +8,7 @@
 import Foundation
 
 let mySubscriptionProducts = [
-    "everymonth",
-    "anual",
-    "life"
+    "uk.co.markgolubev.mywasteapp.monthly",
+    "uk.co.markgolubev.mywasteapp.annual",
+    "uk.co.markgolubev.mywasteapp.monthly.lifetime"
 ]
