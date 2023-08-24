@@ -26,7 +26,7 @@ struct NotifyDayToggleView: View {
                             .foregroundStyle(Color.black)
                             .frame(height: 35.0)
                         Image(systemName: atTheSameDay ? "bell.badge.fill" : "bell.badge")
-                            .foregroundStyle(.blue)
+                            .foregroundStyle(Color("primary_elements"))
                             .onTapGesture {
                                 withAnimation {
                                     atTheSameDay.toggle()
@@ -42,7 +42,7 @@ struct NotifyDayToggleView: View {
                             .foregroundStyle(Color.black)
                             .frame(height: 35.0)
                         Image(systemName: atTheDayBefore ? "bell.badge.fill" : "bell.badge")
-                            .foregroundStyle(.blue)
+                            .foregroundStyle(Color("primary_elements"))
                             .onTapGesture {
                                 withAnimation {
                                     atTheSameDay.toggle()
