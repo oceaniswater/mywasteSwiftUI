@@ -171,7 +171,7 @@ struct ColorPicker: View {
     @Binding var colorSelected: BinColor
     var body: some View {
         List {
-            Picker("Color", selection: $colorSelected) {
+            Picker("Colour", selection: $colorSelected) {
                 ForEach(BinColor.allCases) { bin in
                     Text(bin.rawValue)
                 }
