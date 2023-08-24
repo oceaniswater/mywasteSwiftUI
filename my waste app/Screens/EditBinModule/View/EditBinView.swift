@@ -30,13 +30,19 @@ struct EditBinView: View {
                             TypePicker(typeSelected: $vm.type)
                                 .frame(height: 30)
                         }
+                        
+                        Section {
+                            NavigationLink(vm.selectDays.isEmpty ? "Set collection days" : vm.noteLabel) {
+                                WeekdayList(selectedRows: $vm.selectDays, days: $vm.days)
+                            }
+                        }
+                        
                         Section {
                             DatePicker("Time", selection: $vm.date, displayedComponents: .hourAndMinute)
-                            Toggle("At day of collecton", isOn: $vm.atTheSameDay)
+                            NotifyDayToggleView(atTheSameDay: $vm.atTheSameDay, atTheDayBefore: $vm.atTheDayBefore)
+                                .frame(height: 100)
                         }
-                        NavigationLink("Collection days") {
-                            WeekdayList(selectedRows: $vm.selectDays, days: $vm.days)
-                        }
+
                     }
                     .scrollContentBackground(.hidden)
                     Button {
@@ -47,6 +53,7 @@ struct EditBinView: View {
                             bin.type = vm.type
                             bin.date = vm.date
                             bin.atTheSameDay = vm.atTheSameDay
+                            bin.atTheDayBefore = vm.atTheDayBefore
                             bin.selectDays = vm.selectDays
                             
                             Task {

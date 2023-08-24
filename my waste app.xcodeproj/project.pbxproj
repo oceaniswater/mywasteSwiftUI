@@ -10,6 +10,7 @@
 		860620102A77EC5200E8123C /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8606200F2A77EC5200E8123C /* Utilities.swift */; };
 		860620152A7803EE00E8123C /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 860620142A7803EE00E8123C /* SettingsView.swift */; };
 		860620172A78040600E8123C /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 860620162A78040600E8123C /* SettingsViewModel.swift */; };
+		8643934D2A9B8257005AF8B6 /* NotifyDayToggleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8643934C2A9B8257005AF8B6 /* NotifyDayToggleView.swift */; };
 		867328EB2A79425000BEA07D /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 867328EA2A79425000BEA07D /* NotificationManager.swift */; };
 		867328F62A7A689500BEA07D /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = 867328F52A7A689500BEA07D /* Route.swift */; };
 		867328FE2A82438200BEA07D /* MainAssembley.swift in Sources */ = {isa = PBXBuildFile; fileRef = 867328FD2A82438200BEA07D /* MainAssembley.swift */; };
@@ -47,6 +48,7 @@
 		8606200F2A77EC5200E8123C /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		860620142A7803EE00E8123C /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		860620162A78040600E8123C /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
+		8643934C2A9B8257005AF8B6 /* NotifyDayToggleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotifyDayToggleView.swift; sourceTree = "<group>"; };
 		867328EA2A79425000BEA07D /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		867328F52A7A689500BEA07D /* Route.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
 		867328FD2A82438200BEA07D /* MainAssembley.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainAssembley.swift; sourceTree = "<group>"; };
@@ -177,6 +179,7 @@
 				86DF7F0D2A6FCD5200B304EE /* Model */,
 				86DF7F0E2A6FCD6D00B304EE /* WeekdayRow.swift */,
 				86DF7F162A6FF36F00B304EE /* AddBinViewModel.swift */,
+				8643934C2A9B8257005AF8B6 /* NotifyDayToggleView.swift */,
 			);
 			path = AddBinModule;
 			sourceTree = "<group>";
@@ -390,6 +393,7 @@
 				86DF7F132A6FE85C00B304EE /* BinsListView.swift in Sources */,
 				86BE857E2A73FDD5003650AE /* NotificationScreenView.swift in Sources */,
 				86DF7EFF2A6EC66E00B304EE /* Singleton.swift in Sources */,
+				8643934D2A9B8257005AF8B6 /* NotifyDayToggleView.swift in Sources */,
 				86DF7F0F2A6FCD6D00B304EE /* WeekdayRow.swift in Sources */,
 				86FA52242A93827B00D3495A /* ThanksView.swift in Sources */,
 				86DF7F012A6EFBD500B304EE /* AddBinView.swift in Sources */,

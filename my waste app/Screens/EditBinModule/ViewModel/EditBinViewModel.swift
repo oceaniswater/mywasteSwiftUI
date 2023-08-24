@@ -17,7 +17,16 @@ final class EditBinViewModel: EditBinViewModelProtocol {
     @Published var type: BinType
     @Published var date: Date
     @Published var atTheSameDay: Bool
+    @Published var atTheDayBefore: Bool
     @Published var selectDays: Set<Day>
+    var noteLabel: String {
+        var days: [Day] = []
+        for day in selectDays {
+            days.append(day)
+        }
+        days.sort(by: { $0.componentWeekday < $1.componentWeekday})
+        return days.map(\.dayText).joined(separator: ", ")
+    }
     
     @Published var hasError: Bool = false
     
@@ -35,6 +44,7 @@ final class EditBinViewModel: EditBinViewModelProtocol {
         self.type = bin.type
         self.date = bin.date
         self.atTheSameDay = bin.atTheSameDay
+        self.atTheDayBefore = bin.atTheDayBefore
         self.selectDays = bin.selectDays
     }
     
