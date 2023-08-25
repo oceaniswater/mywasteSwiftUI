@@ -10,5 +10,5 @@ import Foundation
 let mySubscriptionProducts = [
     "uk.co.markgolubev.mywasteapp.monthly",
     "uk.co.markgolubev.mywasteapp.annual",
-    "uk.co.markgolubev.mywasteapp.monthly.lifetime"
+    "uk.co.markgolubev.mywasteapp.lifetime"
 ]

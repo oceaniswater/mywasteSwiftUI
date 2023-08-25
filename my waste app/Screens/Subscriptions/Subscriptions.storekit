@@ -10,17 +10,18 @@
       "internalID" : "CA4C110C",
       "localizations" : [
         {
-          "description" : "Description for lifetime",
+          "description" : "Best value. Forever yours.",
           "displayName" : "Lifetime",
           "locale" : "en_US"
         }
       ],
-      "productID" : "life",
+      "productID" : "uk.co.markgolubev.mywasteapp.lifetime",
       "referenceName" : "life",
       "type" : "NonConsumable"
     }
   ],
   "settings" : {
+    "_billingIssuesEnabled" : false,
     "_failTransactionsEnabled" : false,
     "_storeKitErrors" : [
       {
@@ -96,12 +97,12 @@
           },
           "localizations" : [
             {
-              "description" : "Description about monthly sub",
+              "description" : "Perfect to give it a go.",
               "displayName" : "Monthly",
               "locale" : "en_US"
             },
             {
-              "description" : "Description for monthly",
+              "description" : "Perfect to give it a go.",
               "displayName" : "Monthly",
               "locale" : "en_GB"
             }
@@ -130,7 +131,7 @@
           },
           "localizations" : [
             {
-              "description" : "Description about anual sub",
+              "description" : "For those who plan ahead.",
               "displayName" : "Anual",
               "locale" : "en_US"
             }

@@ -44,8 +44,8 @@ class NotificationManager: ObservableObject {
     
     func addNotificationRequest(bin: Bin) async {
         
-        content.title = "Waste collection day soon!"
-        content.body = "Don't forget take out your \(bin.type.rawValue.capitalized(with: .current)) waste bin"
+        content.title = "Waste collection is coming up!"
+        content.body = "Don't forget to take out your \(bin.type.rawValue.capitalized(with: .current)) waste bin"
         content.categoryIdentifier = "alarm"
         content.sound = UNNotificationSound.default
         

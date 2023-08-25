@@ -39,7 +39,7 @@ struct NotificationView: View {
                             self.isRotating = true
                         }
                     }
-                    Text("Turn on your push notificatons\nto do not miss collection day. You can do it later in settings.")
+                    Text("Turn on push notifications to never miss a collection day. You can also do it later in Settings.")
                         .foregroundColor(.white)
                         .multilineTextAlignment(.center)
                         .padding()
@@ -57,7 +57,7 @@ struct NotificationView: View {
                                 .frame(width: 250,height: 44)
                             HStack {
                                 Image(systemName: "bell")
-                                Text("Turn on notification")
+                                Text("Turn on notifications")
                             }
                             .foregroundColor(.black)
                         }
@@ -93,5 +93,6 @@ struct NotificationView: View {
 struct NotificationScreenView_Previews: PreviewProvider {
     static var previews: some View {
         NotificationView(showNotificationView: .constant(true))
+            .environmentObject(NotificationManager())
     }
 }

@@ -34,7 +34,7 @@ struct BinsListView: View {
                 .listStyle(.plain)
                 .scrollContentBackground(.hidden)
             } else {
-                Text("Add your first bin")
+                Text("Click “+” to add your first bin")
                     .foregroundStyle(Color.gray)
                     .frame(height: 35.0)
                     .offset(y: 60.0)

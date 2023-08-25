@@ -66,7 +66,7 @@ struct MainView: View {
                                     showSubscriptions.toggle()
                                     
                                 }
-                            SubscriptionsView(title: "Unlock all app functions!", description: "Unlock all app functions. All subscriptions goes with 1 week free trial. Try. Enjoy. Cancel any time in Apple Subscriptions.") {
+                            SubscriptionsView(title: "Unlock all app functions", description: "Getting a subscription will let you add any amount of bins and stay in full control of your waste.") {
                                 showSubscriptions.toggle()
                             }
                                 .transition(.move(edge: .bottom).combined(with: .opacity))
@@ -187,7 +187,7 @@ struct NotificationBageView: View {
                     Text("Enable push notifications")
                         .font(.headline)
                         .foregroundColor(.white)
-                    Text("The app will notify you about the next day of collection")
+                    Text("The app will let you know when it’s time to take out the bins.")
                         .font(.subheadline)
                         .foregroundColor(.gray)
                         .multilineTextAlignment(.leading)
