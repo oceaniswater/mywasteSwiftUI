@@ -131,7 +131,7 @@ extension SubscriptionStore {
     /// Create a listener for transactions that don't come directly via the purchase function
     func configureTransactionListener() -> TransactionListener {
         
-        Task { [weak self] in
+        Task.detached(priority: .background) { @MainActor [weak self] in
             
             //            for await result in Transaction.updates {
             //                await self?.handle(transactionVerification: result)
