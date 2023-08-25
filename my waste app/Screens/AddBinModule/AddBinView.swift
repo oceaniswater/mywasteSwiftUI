@@ -43,10 +43,9 @@ struct AddBinView: View {
                     }
                     
                     Section {
-                        DatePicker("Time reminder", selection: $newBin.date, displayedComponents: .hourAndMinute)
+                        DatePicker("Time of notification", selection: $newBin.date, displayedComponents: .hourAndMinute)
                             .clipShape(RoundedRectangle(cornerRadius: 10.00))
                         NotifyDayToggleView(atTheSameDay: $newBin.atTheSameDay, atTheDayBefore: $newBin.atTheDayBefore)
-                            .frame(height: 100)
                     }
                 }
                 .scrollContentBackground(.hidden)
@@ -82,7 +81,7 @@ struct AddBinView: View {
                 
             }
         }
-        .alert("You should chose at least one day of collection", isPresented: $vm.hasError) {
+        .alert("You should set at least one collection day.", isPresented: $vm.hasError) {
             Button("OK", role: .cancel) { }
         }
         .onAppear(perform: {
@@ -107,7 +106,7 @@ struct AddBinView: View {
                         showSubscriptions.toggle()
                         
                     }
-                SubscriptionsView(title: "Unlock all app functions!", description: "Unlock all app functions. With subscriptions you will be able add unlimited amout of bins") {
+                SubscriptionsView(title: "Need an extra bin?", description: "Getting a subscription will let you add any amount of bins and stay in full control of your waste.") {
                     showSubscriptions.toggle()
                 }
                 .transition(.move(edge: .bottom).combined(with: .opacity))

@@ -15,13 +15,14 @@ struct NotifyDayToggleView: View {
         ZStack {
             Color.white
             VStack(spacing:5) {
-                Text("When app should notify you?")
+                Text("When do you want to receive notifications?")
+                    .multilineTextAlignment(.center)
                     .font(.system(.headline, design: .rounded))
                     .foregroundStyle(Color.black)
                 HStack(spacing: 30) {
                     VStack(spacing:5) {
-                        Text("At the collection day")
-                            .multilineTextAlignment(.leading)
+                        Text("On the collection day")
+                            .multilineTextAlignment(.center)
                             .font(.system(.footnote, design: .rounded))
                             .foregroundStyle(Color.black)
                             .frame(height: 35.0)
@@ -36,8 +37,8 @@ struct NotifyDayToggleView: View {
                             }
                     }
                     VStack(spacing:5) {
-                        Text("At the day before")
-                            .multilineTextAlignment(.leading)
+                        Text("The day before")
+                            .multilineTextAlignment(.center)
                             .font(.system(.footnote, design: .rounded))
                             .foregroundStyle(Color.black)
                             .frame(height: 35.0)
@@ -54,7 +55,6 @@ struct NotifyDayToggleView: View {
                 }
             }
         }
-        .frame(height: 100)
         .clipShape(RoundedRectangle(cornerRadius: 10.0))
         .padding( 20.0)
     }
