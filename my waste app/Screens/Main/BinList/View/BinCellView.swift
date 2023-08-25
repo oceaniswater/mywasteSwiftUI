@@ -25,7 +25,7 @@ struct BinCellView: View {
                         .frame(maxWidth: 25)
                 }
                 VStack(alignment: .leading, spacing: 4.0) {
-                    Text("\(bin.type.rawValue.capitalized(with: .current)) waste bin")
+                    Text("\(bin.type.rawValue.capitalized(with: .current)) waste")
                         .font(.system(.headline, design: .rounded))
                         .foregroundStyle(Color.white)
                     Text(bin.noteLabel)

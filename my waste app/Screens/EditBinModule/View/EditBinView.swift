@@ -38,9 +38,8 @@ struct EditBinView: View {
                         }
                         
                         Section {
-                            DatePicker("Time", selection: $vm.date, displayedComponents: .hourAndMinute)
+                            DatePicker("Time of notification", selection: $vm.date, displayedComponents: .hourAndMinute)
                             NotifyDayToggleView(atTheSameDay: $vm.atTheSameDay, atTheDayBefore: $vm.atTheDayBefore)
-                                .frame(height: 100)
                         }
 
                     }
@@ -88,7 +87,7 @@ struct EditBinView: View {
             .onAppear(perform: {
                 vm.setup(nm)
             })
-            .alert("You should chose at least one day of collection", isPresented: $vm.hasError) {
+            .alert("You should set at least one collection day.", isPresented: $vm.hasError) {
                 Button("OK", role: .cancel) { }
             }
     }
