@@ -58,25 +58,20 @@ class NotificationManager: ObservableObject {
         dateComponents.minute = minute
         
         if bin.remindDays.isEmpty {
-            await triggerRequest(dateComponents: dateComponents, bin: bin, isRepeat: false)
+            self.triggerRequest(dateComponents: dateComponents, bin: bin, isRepeat: false)
         } else {
             for weekday in bin.remindDays.map(\.componentWeekday) {
                 dateComponents.weekday = weekday
-                await self.triggerRequest(dateComponents: dateComponents, bin: bin)
+                self.triggerRequest(dateComponents: dateComponents, bin: bin)
                 
             }
         }
     }
     
-    func triggerRequest(dateComponents: DateComponents, bin: Bin, isRepeat: Bool = true) async {
+    func triggerRequest(dateComponents: DateComponents, bin: Bin, isRepeat: Bool = true) {
         let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: isRepeat)
         let request = UNNotificationRequest(identifier: bin.id.uuidString + String(describing: dateComponents.weekday), content: content, trigger: trigger)
-        do {
-            try await current.add(request)
-            print("successfully")
-        } catch {
-            print("error")
-        }
+        current.add(request)
     }
     
     func check(_ id: String?) {
@@ -91,7 +86,6 @@ class NotificationManager: ObservableObject {
             }
         } else {
             UNUserNotificationCenter.current().getPendingNotificationRequests { requests in
-                let d = requests.count
                 dump(requests)
             }
         }
@@ -113,19 +107,6 @@ class NotificationManager: ObservableObject {
                 }
             }
         }
-        
-        
-        //        UNUserNotificationCenter.current().getPendingNotificationRequests { [weak self] requests in
-        //            for request in requests {
-        //                if request.identifier.hasPrefix(id) {
-        //                    ids.append(request.identifier)
-        //                }
-        //            }
-        //            self?.current.removeDeliveredNotifications(withIdentifiers: ids)
-        //            self?.current.removePendingNotificationRequests(withIdentifiers: ids)
-        //        }
-        
-        
     }
     
     func removeAllNot() {
