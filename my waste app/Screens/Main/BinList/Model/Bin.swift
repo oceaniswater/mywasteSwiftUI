@@ -22,11 +22,12 @@ class Bin: Identifiable {
     var color: BinColor
     
     var noteLabel: String {
-        var days: [String] = []
+        var days: [Day] = []
         for day in selectDays {
-            days.append(day.dayText)
+            days.append(day)
         }
-        return days.joined(separator: ", ")
+        days.sort(by: { $0.componentWeekday < $1.componentWeekday})
+        return days.map(\.dayText).joined(separator: ", ")
     }
     var selectDays: Set<Day>
     var atTheSameDay: Bool
