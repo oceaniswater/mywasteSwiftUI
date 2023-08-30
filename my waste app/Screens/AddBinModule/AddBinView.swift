@@ -12,13 +12,10 @@ struct AddBinView: View {
     
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var modelContext
-//    @EnvironmentObject var store: SubscriptionStore
     @EnvironmentObject var nm: NotificationManager
     
-//    @Query private var bins: [Bin]
     @StateObject var vm: AddBinViewModel
     @State private var newBin = Bin(date: .now, type: .cardboard, color: .blue, selectDays: [])
-//    @State var showSubscriptions = false
 //    @State var showThanks = false
     
     var body: some View {
@@ -53,9 +50,6 @@ struct AddBinView: View {
                 
                 
                 Button {
-//                    if !store.isUserHasSubscription() && bins.count == 2 {
-//                        showSubscriptions.toggle()
-//                    } else {
                         if newBin.selectDays.isEmpty {
                             vm.hasError = true
                         } else {
@@ -65,9 +59,6 @@ struct AddBinView: View {
                             }
                             dismiss()
                         }
-                        
-//                    }
-                    
                 } label: {
                     ZStack {
                         Rectangle()
@@ -96,46 +87,7 @@ struct AddBinView: View {
 //            }
 //            
 //        }
-//        .overlay {
-//            
-//            if showSubscriptions {
-//                Color.black.opacity(0.7)
-//                    .ignoresSafeArea()
-//                    .transition(.opacity)
-//                    .onTapGesture {
-//                        showSubscriptions.toggle()
-//                        
-//                    }
-//                SubscriptionsView(title: "Need an extra bin?", description: "Getting a subscription will let you add any amount of bins and stay in full control of your waste.") {
-//                    showSubscriptions.toggle()
-//                }
-//                .transition(.move(edge: .bottom).combined(with: .opacity))
-//                .onDisappear(perform: {
-//                    Task {
-//                        await store.updateCurrentEntitlements()
-//                    }
-//                })
-//            }
-//        }
-//        .animation(.spring(), value: showSubscriptions)
 //        .animation(.spring(), value: showThanks)
-//        .onChange(of: store.action) { action in
-//            
-//            if action == .successful {
-//                
-//                showSubscriptions = false
-//                
-//                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-//                    
-//                    showThanks.toggle()
-//                    
-//                }
-//                
-//                store.reset()
-//            }
-//            
-//        }
-//        .alert(isPresented: $store.hasError, error: store.error) { }
     }
 }
 
@@ -144,7 +96,6 @@ struct AddBinView_Previews: PreviewProvider {
     static var previews: some View {
         AddBinAssembley().build()
             .environmentObject(NotificationManager())
-//            .environmentObject(SubscriptionStore())
     }
 }
 

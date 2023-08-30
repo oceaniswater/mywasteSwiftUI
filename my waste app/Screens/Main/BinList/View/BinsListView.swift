@@ -11,9 +11,9 @@ import SwiftData
 struct BinsListView: View {
     @Environment(\.modelContext) private var modelContext
     @EnvironmentObject var nm: NotificationManager
+    
     @Query private var bins: [Bin]
     @StateObject var vm = BinsListViewModel()
-    @State var selectedBin: Bin?
     
     var body: some View {
         Group {
@@ -22,7 +22,6 @@ struct BinsListView: View {
                     ForEach(bins) { bin in
                         BinCellView(bin: bin)
                             .onTapGesture {
-//                                selectedBin = bin
                                 vm.showEditBin(bin: bin)
                             }
                         

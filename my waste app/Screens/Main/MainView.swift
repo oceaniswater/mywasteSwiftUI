@@ -9,32 +9,25 @@ import SwiftUI
 import StoreKit
 
 struct MainView: View {
-
-    @State var showSettingsScreen: Bool = false
+    
     @State var showNotificationView: Bool = false
-//    @State var showSubscriptions: Bool = false
-//    @State var showThanks: Bool = false
     
     @StateObject var vm: MainViewModel
     @EnvironmentObject var nm: NotificationManager
-//    @EnvironmentObject var store: SubscriptionStore
     
     var body: some View {
-            ZStack {
-                Color("primary_bg")
-                    .edgesIgnoringSafeArea(.all)
-                VStack {
-//                    SettingsBarView(showSubscriptions: $showSubscriptions)
-
-                    if !nm.hasPermisions {
-                        if vm.isNotificationBageShown {
-                            NotificationBageView(isNotificationBageShown: $vm.isNotificationBageShown)
-                        }
+        ZStack {
+            Color("primary_bg")
+                .edgesIgnoringSafeArea(.all)
+            VStack {
+                if !nm.hasPermisions {
+                    if vm.isNotificationBageShown {
+                        NotificationBageView(isNotificationBageShown: $vm.isNotificationBageShown)
                     }
-                    YourBinsHeaderView()
-                    BinsListView()
                 }
-                
+                YourBinsHeaderView()
+                BinsListView()
+            }
             .environmentObject(vm)
             .onAppear {
                 if UserDefaults.standard.bool(forKey: "notFirstTime") != true {
@@ -47,66 +40,17 @@ struct MainView: View {
                     await nm.getAuthStatus()
                 }
             }
-//            .overlay(alignment: .bottom) {
-//                
-//                if showThanks {
-//                    ThanksView(didTapClose: {
-//                        showThanks.toggle()
-//                    })
-//                }
-//             
-//            }
-//            .overlay {
-//                        
-//                        if showSubscriptions {
-//                            Color.black.opacity(0.7)
-//                                .ignoresSafeArea()
-//                                .transition(.opacity)
-//                                .onTapGesture {
-//                                    showSubscriptions.toggle()
-//                                    
-//                                }
-//                            SubscriptionsView(title: "Unlock all app functions", description: "Getting a subscription will let you add any amount of bins and stay in full control of your waste.") {
-//                                showSubscriptions.toggle()
-//                            }
-//                                .transition(.move(edge: .bottom).combined(with: .opacity))
-//                                .onDisappear(perform: {
-//                                    Task {
-//                                        await store.updateCurrentEntitlements()
-//                                    }
-//                                })
-//                        }
-//                    }
-//                    .animation(.spring(), value: showSubscriptions)
-//                    .animation(.spring(), value: showThanks)
-//                    .onChange(of: store.action) { action in
-//                                    
-//                        if action == .successful {
-//                            
-//                            showSubscriptions = false
-//                            
-//                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-//                                
-//                                    showThanks.toggle()
-//
-//                            }
-//                            
-//                            store.reset()
-//                        }
-//                        
-//                    }
-//                    .alert(isPresented: $store.hasError, error: store.error) { }
-                }
-            .fullScreenCover(isPresented: $showNotificationView) {
-                NotificationView(showNotificationView: $showNotificationView)
-            }
+            
+        }
+        .fullScreenCover(isPresented: $showNotificationView) {
+            NotificationView(showNotificationView: $showNotificationView)
+        }
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         MainAssembley().build()
-//            .environmentObject(SubscriptionStore())
             .environmentObject(NotificationManager())
     }
 }
@@ -114,7 +58,7 @@ struct ContentView_Previews: PreviewProvider {
 struct SettingsBarView: View {
     @EnvironmentObject var vm: MainViewModel
     @Binding var showSubscriptions: Bool
-
+    
     var body: some View {
         HStack() {
             Spacer()
@@ -145,7 +89,6 @@ struct YourBinsHeaderView: View {
             Spacer()
             Button {
                 vm.showAddBinView()
-//                isAddBinPresented.toggle()
             } label: {
                 Image(systemName: "plus")
                     .tint(Color("primary_elements"))
@@ -154,9 +97,6 @@ struct YourBinsHeaderView: View {
                     .font(.title2)
             }
         }
-//        .sheet(isPresented: $isAddBinPresented, content: {
-//            AddBinAssembley().build()
-//        })
         .padding(.horizontal)
     }
 }
@@ -168,7 +108,6 @@ struct NotificationBageView: View {
         Button {
             Task {
                 if let url = URL(string: UIApplication.openNotificationSettingsURLString) {
-                    // Ask the system to open that URL.
                     await UIApplication.shared.open(url)
                 }
             }
@@ -190,25 +129,15 @@ struct NotificationBageView: View {
                         .font(.subheadline)
                         .foregroundColor(.gray)
                         .multilineTextAlignment(.leading)
-                        
                 }
                 Spacer()
-                Button {
-                    withAnimation {
-                        isNotificationBageShown = !isNotificationBageShown
-                    }
-                } label: {
-                    Image(systemName: "xmark.circle.fill")
-                        .foregroundStyle(.gray, .gray.opacity(0.2))
-                }
-                
             }
             .padding(.all, 20)
             .background(Color("primary_cell"))
             .cornerRadius(10.0)
-            .padding(.horizontal)
+
         }
-
-
+        .padding(.vertical)
+        .padding(.horizontal, 20)
     }
 }

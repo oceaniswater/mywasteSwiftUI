@@ -25,7 +25,6 @@
 		86DF7EF12A6EA13C00B304EE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 86DF7EF02A6EA13C00B304EE /* Assets.xcassets */; };
 		86DF7EF42A6EA13C00B304EE /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 86DF7EF32A6EA13C00B304EE /* Preview Assets.xcassets */; };
 		86DF7EFB2A6EC4FA00B304EE /* BinCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86DF7EFA2A6EC4FA00B304EE /* BinCellView.swift */; };
-		86DF7EFF2A6EC66E00B304EE /* Singleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86DF7EFE2A6EC66E00B304EE /* Singleton.swift */; };
 		86DF7F012A6EFBD500B304EE /* AddBinView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86DF7F002A6EFBD500B304EE /* AddBinView.swift */; };
 		86DF7F0C2A6F22AC00B304EE /* WeekDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86DF7F0B2A6F22AC00B304EE /* WeekDay.swift */; };
 		86DF7F0F2A6FCD6D00B304EE /* WeekdayRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86DF7F0E2A6FCD6D00B304EE /* WeekdayRow.swift */; };
@@ -63,7 +62,6 @@
 		86DF7EF02A6EA13C00B304EE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		86DF7EF32A6EA13C00B304EE /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		86DF7EFA2A6EC4FA00B304EE /* BinCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinCellView.swift; sourceTree = "<group>"; };
-		86DF7EFE2A6EC66E00B304EE /* Singleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Singleton.swift; sourceTree = "<group>"; };
 		86DF7F002A6EFBD500B304EE /* AddBinView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBinView.swift; sourceTree = "<group>"; };
 		86DF7F0B2A6F22AC00B304EE /* WeekDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekDay.swift; sourceTree = "<group>"; };
 		86DF7F0E2A6FCD6D00B304EE /* WeekdayRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekdayRow.swift; sourceTree = "<group>"; };
@@ -156,7 +154,6 @@
 				86DF7F282A7055B800B304EE /* Services */,
 				86DF7EF02A6EA13C00B304EE /* Assets.xcassets */,
 				86DF7EF22A6EA13C00B304EE /* Preview Content */,
-				86DF7EFE2A6EC66E00B304EE /* Singleton.swift */,
 			);
 			path = "my waste app";
 			sourceTree = "<group>";
@@ -388,7 +385,6 @@
 				86DF7EFB2A6EC4FA00B304EE /* BinCellView.swift in Sources */,
 				86DF7F132A6FE85C00B304EE /* BinsListView.swift in Sources */,
 				86BE857E2A73FDD5003650AE /* NotificationScreenView.swift in Sources */,
-				86DF7EFF2A6EC66E00B304EE /* Singleton.swift in Sources */,
 				8643934D2A9B8257005AF8B6 /* NotifyDayToggleView.swift in Sources */,
 				86DF7F0F2A6FCD6D00B304EE /* WeekdayRow.swift in Sources */,
 				86FA52242A93827B00D3495A /* ThanksView.swift in Sources */,
