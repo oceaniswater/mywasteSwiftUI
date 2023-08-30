@@ -82,7 +82,8 @@ struct AddBinView: View {
                 } label: {
                     ZStack {
                         Rectangle()
-                            .frame(width: 355, height: 55)
+                            .frame(height: 55)
+                            .frame(maxWidth: 500)
                             .cornerRadius(10.0)
                         Text("Save")
                             .foregroundColor(.white)
@@ -196,6 +197,7 @@ struct WeekdayList: View {
             List(Day.allCases, id: \.rawValue, selection: $selectedRows) {day in
                 WeekdayRow(day: day, selectedItems: $selectedRows)
             }
+            .frame(maxWidth: 500)
             .listStyle(.automatic)
             .scrollContentBackground(.hidden)
         }

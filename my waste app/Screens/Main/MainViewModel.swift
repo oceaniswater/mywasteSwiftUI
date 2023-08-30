@@ -20,8 +20,4 @@ final class MainViewModel: ObservableObject {
     func showAddBinView() {
         self.router.showAddBin()
     }
-    
-    func showSettings() {
-        self.router.showSettings()
-    }
 }

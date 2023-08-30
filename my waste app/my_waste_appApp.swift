@@ -40,8 +40,6 @@ struct my_waste_appApp: App {
                         switch route {
                         case .addBin:
                             AddBinAssembley().build()
-                        case .settings:
-                            SettingsAssembley().build()
                         case .editBin(let bin):
                             EditBinAssembley().build(for: bin)
                         }

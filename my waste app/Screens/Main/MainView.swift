@@ -142,7 +142,6 @@ struct NotificationBageView: View {
 
 
         }
-        .padding(.vertical)
-        .padding(.horizontal, 20)
+        .padding(.all)
     }
 }

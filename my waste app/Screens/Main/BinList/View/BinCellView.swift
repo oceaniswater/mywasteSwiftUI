@@ -37,12 +37,8 @@ struct BinCellView: View {
                 }
                 .padding()
                 Spacer()
-                Button {
-
-                } label: {
-                    Image(systemName: "slider.horizontal.3")
-                        .foregroundStyle(.gray, .gray.opacity(0.2))
-                }
+                Image(systemName: !bin.notifyMe ? "bell.slash" : "")
+                    .foregroundStyle(.red)
             }
             .padding(.all, 10)
             .background(Color("primary_cell"))
