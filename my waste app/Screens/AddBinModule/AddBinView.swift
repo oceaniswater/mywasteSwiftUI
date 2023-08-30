@@ -16,13 +16,15 @@ struct AddBinView: View {
     
     @StateObject var vm: AddBinViewModel
     @State private var newBin = Bin(date: .now, type: .cardboard, color: .blue, selectDays: [])
-//    @State var showThanks = false
+    @State private var isNotificationEnabled = true
+    @State private var hasPermision = false
+    @State var showThanks = false
     
     var body: some View {
         ZStack {
             Color("primary_bg")
                 .edgesIgnoringSafeArea(.all)
-            VStack(spacing:20) {
+            VStack(spacing:0) {
                 ImageBin(colorSelected: $newBin.color, typeSelected: $newBin.type)
                 
                 Form {
@@ -40,25 +42,45 @@ struct AddBinView: View {
                     }
                     
                     Section {
-                        DatePicker("Time of notification", selection: $newBin.date, displayedComponents: .hourAndMinute)
-                            .clipShape(RoundedRectangle(cornerRadius: 10.00))
-                        NotifyDayToggleView(atTheSameDay: $newBin.atTheSameDay, atTheDayBefore: $newBin.atTheDayBefore)
+                        Toggle("Notify me", isOn: $newBin.notifyMe)
+                            .disabled(!nm.hasPermisions)
+                            .onTapGesture {
+                                if nm.hasPermisions{
+                                    newBin.notifyMe.toggle()
+                                }
+                            }
+                        
+                        if newBin.notifyMe {
+                            DatePicker("Time of notification", selection: $newBin.date, displayedComponents: .hourAndMinute)
+                                .clipShape(RoundedRectangle(cornerRadius: 10.00))
+                            NotifyDayToggleView(atTheSameDay: $newBin.atTheSameDay, atTheDayBefore: $newBin.atTheDayBefore)
+                        }
+                        if !nm.hasPermisions && !newBin.notifyMe {
+                            Button("Why it is disabled?") {
+                                showThanks = true
+                            }
+                            .foregroundStyle(Color("primary_elements"))
+                            .frame(height: 35.0)
+                            .font(.system(.body, design: .rounded))
+                        }
                     }
                 }
                 .scrollContentBackground(.hidden)
                 
                 
-                
                 Button {
-                        if newBin.selectDays.isEmpty {
-                            vm.hasError = true
-                        } else {
-                            modelContext.insert(newBin)
+                    if newBin.selectDays.isEmpty {
+                        vm.hasError = true
+                    } else {
+                        newBin.notifyMe = isNotificationEnabled
+                        modelContext.insert(newBin)
+                        if isNotificationEnabled {
                             Task {
                                 await vm.addNotification(newBin)
                             }
-                            dismiss()
                         }
+                        dismiss()
+                    }
                 } label: {
                     ZStack {
                         Rectangle()
@@ -77,17 +99,36 @@ struct AddBinView: View {
         }
         .onAppear(perform: {
             self.vm.setup(nm)
+            Task {
+                await nm.getAuthStatus()
+            }
+            if !hasPermision {
+                newBin.notifyMe = hasPermision
+            }
         })
-//        .overlay(alignment: .bottom) {
-//            
-//            if showThanks {
-//                ThanksView(didTapClose: {
-//                    showThanks.toggle()
-//                })
-//            }
-//            
-//        }
-//        .animation(.spring(), value: showThanks)
+        .overlay(alignment: .bottom) {
+            
+            if showThanks {
+                Color.black.opacity(0.7)
+                    .ignoresSafeArea()
+                    .transition(.opacity)
+                    .onTapGesture {
+                        showThanks.toggle()
+                        Task {
+                            await nm.getAuthStatus()
+                        }
+                        
+                    }
+                ThanksView(didTapClose: {
+                    showThanks.toggle()
+                    Task {
+                        await nm.getAuthStatus()
+                    }
+                })
+            }
+            
+        }
+        .animation(.spring(), value: showThanks)
     }
 }
 

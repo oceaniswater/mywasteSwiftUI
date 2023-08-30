@@ -79,7 +79,6 @@ struct SettingsBarView: View {
 
 struct YourBinsHeaderView: View {
     @EnvironmentObject var vm: MainViewModel
-    @State var isAddBinPresented: Bool = false
     
     var body: some View {
         HStack {

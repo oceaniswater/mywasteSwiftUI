@@ -8,35 +8,55 @@
 import SwiftUI
 
 struct ThanksView: View {
+    @Environment(\.dismiss) var dismiss
     
     var didTapClose: () -> ()
     
     var body: some View {
         VStack(spacing: 8) {
+            HStack {
+                Spacer()
+                Button(action: didTapClose, label: {
+                    
+                    Image(systemName: "xmark")
+                        .symbolVariant(.circle.fill)
+                        .font(.system(.title, design: .rounded))
+                        .symbolRenderingMode(.palette)
+                        .foregroundStyle(.gray, .gray.opacity(0.2))
+                })
+            }
             
-            Text("Thank You 💕")
+            Text("Why it is disabled?")
                 .foregroundStyle(Color.white)
                 .font(.system(.title2, design: .rounded).bold())
                 .multilineTextAlignment(.center)
             
-            Text("Now you have ability to use all power of this app. In the future we gonna add more fetures into it. And you will use it for free too.")
+            Text("You shoud give permissons for Notifications in your app Settings")
                 .foregroundStyle(Color.gray)
                 .font(.system(.body, design: .rounded))
                 .multilineTextAlignment(.center)
                 .padding(.bottom, 16)
             
-            Button(action: didTapClose) {
-                Text("Close")
+            Button {
+                Task {
+                    if let url = URL(string: UIApplication.openNotificationSettingsURLString) {
+                        await UIApplication.shared.open(url)
+                    }
+                }
+            } label: {
+                Text("Settings")
                     .font(.system(.title3, design: .rounded).bold())
                     .tint(.white)
                     .frame(height: 55)
                     .frame(maxWidth: .infinity)
-                    .background(.blue, in: RoundedRectangle(cornerRadius: 10,
+                    .background(Color("primary_elements"), in: RoundedRectangle(cornerRadius: 10,
                                                             style: .continuous))
+
             }
         }
         .padding(16)
         .background(Color("primary_cell"), in: RoundedRectangle(cornerRadius: 10, style: .continuous))
+        .frame(maxWidth: 500)
         .padding(.horizontal, 8)
     }
 }
