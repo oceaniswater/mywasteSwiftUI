@@ -16,9 +16,7 @@ struct AddBinView: View {
     
     @StateObject var vm: AddBinViewModel
     @State private var newBin = Bin(date: .now, type: .cardboard, color: .blue, selectDays: [])
-    @State private var isNotificationEnabled = true
-    @State private var hasPermision = false
-    @State var showThanks = false
+    @State var showAlertView = false
     
     var body: some View {
         ZStack {
@@ -50,14 +48,14 @@ struct AddBinView: View {
                                 }
                             }
                         
-                        if newBin.notifyMe {
+                        if nm.hasPermisions && newBin.notifyMe {
                             DatePicker("Time of notification", selection: $newBin.date, displayedComponents: .hourAndMinute)
                                 .clipShape(RoundedRectangle(cornerRadius: 10.00))
                             NotifyDayToggleView(atTheSameDay: $newBin.atTheSameDay, atTheDayBefore: $newBin.atTheDayBefore)
                         }
                         if !nm.hasPermisions && !newBin.notifyMe {
                             Button("Why it is disabled?") {
-                                showThanks = true
+                                showAlertView = true
                             }
                             .foregroundStyle(Color("primary_elements"))
                             .frame(height: 35.0)
@@ -65,6 +63,7 @@ struct AddBinView: View {
                         }
                     }
                 }
+                .frame(maxWidth: 500)
                 .scrollContentBackground(.hidden)
                 
                 
@@ -72,9 +71,8 @@ struct AddBinView: View {
                     if newBin.selectDays.isEmpty {
                         vm.hasError = true
                     } else {
-                        newBin.notifyMe = isNotificationEnabled
                         modelContext.insert(newBin)
-                        if isNotificationEnabled {
+                        if nm.hasPermisions {
                             Task {
                                 await vm.addNotification(newBin)
                             }
@@ -102,25 +100,24 @@ struct AddBinView: View {
             Task {
                 await nm.getAuthStatus()
             }
-            if !hasPermision {
-                newBin.notifyMe = hasPermision
-            }
+            newBin.notifyMe = nm.hasPermisions
+
         })
         .overlay(alignment: .bottom) {
             
-            if showThanks {
+            if showAlertView {
                 Color.black.opacity(0.7)
                     .ignoresSafeArea()
                     .transition(.opacity)
                     .onTapGesture {
-                        showThanks.toggle()
+                        showAlertView.toggle()
                         Task {
                             await nm.getAuthStatus()
                         }
                         
                     }
-                ThanksView(didTapClose: {
-                    showThanks.toggle()
+                AlertView(didTapClose: {
+                    showAlertView.toggle()
                     Task {
                         await nm.getAuthStatus()
                     }
@@ -128,7 +125,7 @@ struct AddBinView: View {
             }
             
         }
-        .animation(.spring(), value: showThanks)
+        .animation(.spring(), value: showAlertView)
     }
 }
 

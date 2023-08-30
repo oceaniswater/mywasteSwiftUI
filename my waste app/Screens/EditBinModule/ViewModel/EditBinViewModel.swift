@@ -17,6 +17,7 @@ final class EditBinViewModel: EditBinViewModelProtocol {
     @Published var type: BinType
     @Published var date: Date
     @Published var atTheSameDay: Bool
+    @Published var notifyMe: Bool
     @Published var atTheDayBefore: Bool
     @Published var selectDays: Set<Day>
     var noteLabel: String {
@@ -43,6 +44,7 @@ final class EditBinViewModel: EditBinViewModelProtocol {
         self.color = bin.color
         self.type = bin.type
         self.date = bin.date
+        self.notifyMe = bin.notifyMe
         self.atTheSameDay = bin.atTheSameDay
         self.atTheDayBefore = bin.atTheDayBefore
         self.selectDays = bin.selectDays

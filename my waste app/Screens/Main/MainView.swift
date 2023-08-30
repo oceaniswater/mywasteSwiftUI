@@ -23,10 +23,14 @@ struct MainView: View {
                 if !nm.hasPermisions {
                     if vm.isNotificationBageShown {
                         NotificationBageView(isNotificationBageShown: $vm.isNotificationBageShown)
+                            .frame(maxWidth: 500)
                     }
                 }
                 YourBinsHeaderView()
+                    .frame(maxWidth: 500)
                 BinsListView()
+                    .frame(maxWidth: 500)
+
             }
             .environmentObject(vm)
             .onAppear {
@@ -96,6 +100,7 @@ struct YourBinsHeaderView: View {
                     .font(.title2)
             }
         }
+        .frame(maxWidth: 500)
         .padding(.horizontal)
     }
 }
@@ -134,6 +139,7 @@ struct NotificationBageView: View {
             .padding(.all, 20)
             .background(Color("primary_cell"))
             .cornerRadius(10.0)
+
 
         }
         .padding(.vertical)

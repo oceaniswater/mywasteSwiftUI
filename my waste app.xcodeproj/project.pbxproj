@@ -37,7 +37,7 @@
 		86F9D7E12A851E7B00F9765C /* Bin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86F9D7E02A851E7B00F9765C /* Bin.swift */; };
 		86FA52202A8F89B100D3495A /* ProductsConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86FA521F2A8F89B100D3495A /* ProductsConstants.swift */; };
 		86FA52222A8F8A3300D3495A /* SubscriptionStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86FA52212A8F8A3300D3495A /* SubscriptionStore.swift */; };
-		86FA52242A93827B00D3495A /* ThanksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86FA52232A93827B00D3495A /* ThanksView.swift */; };
+		86FA52242A93827B00D3495A /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86FA52232A93827B00D3495A /* AlertView.swift */; };
 		86FA52262A93918900D3495A /* SubscriptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86FA52252A93918900D3495A /* SubscriptionsView.swift */; };
 /* End PBXBuildFile section */
 
@@ -74,7 +74,7 @@
 		86F9D7E02A851E7B00F9765C /* Bin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bin.swift; sourceTree = "<group>"; };
 		86FA521F2A8F89B100D3495A /* ProductsConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsConstants.swift; sourceTree = "<group>"; };
 		86FA52212A8F8A3300D3495A /* SubscriptionStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionStore.swift; sourceTree = "<group>"; };
-		86FA52232A93827B00D3495A /* ThanksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThanksView.swift; sourceTree = "<group>"; };
+		86FA52232A93827B00D3495A /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
 		86FA52252A93918900D3495A /* SubscriptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -284,7 +284,7 @@
 			children = (
 				86FA521F2A8F89B100D3495A /* ProductsConstants.swift */,
 				86FA52212A8F8A3300D3495A /* SubscriptionStore.swift */,
-				86FA52232A93827B00D3495A /* ThanksView.swift */,
+				86FA52232A93827B00D3495A /* AlertView.swift */,
 				86FA52252A93918900D3495A /* SubscriptionsView.swift */,
 			);
 			path = Subscriptions;
@@ -387,7 +387,7 @@
 				86BE857E2A73FDD5003650AE /* NotificationScreenView.swift in Sources */,
 				8643934D2A9B8257005AF8B6 /* NotifyDayToggleView.swift in Sources */,
 				86DF7F0F2A6FCD6D00B304EE /* WeekdayRow.swift in Sources */,
-				86FA52242A93827B00D3495A /* ThanksView.swift in Sources */,
+				86FA52242A93827B00D3495A /* AlertView.swift in Sources */,
 				86DF7F012A6EFBD500B304EE /* AddBinView.swift in Sources */,
 				86DF7EED2A6EA13B00B304EE /* my_waste_appApp.swift in Sources */,
 				86DF7F1A2A70394800B304EE /* EditBinView.swift in Sources */,

@@ -1,5 +1,5 @@
 //
-//  ThanksView.swift
+//  AlertView.swift
 //  my waste app
 //
 //  Created by Mark Golubev on 21/08/2023.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ThanksView: View {
+struct AlertView: View {
     @Environment(\.dismiss) var dismiss
     
     var didTapClose: () -> ()
@@ -63,6 +63,6 @@ struct ThanksView: View {
 
 struct ThanksView_Previews: PreviewProvider {
     static var previews: some View {
-        ThanksView {}
+        AlertView {}
     }
 }
