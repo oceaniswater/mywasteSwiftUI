@@ -12,19 +12,19 @@ struct MainView: View {
 
     @State var showSettingsScreen: Bool = false
     @State var showNotificationView: Bool = false
-    @State var showSubscriptions: Bool = false
-    @State var showThanks: Bool = false
+//    @State var showSubscriptions: Bool = false
+//    @State var showThanks: Bool = false
     
     @StateObject var vm: MainViewModel
     @EnvironmentObject var nm: NotificationManager
-    @EnvironmentObject var store: SubscriptionStore
+//    @EnvironmentObject var store: SubscriptionStore
     
     var body: some View {
             ZStack {
                 Color("primary_bg")
                     .edgesIgnoringSafeArea(.all)
                 VStack {
-                    SettingsBarView(showSubscriptions: $showSubscriptions)
+//                    SettingsBarView(showSubscriptions: $showSubscriptions)
 
                     if !nm.hasPermisions {
                         if vm.isNotificationBageShown {
@@ -47,57 +47,56 @@ struct MainView: View {
                     await nm.getAuthStatus()
                 }
             }
-            .overlay(alignment: .bottom) {
-                
-                if showThanks {
-                    ThanksView(didTapClose: {
-                        showThanks.toggle()
-                    })
+//            .overlay(alignment: .bottom) {
+//                
+//                if showThanks {
+//                    ThanksView(didTapClose: {
+//                        showThanks.toggle()
+//                    })
+//                }
+//             
+//            }
+//            .overlay {
+//                        
+//                        if showSubscriptions {
+//                            Color.black.opacity(0.7)
+//                                .ignoresSafeArea()
+//                                .transition(.opacity)
+//                                .onTapGesture {
+//                                    showSubscriptions.toggle()
+//                                    
+//                                }
+//                            SubscriptionsView(title: "Unlock all app functions", description: "Getting a subscription will let you add any amount of bins and stay in full control of your waste.") {
+//                                showSubscriptions.toggle()
+//                            }
+//                                .transition(.move(edge: .bottom).combined(with: .opacity))
+//                                .onDisappear(perform: {
+//                                    Task {
+//                                        await store.updateCurrentEntitlements()
+//                                    }
+//                                })
+//                        }
+//                    }
+//                    .animation(.spring(), value: showSubscriptions)
+//                    .animation(.spring(), value: showThanks)
+//                    .onChange(of: store.action) { action in
+//                                    
+//                        if action == .successful {
+//                            
+//                            showSubscriptions = false
+//                            
+//                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+//                                
+//                                    showThanks.toggle()
+//
+//                            }
+//                            
+//                            store.reset()
+//                        }
+//                        
+//                    }
+//                    .alert(isPresented: $store.hasError, error: store.error) { }
                 }
-             
-            }
-            .overlay {
-                        
-                        if showSubscriptions {
-                            Color.black.opacity(0.7)
-                                .ignoresSafeArea()
-                                .transition(.opacity)
-                                .onTapGesture {
-                                    showSubscriptions.toggle()
-                                    
-                                }
-                            SubscriptionsView(title: "Unlock all app functions", description: "Getting a subscription will let you add any amount of bins and stay in full control of your waste.") {
-                                showSubscriptions.toggle()
-                            }
-                                .transition(.move(edge: .bottom).combined(with: .opacity))
-                                .onDisappear(perform: {
-                                    Task {
-                                        await store.updateCurrentEntitlements()
-                                    }
-                                })
-                        }
-                    }
-                    .animation(.spring(), value: showSubscriptions)
-                    .animation(.spring(), value: showThanks)
-                    .onChange(of: store.action) { action in
-                                    
-                        if action == .successful {
-                            
-                            showSubscriptions = false
-                            
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                                
-                                    showThanks.toggle()
-
-                            }
-                            
-                            store.reset()
-                        }
-                        
-                    }
-                    .alert(isPresented: $store.hasError, error: store.error) { }
-                }
-        
             .fullScreenCover(isPresented: $showNotificationView) {
                 NotificationView(showNotificationView: $showNotificationView)
             }
@@ -107,7 +106,7 @@ struct MainView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         MainAssembley().build()
-            .environmentObject(SubscriptionStore())
+//            .environmentObject(SubscriptionStore())
             .environmentObject(NotificationManager())
     }
 }

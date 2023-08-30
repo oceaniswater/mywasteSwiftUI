@@ -40,7 +40,6 @@ struct WeekdayRow: View {
 
 struct WeekdayRow_Previews: PreviewProvider {
     static var previews: some View {
-        let id = "2"
         WeekdayRow(day: .Fri, selectedItems: .constant([.Fri, .Mon]))
     }
 }

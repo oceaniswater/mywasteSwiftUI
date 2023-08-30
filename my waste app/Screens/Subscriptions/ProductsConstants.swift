@@ -7,8 +7,8 @@
 
 import Foundation
 
-let mySubscriptionProducts = [
-    "uk.co.markgolubev.mywasteapp.monthly",
-    "uk.co.markgolubev.mywasteapp.annual",
-    "uk.co.markgolubev.mywasteapp.lifetime"
-]
+//let mySubscriptionProducts = [
+//    "uk.co.markgolubev.mywasteapp.monthly",
+//    "uk.co.markgolubev.mywasteapp.annual",
+//    "uk.co.markgolubev.mywasteapp.lifetime"
+//]
