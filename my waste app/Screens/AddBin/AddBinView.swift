@@ -90,6 +90,7 @@ struct AddBinView: View {
                     }
                     
                 }
+                .padding()
                 
             }
         }
@@ -100,8 +101,9 @@ struct AddBinView: View {
             self.vm.setup(nm)
             Task {
                 await nm.getAuthStatus()
+                newBin.notifyMe = nm.hasPermisions
             }
-            newBin.notifyMe = nm.hasPermisions
+            
 
         })
         .overlay(alignment: .bottom) {

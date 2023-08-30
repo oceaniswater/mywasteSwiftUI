@@ -99,6 +99,7 @@ struct YourBinsHeaderView: View {
                     .cornerRadius(10.0)
                     .font(.title2)
             }
+            .offset(x: 15)
         }
         .frame(maxWidth: 500)
         .padding(.horizontal)
@@ -142,6 +143,7 @@ struct NotificationBageView: View {
 
 
         }
-        .padding(.all)
+//        .padding(.vertical)
+        .padding(.horizontal, 20)
     }
 }

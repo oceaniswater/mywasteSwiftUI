@@ -94,6 +94,7 @@ struct EditBinView: View {
                         }
                             
                     }
+                    .padding()
                 }
             }
             .onAppear(perform: {
