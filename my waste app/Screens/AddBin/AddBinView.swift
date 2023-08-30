@@ -12,20 +12,17 @@ struct AddBinView: View {
     
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var modelContext
-    @EnvironmentObject var store: SubscriptionStore
     @EnvironmentObject var nm: NotificationManager
     
-    @Query private var bins: [Bin]
     @StateObject var vm: AddBinViewModel
     @State private var newBin = Bin(date: .now, type: .cardboard, color: .blue, selectDays: [])
-    @State var showSubscriptions = false
-    @State var showThanks = false
+    @State var showAlertView = false
     
     var body: some View {
         ZStack {
             Color("primary_bg")
                 .edgesIgnoringSafeArea(.all)
-            VStack(spacing:20) {
+            VStack(spacing:0) {
                 ImageBin(colorSelected: $newBin.color, typeSelected: $newBin.type)
                 
                 Form {
@@ -43,35 +40,50 @@ struct AddBinView: View {
                     }
                     
                     Section {
-                        DatePicker("Time of notification", selection: $newBin.date, displayedComponents: .hourAndMinute)
-                            .clipShape(RoundedRectangle(cornerRadius: 10.00))
-                        NotifyDayToggleView(atTheSameDay: $newBin.atTheSameDay, atTheDayBefore: $newBin.atTheDayBefore)
+                        Toggle("Notify me", isOn: $newBin.notifyMe)
+                            .disabled(!nm.hasPermisions)
+                            .onTapGesture {
+                                if nm.hasPermisions{
+                                    newBin.notifyMe.toggle()
+                                }
+                            }
+                        
+                        if nm.hasPermisions && newBin.notifyMe {
+                            DatePicker("Time of notification", selection: $newBin.date, displayedComponents: .hourAndMinute)
+                                .clipShape(RoundedRectangle(cornerRadius: 10.00))
+                            NotifyDayToggleView(atTheSameDay: $newBin.atTheSameDay, atTheDayBefore: $newBin.atTheDayBefore)
+                        }
+                        if !nm.hasPermisions && !newBin.notifyMe {
+                            Button("Why it is disabled?") {
+                                showAlertView = true
+                            }
+                            .foregroundStyle(Color("primary_elements"))
+                            .frame(height: 35.0)
+                            .font(.system(.body, design: .rounded))
+                        }
                     }
                 }
+                .frame(maxWidth: 500)
                 .scrollContentBackground(.hidden)
                 
                 
-                
                 Button {
-                    if !store.isUserHasSubscription() && bins.count == 2 {
-                        showSubscriptions.toggle()
+                    if newBin.selectDays.isEmpty {
+                        vm.hasError = true
                     } else {
-                        if newBin.selectDays.isEmpty {
-                            vm.hasError = true
-                        } else {
-                            modelContext.insert(newBin)
+                        modelContext.insert(newBin)
+                        if nm.hasPermisions {
                             Task {
                                 await vm.addNotification(newBin)
                             }
-                            dismiss()
                         }
-                        
+                        dismiss()
                     }
-                    
                 } label: {
                     ZStack {
                         Rectangle()
-                            .frame(width: 355, height: 55)
+                            .frame(height: 55)
+                            .frame(maxWidth: 500)
                             .cornerRadius(10.0)
                         Text("Save")
                             .foregroundColor(.white)
@@ -86,56 +98,35 @@ struct AddBinView: View {
         }
         .onAppear(perform: {
             self.vm.setup(nm)
+            Task {
+                await nm.getAuthStatus()
+            }
+            newBin.notifyMe = nm.hasPermisions
+
         })
         .overlay(alignment: .bottom) {
             
-            if showThanks {
-                ThanksView(didTapClose: {
-                    showThanks.toggle()
-                })
-            }
-            
-        }
-        .overlay {
-            
-            if showSubscriptions {
+            if showAlertView {
                 Color.black.opacity(0.7)
                     .ignoresSafeArea()
                     .transition(.opacity)
                     .onTapGesture {
-                        showSubscriptions.toggle()
+                        showAlertView.toggle()
+                        Task {
+                            await nm.getAuthStatus()
+                        }
                         
                     }
-                SubscriptionsView(title: "Need an extra bin?", description: "Getting a subscription will let you add any amount of bins and stay in full control of your waste.") {
-                    showSubscriptions.toggle()
-                }
-                .transition(.move(edge: .bottom).combined(with: .opacity))
-                .onDisappear(perform: {
+                AlertView(didTapClose: {
+                    showAlertView.toggle()
                     Task {
-                        await store.updateCurrentEntitlements()
+                        await nm.getAuthStatus()
                     }
                 })
             }
-        }
-        .animation(.spring(), value: showSubscriptions)
-        .animation(.spring(), value: showThanks)
-        .onChange(of: store.action) { action in
-            
-            if action == .successful {
-                
-                showSubscriptions = false
-                
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                    
-                    showThanks.toggle()
-                    
-                }
-                
-                store.reset()
-            }
             
         }
-        .alert(isPresented: $store.hasError, error: store.error) { }
+        .animation(.spring(), value: showAlertView)
     }
 }
 
@@ -144,7 +135,6 @@ struct AddBinView_Previews: PreviewProvider {
     static var previews: some View {
         AddBinAssembley().build()
             .environmentObject(NotificationManager())
-            .environmentObject(SubscriptionStore())
     }
 }
 
@@ -207,6 +197,7 @@ struct WeekdayList: View {
             List(Day.allCases, id: \.rawValue, selection: $selectedRows) {day in
                 WeekdayRow(day: day, selectedItems: $selectedRows)
             }
+            .frame(maxWidth: 500)
             .listStyle(.automatic)
             .scrollContentBackground(.hidden)
         }

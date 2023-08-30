@@ -37,12 +37,8 @@ struct BinCellView: View {
                 }
                 .padding()
                 Spacer()
-                Button {
-//                    path.append(bin)
-                } label: {
-                    Image(systemName: "slider.horizontal.3")
-                        .foregroundStyle(.gray, .gray.opacity(0.2))
-                }
+                Image(systemName: !bin.notifyMe ? "bell.slash" : "")
+                    .foregroundStyle(.red)
             }
             .padding(.all, 10)
             .background(Color("primary_cell"))
@@ -52,9 +48,8 @@ struct BinCellView: View {
     }
 }
 
-//struct BinCellView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        BinCellView(bin: .constant(Bin(id: "123", color: .blue, type: .glass, days: ["Sunday", "Monday"])), path: .constant(NavigationPath()))
-//            .padding()
-//    }
-//}
+struct BinCellView_Previews: PreviewProvider {
+    static var previews: some View {
+        BinCellView(bin: Bin(date: .now, type: .cardboard, color: .yellow, selectDays: [.Fri]))
+    }
+}

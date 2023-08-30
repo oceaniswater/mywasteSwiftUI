@@ -12,7 +12,6 @@ enum Route: Hashable {
     
     case editBin(Bin)
     case addBin
-    case settings
 }
 
 final class Router: ObservableObject {
@@ -26,10 +25,6 @@ final class Router: ObservableObject {
 
     func showAddBin() {
         path.append(.addBin)
-    }
-    
-    func showSettings() {
-        path.append(.settings)
     }
     
     func backToRoot() {

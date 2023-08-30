@@ -30,6 +30,7 @@ class Bin: Identifiable {
         return days.map(\.dayText).joined(separator: ", ")
     }
     var selectDays: Set<Day>
+    var notifyMe: Bool
     var atTheSameDay: Bool
     var atTheDayBefore: Bool
     var remindDays: Set<Day> {
@@ -65,12 +66,13 @@ class Bin: Identifiable {
 
     }
     
-    init(id: UUID = UUID(), date: Date, type: BinType, color: BinColor, selectDays: Set<Day>, atTheSameDay: Bool = false, atTheDayBefore: Bool = true) {
+    init(id: UUID = UUID(), date: Date, type: BinType, color: BinColor, selectDays: Set<Day>, notifyMe: Bool = true, atTheSameDay: Bool = false, atTheDayBefore: Bool = true) {
         self.id = id
         self.date = date
         self.type = type
         self.color = color
         self.selectDays = selectDays
+        self.notifyMe = notifyMe
         self.atTheSameDay = atTheSameDay
         self.atTheDayBefore = atTheDayBefore
     }
