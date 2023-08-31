@@ -39,7 +39,7 @@ struct NotificationView: View {
                             self.isRotating = true
                         }
                     }
-                    Text("Turn on push notifications to never miss a collection day. You can also do it later in Settings.")
+                    Text("Allow push notifications to never miss a\u{00a0}collection day. You can change your decision later in Settings.")
                         .foregroundColor(.white)
                         .multilineTextAlignment(.center)
                         .frame(maxWidth: 500)
@@ -58,29 +58,29 @@ struct NotificationView: View {
                                 .frame(width: 250,height: 44)
                             HStack {
                                 Image(systemName: "bell")
-                                Text("Turn on notifications")
+                                Text("Notifications")
                             }
                             .foregroundColor(.black)
                         }
                     }
-                    Button {
-                        showNotificationView = false
-                        UserDefaults.standard.setValue(true, forKey: "notFirstTime")
-                    } label: {
-                        ZStack {
-                            Rectangle()
-                                .foregroundColor(.clear)
-                                .cornerRadius(10)
-                                .frame(width: 250,height: 44)
-                                .overlay(
-                                        RoundedRectangle(cornerRadius: 10)
-                                            .stroke(.white, lineWidth: 1)
-                                    )
-
-                            Text("Later")
-                                .foregroundColor(.white)
-                        }
-                    }
+//                    Button {
+//                        showNotificationView = false
+//                        UserDefaults.standard.setValue(true, forKey: "notFirstTime")
+//                    } label: {
+//                        ZStack {
+//                            Rectangle()
+//                                .foregroundColor(.clear)
+//                                .cornerRadius(10)
+//                                .frame(width: 250,height: 44)
+//                                .overlay(
+//                                        RoundedRectangle(cornerRadius: 10)
+//                                            .stroke(.white, lineWidth: 1)
+//                                    )
+//
+//                            Text("Later")
+//                                .foregroundColor(.white)
+//                        }
+//                    }
                     Spacer()
                 }
                 .onDisappear(perform: {
