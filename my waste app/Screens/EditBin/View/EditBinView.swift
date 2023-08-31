@@ -52,7 +52,7 @@ struct EditBinView: View {
                                 NotifyDayToggleView(atTheSameDay: $vm.atTheSameDay, atTheDayBefore: $vm.atTheDayBefore)
                             }
                             if !nm.hasPermisions {
-                                Button("Why it is disabled?") {
+                                Button("Why is it disabled?") {
                                     showAlertView = true
                                 }
                                 .foregroundStyle(Color("primary_elements"))

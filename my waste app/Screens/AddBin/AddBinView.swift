@@ -54,7 +54,7 @@ struct AddBinView: View {
                             NotifyDayToggleView(atTheSameDay: $newBin.atTheSameDay, atTheDayBefore: $newBin.atTheDayBefore)
                         }
                         if !nm.hasPermisions && !newBin.notifyMe {
-                            Button("Why it is disabled?") {
+                            Button("Why is it disabled?") {
                                 showAlertView = true
                             }
                             .foregroundStyle(Color("primary_elements"))

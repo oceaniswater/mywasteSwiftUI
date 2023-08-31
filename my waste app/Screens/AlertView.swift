@@ -26,12 +26,12 @@ struct AlertView: View {
                 })
             }
             
-            Text("Why it is disabled?")
+            Text("Why is it disabled?")
                 .foregroundStyle(Color.white)
                 .font(.system(.title2, design: .rounded).bold())
                 .multilineTextAlignment(.center)
             
-            Text("You shoud give permissons for Notifications in your app Settings")
+            Text("You should allow Notifications in your app Settings.")
                 .foregroundStyle(Color.gray)
                 .font(.system(.body, design: .rounded))
                 .multilineTextAlignment(.center)
@@ -56,8 +56,9 @@ struct AlertView: View {
         }
         .padding(16)
         .background(Color("primary_cell"), in: RoundedRectangle(cornerRadius: 10, style: .continuous))
+        .padding(.horizontal)
         .frame(maxWidth: 500)
-        .padding(.horizontal, 8)
+
     }
 }
 
