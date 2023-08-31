@@ -9,7 +9,7 @@ enum BinType: String, CaseIterable, Identifiable, Codable {
 }
 
 enum BinColor: String, CaseIterable, Identifiable, Codable {
-    case green, red, blue, yellow, black, orange, brown, gray, purple, purple2, pink
+    case green, red, blue, yellow, black, orange, brown, gray, indigo, purple, pink
     var id: Self { self }
 }
 
