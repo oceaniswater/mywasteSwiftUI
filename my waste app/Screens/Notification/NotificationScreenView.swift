@@ -42,6 +42,7 @@ struct NotificationView: View {
                     Text("Turn on push notifications to never miss a collection day. You can also do it later in Settings.")
                         .foregroundColor(.white)
                         .multilineTextAlignment(.center)
+                        .frame(maxWidth: 500)
                         .padding()
                     Button {
                         Task {
