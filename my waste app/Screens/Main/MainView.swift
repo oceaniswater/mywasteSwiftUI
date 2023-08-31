@@ -11,6 +11,7 @@ import StoreKit
 struct MainView: View {
     
     @State var showNotificationView: Bool = false
+    @State var showNotificationBage: Bool = false
     
     @StateObject var vm: MainViewModel
     @EnvironmentObject var nm: NotificationManager
@@ -20,11 +21,9 @@ struct MainView: View {
             Color("primary_bg")
                 .edgesIgnoringSafeArea(.all)
             VStack {
-                if !nm.hasPermisions {
-                    if vm.isNotificationBageShown {
-                        NotificationBageView(isNotificationBageShown: $vm.isNotificationBageShown)
+                if showNotificationBage {
+                        NotificationBageView(isNotificationBageShown: $showNotificationBage)
                             .frame(maxWidth: 500)
-                    }
                 }
                 YourBinsHeaderView()
                     .frame(maxWidth: 500)
@@ -42,6 +41,13 @@ struct MainView: View {
                 
                 Task {
                     await nm.getAuthStatus()
+                    withAnimation {
+                        if !nm.hasPermisions {
+                            showNotificationBage = true
+                        } else {
+                            showNotificationBage = false
+                        }
+                    }
                 }
             }
             
