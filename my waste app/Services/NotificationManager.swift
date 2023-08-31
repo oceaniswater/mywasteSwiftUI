@@ -11,7 +11,7 @@ import UserNotifications
 @MainActor
 class NotificationManager: ObservableObject {
     
-    @Published private(set) var hasPermisions: Bool = false
+    @Published private(set) var hasPermisions: Bool = true
     
     init() {
         Task {
