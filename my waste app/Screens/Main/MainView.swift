@@ -14,17 +14,21 @@ struct MainView: View {
     @State var showNotificationBage: Bool = false
     
     @StateObject var vm: MainViewModel
-    @EnvironmentObject var nm: NotificationManager
+    @Environment(NotificationManager.self) private var nm
     
     var body: some View {
         ZStack {
             Color("primary_bg")
                 .edgesIgnoringSafeArea(.all)
             VStack {
-                if showNotificationBage {
-                        NotificationBageView(isNotificationBageShown: $showNotificationBage)
-                            .frame(maxWidth: 500)
-                }
+                nm.hasPermisions || !showNotificationBage
+                    ? nil
+                    : NotificationBageView(didTapClose: {
+                        withAnimation {
+                            showNotificationBage = false
+                        }
+                    })
+                    .frame(maxWidth: 500)
                 YourBinsHeaderView()
                     .frame(maxWidth: 500)
                 BinsListView()
@@ -61,7 +65,7 @@ struct MainView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         MainAssembley().build()
-            .environmentObject(NotificationManager())
+            .environment(NotificationManager())
     }
 }
 
@@ -113,16 +117,18 @@ struct YourBinsHeaderView: View {
 }
 
 struct NotificationBageView: View {
-    @Binding var isNotificationBageShown: Bool
+    var didTapClose: () -> ()
     
     var body: some View {
         Button {
+            didTapClose()
+            
             Task {
                 if let url = URL(string: UIApplication.openNotificationSettingsURLString) {
                     await UIApplication.shared.open(url)
                 }
+                
             }
-            isNotificationBageShown = !isNotificationBageShown
         } label: {
             HStack(alignment: .top) {
                 Image(systemName: "bell.badge.fill")

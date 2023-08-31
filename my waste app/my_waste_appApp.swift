@@ -29,7 +29,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
 struct my_waste_appApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     
-    @StateObject var notificationManager = NotificationManager()
+    @State var notificationManager = NotificationManager()
     @ObservedObject var router = Router.shared
     
     var body: some Scene {
@@ -46,7 +46,7 @@ struct my_waste_appApp: App {
                         
                     }
             }
-            .environmentObject(NotificationManager())
+            .environment(notificationManager)
         }
         .modelContainer(for: Bin.self)
 

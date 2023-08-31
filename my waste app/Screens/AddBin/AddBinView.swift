@@ -12,7 +12,7 @@ struct AddBinView: View {
     
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var modelContext
-    @EnvironmentObject var nm: NotificationManager
+    @Environment(NotificationManager.self) private var nm
     
     @StateObject var vm: AddBinViewModel
     @State private var newBin = Bin(date: .now, type: .cardboard, color: .blue, selectDays: [])
@@ -136,7 +136,7 @@ struct AddBinView: View {
 struct AddBinView_Previews: PreviewProvider {
     static var previews: some View {
         AddBinAssembley().build()
-            .environmentObject(NotificationManager())
+            .environment(NotificationManager())
     }
 }
 

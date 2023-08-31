@@ -10,7 +10,7 @@ import SwiftData
 
 struct BinsListView: View {
     @Environment(\.modelContext) private var modelContext
-    @EnvironmentObject var nm: NotificationManager
+    @Environment(NotificationManager.self) private var nm
     
     @Query private var bins: [Bin]
     @StateObject var vm = BinsListViewModel()
@@ -69,6 +69,6 @@ struct BinsListView: View {
 struct BinListView_Previews: PreviewProvider {
     static var previews: some View {
         BinsListView()
-            .environmentObject(NotificationManager())
+            .environment(NotificationManager())
     }
 }

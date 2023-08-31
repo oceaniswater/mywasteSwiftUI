@@ -11,7 +11,7 @@ struct EditBinView: View {
     
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var modelContext
-    @EnvironmentObject var nm: NotificationManager
+    @Environment(NotificationManager.self) private var nm
     
     @Bindable var bin: Bin
     @StateObject var vm: EditBinViewModel

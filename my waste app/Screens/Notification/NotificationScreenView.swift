@@ -9,7 +9,7 @@ import SwiftUI
 
 struct NotificationView: View {
     
-    @EnvironmentObject var nm: NotificationManager
+    @Environment(NotificationManager.self) private var nm
     @Binding var showNotificationView: Bool
     @State var isRotating = false
 
@@ -83,9 +83,11 @@ struct NotificationView: View {
                     }
                     Spacer()
                 }
-                .task {
-                    await nm.getAuthStatus()
-                }
+                .onDisappear(perform: {
+                    Task {
+                        await nm.getAuthStatus()
+                    }
+                })
             }
         }
     }
@@ -94,6 +96,6 @@ struct NotificationView: View {
 struct NotificationScreenView_Previews: PreviewProvider {
     static var previews: some View {
         NotificationView(showNotificationView: .constant(true))
-            .environmentObject(NotificationManager())
+            .environment(NotificationManager())
     }
 }
