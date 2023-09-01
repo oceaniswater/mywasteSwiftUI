@@ -37,7 +37,8 @@ struct BinCellView: View {
                 }
                 .padding()
                 Spacer()
-                Image(systemName: !bin.notifyMe ? "bell.slash" : "")
+                bin.notifyMe ? nil :
+                Image(systemName: "bell.slash")
                     .foregroundStyle(.red)
             }
             .padding(.all, 10)

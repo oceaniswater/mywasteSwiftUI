@@ -28,19 +28,14 @@ struct AddBinView: View {
                 Form {
                     Section {
                         ColorPicker(colorSelected: $newBin.color)
-                            .frame(height: 30)
                         TypePicker(typeSelected: $newBin.type)
-                            .frame(height: 30)
-                    }
-                    
-                    Section {
-                        NavigationLink(newBin.selectDays.isEmpty ? "Set collection days" : newBin.noteLabel) {
+
+                        NavigationLink(newBin.selectDays.isEmpty ? "Collection days" : newBin.noteLabel) {
                             WeekdayList(selectedRows: $newBin.selectDays, days: $vm.days)
                         }
-                    }
-                    
-                    Section {
-                        Toggle("Notify me", isOn: $newBin.notifyMe)
+                        .foregroundStyle(newBin.selectDays.isEmpty ? .black : .gray)
+
+                        Toggle("Enable notifications", isOn: $newBin.notifyMe)
                             .disabled(!nm.hasPermisions)
                             .onTapGesture {
                                 if nm.hasPermisions{
@@ -49,7 +44,7 @@ struct AddBinView: View {
                             }
                         
                         if nm.hasPermisions && newBin.notifyMe {
-                            DatePicker("Time of notification", selection: $newBin.date, displayedComponents: .hourAndMinute)
+                            DatePicker("Time of notifications", selection: $newBin.date, displayedComponents: .hourAndMinute)
                                 .clipShape(RoundedRectangle(cornerRadius: 10.00))
                             NotifyDayToggleView(atTheSameDay: $newBin.atTheSameDay, atTheDayBefore: $newBin.atTheDayBefore)
                         }
@@ -94,7 +89,7 @@ struct AddBinView: View {
                 
             }
         }
-        .alert("You should set at least one collection day.", isPresented: $vm.hasError) {
+        .alert("You should choose at least one collection day.", isPresented: $vm.hasError) {
             Button("OK", role: .cancel) { }
         }
         .onAppear(perform: {
@@ -169,7 +164,7 @@ struct ColorPicker: View {
             }
         }
         .scrollContentBackground(.hidden)
-        .frame(height: 80)
+
     }
 }
 
@@ -184,7 +179,6 @@ struct TypePicker: View {
             }
         }
         .scrollContentBackground(.hidden)
-        .frame(height: 80)
     }
 }
 

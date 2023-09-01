@@ -30,16 +30,13 @@ struct EditBinView: View {
                                 .frame(height: 30)
                             TypePicker(typeSelected: $vm.type)
                                 .frame(height: 30)
-                        }
-                        
-                        Section {
-                            NavigationLink(vm.selectDays.isEmpty ? "Set collection days" : vm.noteLabel) {
+
+                            NavigationLink(vm.selectDays.isEmpty ? "Collection days" : vm.noteLabel) {
                                 WeekdayList(selectedRows: $vm.selectDays, days: $vm.days)
                             }
-                        }
+                            .foregroundStyle(vm.selectDays.isEmpty ? .black : .gray)
                         
-                        Section {
-                            Toggle("Notify me", isOn: $vm.notifyMe)
+                            Toggle("Enable notifications", isOn: $vm.notifyMe)
                                 .disabled(!nm.hasPermisions)
                                 .onTapGesture {
                                     if nm.hasPermisions{
@@ -126,7 +123,7 @@ struct EditBinView: View {
                 
             }
             .animation(.spring(), value: showAlertView)
-            .alert("You should set at least one collection day.", isPresented: $vm.hasError) {
+            .alert("You should choose at least one collection day.", isPresented: $vm.hasError) {
                 Button("OK", role: .cancel) { }
             }
         
