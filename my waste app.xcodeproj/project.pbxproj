@@ -37,6 +37,7 @@
 /* Begin PBXFileReference section */
 		8606200B2A77D00900E8123C /* my waste app.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "my waste app.entitlements"; sourceTree = "<group>"; };
 		8643934C2A9B8257005AF8B6 /* NotifyDayToggleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotifyDayToggleView.swift; sourceTree = "<group>"; };
+		866A48E62AA2344900C96B2B /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		867328EA2A79425000BEA07D /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		867328F52A7A689500BEA07D /* Route.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
 		867328FD2A82438200BEA07D /* MainAssembley.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainAssembley.swift; sourceTree = "<group>"; };
@@ -129,6 +130,7 @@
 				86DF7F292A7055CC00B304EE /* Screens */,
 				86DF7EF02A6EA13C00B304EE /* Assets.xcassets */,
 				86DF7EF22A6EA13C00B304EE /* Preview Content */,
+				866A48E62AA2344900C96B2B /* PrivacyInfo.xcprivacy */,
 			);
 			path = "my waste app";
 			sourceTree = "<group>";
