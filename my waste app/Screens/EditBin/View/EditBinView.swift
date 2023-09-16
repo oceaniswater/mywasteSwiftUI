@@ -75,9 +75,16 @@ struct EditBinView: View {
                             bin.selectDays = vm.selectDays
                             bin.notifyMe = vm.notifyMe
                             
-                            Task {
-                                await vm.updateNotifications(bin: bin)
+                            if bin.notifyMe {
+                                Task {
+                                    await vm.updateNotifications(bin: bin)
+                                }
+                            } else {
+                                Task {
+                                    await vm.deleteNotifications(for: bin)
+                                }
                             }
+
                             dismiss()
                         }
                     } label: {

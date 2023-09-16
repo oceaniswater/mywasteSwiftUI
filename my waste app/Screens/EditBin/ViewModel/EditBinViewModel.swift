@@ -54,4 +54,8 @@ final class EditBinViewModel: EditBinViewModelProtocol {
         await nm?.updateNotification(for: bin)
         
     }
+    
+    func deleteNotifications(for bin: Bin) async {
+        await nm?.removeNotification(id: bin.id.uuidString)
+    }
 }
