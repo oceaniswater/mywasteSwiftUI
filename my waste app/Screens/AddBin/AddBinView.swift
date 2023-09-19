@@ -33,7 +33,7 @@ struct AddBinView: View {
                         NavigationLink(newBin.selectDays.isEmpty ? "Collection days" : newBin.noteLabel) {
                             WeekdayList(selectedRows: $newBin.selectDays, days: $vm.days)
                         }
-                        .foregroundStyle(newBin.selectDays.isEmpty ? .black : .gray)
+                        .foregroundStyle(newBin.selectDays.isEmpty ? Color(.textOne) : .gray)
 
                         Toggle("Enable notifications", isOn: $newBin.notifyMe)
                             .disabled(!nm.hasPermisions)

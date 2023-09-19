@@ -13,18 +13,18 @@ struct NotifyDayToggleView: View {
     
     var body: some View {
         ZStack {
-            Color.white
+            Color(.backgroundOne)
             VStack(spacing:5) {
                 Text("When do you want to receive notifications?")
                     .multilineTextAlignment(.center)
                     .font(.system(.headline, design: .rounded))
-                    .foregroundStyle(Color.black)
+                    .foregroundStyle(Color(.textOne))
                 HStack(spacing: 30) {
                     VStack(spacing:5) {
                         Text("On the collection day")
                             .multilineTextAlignment(.center)
                             .font(.system(.footnote, design: .rounded))
-                            .foregroundStyle(Color.black)
+                            .foregroundStyle(Color(.textOne))
                             .frame(height: 35.0)
                         Image(systemName: atTheSameDay ? "bell.badge.fill" : "bell.badge")
                             .foregroundStyle(Color("primary_elements"))
@@ -40,7 +40,7 @@ struct NotifyDayToggleView: View {
                         Text("The day before")
                             .multilineTextAlignment(.center)
                             .font(.system(.footnote, design: .rounded))
-                            .foregroundStyle(Color.black)
+                            .foregroundStyle(Color(.textOne))
                             .frame(height: 35.0)
                         Image(systemName: atTheDayBefore ? "bell.badge.fill" : "bell.badge")
                             .foregroundStyle(Color("primary_elements"))

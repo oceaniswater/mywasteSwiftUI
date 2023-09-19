@@ -34,7 +34,7 @@ struct EditBinView: View {
                             NavigationLink(vm.selectDays.isEmpty ? "Collection days" : vm.noteLabel) {
                                 WeekdayList(selectedRows: $vm.selectDays, days: $vm.days)
                             }
-                            .foregroundStyle(vm.selectDays.isEmpty ? .black : .gray)
+                            .foregroundStyle(vm.selectDays.isEmpty ? Color(.textOne) : .gray)
                         
                             Toggle("Enable notifications", isOn: $vm.notifyMe)
                                 .disabled(!nm.hasPermisions)
@@ -140,6 +140,7 @@ struct EditBinView: View {
 struct EditBinView_Previews: PreviewProvider {
     static var previews: some View {
         EditBinAssembley().build(for: Bin(date: .now, type: .cardboard, color: .blue, selectDays: [.Fri]))
+            .environment(NotificationManager())
     }
 }
 
