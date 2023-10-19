@@ -84,6 +84,38 @@
 			path = Utilities;
 			sourceTree = "<group>";
 		};
+		86266F022AE17E4400FA892D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				86F9D7E02A851E7B00F9765C /* Bin.swift */,
+				86F9D7DE2A851D5E00F9765C /* Day.swift */,
+				86DF7F0B2A6F22AC00B304EE /* WeekDay.swift */,
+				86DF7F0E2A6FCD6D00B304EE /* WeekdayRow.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		86266F032AE17E5200FA892D /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				86DF7F142A6FE8CE00B304EE /* BinsListViewModel.swift */,
+				867329062A826E8700BEA07D /* MainViewModel.swift */,
+				86DF7F1D2A703E4000B304EE /* EditBinViewModel.swift */,
+				86DF7F162A6FF36F00B304EE /* AddBinViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		86266F042AE17F5900FA892D /* App */ = {
+			isa = PBXGroup;
+			children = (
+				86DF7F282A7055B800B304EE /* Services */,
+				8606200E2A77EC3500E8123C /* Utilities */,
+				867329032A825BB300BEA07D /* Builder */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
 		867329032A825BB300BEA07D /* Builder */ = {
 			isa = PBXGroup;
 			children = (
@@ -122,12 +154,12 @@
 		86DF7EEB2A6EA13B00B304EE /* my waste app */ = {
 			isa = PBXGroup;
 			children = (
+				86266F022AE17E4400FA892D /* Model */,
+				86DF7F292A7055CC00B304EE /* View */,
+				86266F032AE17E5200FA892D /* ViewModel */,
+				86266F042AE17F5900FA892D /* App */,
 				8606200B2A77D00900E8123C /* my waste app.entitlements */,
 				86DF7EEC2A6EA13B00B304EE /* my_waste_appApp.swift */,
-				867329032A825BB300BEA07D /* Builder */,
-				8606200E2A77EC3500E8123C /* Utilities */,
-				86DF7F282A7055B800B304EE /* Services */,
-				86DF7F292A7055CC00B304EE /* Screens */,
 				86DF7EF02A6EA13C00B304EE /* Assets.xcassets */,
 				86DF7EF22A6EA13C00B304EE /* Preview Content */,
 				866A48E62AA2344900C96B2B /* PrivacyInfo.xcprivacy */,
@@ -147,10 +179,6 @@
 			isa = PBXGroup;
 			children = (
 				86DF7F002A6EFBD500B304EE /* AddBinView.swift */,
-				86DF7F0D2A6FCD5200B304EE /* Model */,
-				86DF7F0E2A6FCD6D00B304EE /* WeekdayRow.swift */,
-				86DF7F162A6FF36F00B304EE /* AddBinViewModel.swift */,
-				8643934C2A9B8257005AF8B6 /* NotifyDayToggleView.swift */,
 			);
 			path = AddBin;
 			sourceTree = "<group>";
@@ -159,52 +187,15 @@
 			isa = PBXGroup;
 			children = (
 				86DF7EEE2A6EA13B00B304EE /* MainView.swift */,
-				867329062A826E8700BEA07D /* MainViewModel.swift */,
-				86DF7F112A6FE82900B304EE /* BinList */,
 			);
 			path = Main;
-			sourceTree = "<group>";
-		};
-		86DF7F042A6EFC1400B304EE /* View */ = {
-			isa = PBXGroup;
-			children = (
-				86DF7EFA2A6EC4FA00B304EE /* BinCellView.swift */,
-				86DF7F122A6FE85C00B304EE /* BinsListView.swift */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		86DF7F052A6EFC3000B304EE /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				86F9D7E02A851E7B00F9765C /* Bin.swift */,
-				86F9D7DE2A851D5E00F9765C /* Day.swift */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		86DF7F0D2A6FCD5200B304EE /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				86DF7F0B2A6F22AC00B304EE /* WeekDay.swift */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		86DF7F102A6FE43900B304EE /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				86DF7F142A6FE8CE00B304EE /* BinsListViewModel.swift */,
-			);
-			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		86DF7F112A6FE82900B304EE /* BinList */ = {
 			isa = PBXGroup;
 			children = (
-				86DF7F042A6EFC1400B304EE /* View */,
-				86DF7F052A6EFC3000B304EE /* Model */,
-				86DF7F102A6FE43900B304EE /* ViewModel */,
+				86DF7EFA2A6EC4FA00B304EE /* BinCellView.swift */,
+				86DF7F122A6FE85C00B304EE /* BinsListView.swift */,
 			);
 			path = BinList;
 			sourceTree = "<group>";
@@ -212,26 +203,9 @@
 		86DF7F182A70390100B304EE /* EditBin */ = {
 			isa = PBXGroup;
 			children = (
-				86DF7F1C2A703DE900B304EE /* ViewModel */,
-				86DF7F1B2A703DD500B304EE /* View */,
-			);
-			path = EditBin;
-			sourceTree = "<group>";
-		};
-		86DF7F1B2A703DD500B304EE /* View */ = {
-			isa = PBXGroup;
-			children = (
 				86DF7F192A70394800B304EE /* EditBinView.swift */,
 			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		86DF7F1C2A703DE900B304EE /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				86DF7F1D2A703E4000B304EE /* EditBinViewModel.swift */,
-			);
-			path = ViewModel;
+			path = EditBin;
 			sourceTree = "<group>";
 		};
 		86DF7F282A7055B800B304EE /* Services */ = {
@@ -242,17 +216,19 @@
 			path = Services;
 			sourceTree = "<group>";
 		};
-		86DF7F292A7055CC00B304EE /* Screens */ = {
+		86DF7F292A7055CC00B304EE /* View */ = {
 			isa = PBXGroup;
 			children = (
 				86FA52232A93827B00D3495A /* AlertView.swift */,
+				8643934C2A9B8257005AF8B6 /* NotifyDayToggleView.swift */,
+				86DF7F112A6FE82900B304EE /* BinList */,
 				86DF7F032A6EFBFC00B304EE /* Main */,
 				86BE857C2A73FD89003650AE /* Notification */,
 				86DF7F022A6EFBDE00B304EE /* AddBin */,
 				86DF7F182A70390100B304EE /* EditBin */,
 				86A04D352A97C3C700A0C524 /* LaunchScreen.storyboard */,
 			);
-			path = Screens;
+			path = View;
 			sourceTree = "<group>";
 		};
 		86FA521A2A8F826E00D3495A /* Frameworks */ = {
