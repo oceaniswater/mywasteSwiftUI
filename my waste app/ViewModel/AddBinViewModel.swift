@@ -8,12 +8,9 @@
 import Foundation
 import SwiftUI
 
-protocol AddBinViewModelProtocol {
-//    func addNotification(_ bin: Bin)
-//    func isBinExist(bin: Bin) -> Bool
-}
+protocol AddBinViewModelProtocol: ObservableObject {}
 
-final class AddBinViewModel: ObservableObject, AddBinViewModelProtocol {
+final class AddBinViewModel: AddBinViewModelProtocol {
         
     @Published var selectedRows = Set<Day>()
     @Published var days = Day.allCases
