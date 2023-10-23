@@ -16,15 +16,15 @@ final class HapticsManager {
     private init() { }
     
     func simpleSuccess() {
-        let generator = UINotificationFeedbackGenerator()
-        generator.notificationOccurred(.success)
-        let impact = UIImpactFeedbackGenerator(style: .heavy)
+//        let generator = UINotificationFeedbackGenerator()
+//        generator.notificationOccurred(.success)
+        let impact = UIImpactFeedbackGenerator(style: .medium)
         impact.impactOccurred()
     }
     
     func simpleSuccess2() {
         let generator = UINotificationFeedbackGenerator()
-        generator.notificationOccurred(.success)
+        generator.notificationOccurred(.error)
 //        let impact = UIImpactFeedbackGenerator(style: .heavy)
 //        impact.impactOccurred()
     }
