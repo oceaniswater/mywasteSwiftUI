@@ -99,12 +99,9 @@ struct YourBinsHeaderView: View {
             Text("Your Bins")
                 .font(.system(.title2, design: .rounded))
                 .foregroundStyle(Color.white)
-                .onTapGesture {
-                    HapticsManager.shared.impactFeedback()
-                }
             Spacer()
             Button {
-                HapticsManager.shared.notificationFeedback(.success)
+                HapticsManager.shared.impactFeedback()
                 vm.showAddBinView()
             } label: {
                 Image(systemName: "plus")
