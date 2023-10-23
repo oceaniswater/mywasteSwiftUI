@@ -37,6 +37,7 @@ struct BinsListView: View {
                     .foregroundStyle(Color.gray)
                     .frame(height: 35.0)
                     .offset(y: 60.0)
+                    .onTapGesture(perform: HapticsManager.shared.simpleSuccess2)
                 Spacer()
                 Spacer()
                 Spacer()
