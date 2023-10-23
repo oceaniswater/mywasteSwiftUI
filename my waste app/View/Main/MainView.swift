@@ -101,7 +101,6 @@ struct YourBinsHeaderView: View {
                 .foregroundStyle(Color.white)
             Spacer()
             Button {
-                HapticsManager.shared.impactFeedback()
                 vm.showAddBinView()
             } label: {
                 Image(systemName: "plus")
