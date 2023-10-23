@@ -111,6 +111,7 @@ struct YourBinsHeaderView: View {
                     .font(.title2)
             }
             .offset(x: 15)
+            .onTapGesture(perform: HapticsManager.shared.simpleSuccess2)
         }
         .frame(maxWidth: 500)
         .padding(.horizontal)
