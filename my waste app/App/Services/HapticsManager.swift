@@ -1,5 +1,5 @@
 //
-//  HapsticsManager.swift
+//  HapticsManager.swift
 //  my waste app
 //
 //  Created by Mark Golubev on 23/10/2023.
