@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		86023F122AE69F84004AC376 /* HapticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86023F112AE69F84004AC376 /* HapticsManager.swift */; };
 		8643934D2A9B8257005AF8B6 /* NotifyDayToggleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8643934C2A9B8257005AF8B6 /* NotifyDayToggleView.swift */; };
 		867328EB2A79425000BEA07D /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 867328EA2A79425000BEA07D /* NotificationManager.swift */; };
 		867328F62A7A689500BEA07D /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = 867328F52A7A689500BEA07D /* Route.swift */; };
@@ -35,6 +36,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		86023F112AE69F84004AC376 /* HapticsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticsManager.swift; sourceTree = "<group>"; };
 		8606200B2A77D00900E8123C /* my waste app.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "my waste app.entitlements"; sourceTree = "<group>"; };
 		8643934C2A9B8257005AF8B6 /* NotifyDayToggleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotifyDayToggleView.swift; sourceTree = "<group>"; };
 		866A48E62AA2344900C96B2B /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
@@ -212,6 +214,7 @@
 			isa = PBXGroup;
 			children = (
 				867328EA2A79425000BEA07D /* NotificationManager.swift */,
+				86023F112AE69F84004AC376 /* HapticsManager.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -325,6 +328,7 @@
 				86DF7F132A6FE85C00B304EE /* BinsListView.swift in Sources */,
 				86BE857E2A73FDD5003650AE /* NotificationScreenView.swift in Sources */,
 				8643934D2A9B8257005AF8B6 /* NotifyDayToggleView.swift in Sources */,
+				86023F122AE69F84004AC376 /* HapticsManager.swift in Sources */,
 				86DF7F0F2A6FCD6D00B304EE /* WeekdayRow.swift in Sources */,
 				86FA52242A93827B00D3495A /* AlertView.swift in Sources */,
 				86DF7F012A6EFBD500B304EE /* AddBinView.swift in Sources */,
@@ -480,7 +484,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.markgolubev.my-waste-app";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -518,7 +522,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.markgolubev.my-waste-app";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

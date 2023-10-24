@@ -53,6 +53,16 @@ struct NotifyDayToggleView: View {
                             }
                     }
                 }
+                .onChange(of: atTheSameDay) { oldValue, newValue in
+                    if newValue {
+                        HapticsManager.shared.impactFeedback(.light)
+                    }
+                }
+                .onChange(of: atTheDayBefore) { oldValue, newValue in
+                    if newValue {
+                        HapticsManager.shared.impactFeedback(.light)
+                    }
+                }
             }
         }
         .clipShape(RoundedRectangle(cornerRadius: 10.0))
