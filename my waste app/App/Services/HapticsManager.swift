@@ -6,9 +6,7 @@
 //
 
 import Foundation
-
 import UIKit
-import CoreHaptics
 
 final class HapticsManager {
     
