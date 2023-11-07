@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		86023F122AE69F84004AC376 /* HapticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86023F112AE69F84004AC376 /* HapticsManager.swift */; };
+		8605D9062AFA5A580039DE71 /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8605D9052AFA5A580039DE71 /* AlertView.swift */; };
+		8605D9092AFA5ACD0039DE71 /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8605D9082AFA5ACD0039DE71 /* ViewExtensions.swift */; };
 		8643934D2A9B8257005AF8B6 /* NotifyDayToggleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8643934C2A9B8257005AF8B6 /* NotifyDayToggleView.swift */; };
 		867328EB2A79425000BEA07D /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 867328EA2A79425000BEA07D /* NotificationManager.swift */; };
 		867328F62A7A689500BEA07D /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = 867328F52A7A689500BEA07D /* Route.swift */; };
@@ -32,11 +34,12 @@
 		86DF7F1E2A703E4000B304EE /* EditBinViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86DF7F1D2A703E4000B304EE /* EditBinViewModel.swift */; };
 		86F9D7DF2A851D5E00F9765C /* Day.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86F9D7DE2A851D5E00F9765C /* Day.swift */; };
 		86F9D7E12A851E7B00F9765C /* Bin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86F9D7E02A851E7B00F9765C /* Bin.swift */; };
-		86FA52242A93827B00D3495A /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86FA52232A93827B00D3495A /* AlertView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		86023F112AE69F84004AC376 /* HapticsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticsManager.swift; sourceTree = "<group>"; };
+		8605D9052AFA5A580039DE71 /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
+		8605D9082AFA5ACD0039DE71 /* ViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtensions.swift; sourceTree = "<group>"; };
 		8606200B2A77D00900E8123C /* my waste app.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "my waste app.entitlements"; sourceTree = "<group>"; };
 		8643934C2A9B8257005AF8B6 /* NotifyDayToggleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotifyDayToggleView.swift; sourceTree = "<group>"; };
 		866A48E62AA2344900C96B2B /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
@@ -64,7 +67,6 @@
 		86DF7F1D2A703E4000B304EE /* EditBinViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBinViewModel.swift; sourceTree = "<group>"; };
 		86F9D7DE2A851D5E00F9765C /* Day.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day.swift; sourceTree = "<group>"; };
 		86F9D7E02A851E7B00F9765C /* Bin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bin.swift; sourceTree = "<group>"; };
-		86FA52232A93827B00D3495A /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +80,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8605D9042AFA599D0039DE71 /* Support View */ = {
+			isa = PBXGroup;
+			children = (
+				8643934C2A9B8257005AF8B6 /* NotifyDayToggleView.swift */,
+				8605D9052AFA5A580039DE71 /* AlertView.swift */,
+			);
+			path = "Support View";
+			sourceTree = "<group>";
+		};
+		8605D9072AFA5A740039DE71 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				8605D9082AFA5ACD0039DE71 /* ViewExtensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		8606200E2A77EC3500E8123C /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
@@ -156,6 +175,7 @@
 		86DF7EEB2A6EA13B00B304EE /* my waste app */ = {
 			isa = PBXGroup;
 			children = (
+				8605D9072AFA5A740039DE71 /* Extensions */,
 				86266F022AE17E4400FA892D /* Model */,
 				86DF7F292A7055CC00B304EE /* View */,
 				86266F032AE17E5200FA892D /* ViewModel */,
@@ -222,8 +242,7 @@
 		86DF7F292A7055CC00B304EE /* View */ = {
 			isa = PBXGroup;
 			children = (
-				86FA52232A93827B00D3495A /* AlertView.swift */,
-				8643934C2A9B8257005AF8B6 /* NotifyDayToggleView.swift */,
+				8605D9042AFA599D0039DE71 /* Support View */,
 				86DF7F112A6FE82900B304EE /* BinList */,
 				86DF7F032A6EFBFC00B304EE /* Main */,
 				86BE857C2A73FD89003650AE /* Notification */,
@@ -321,6 +340,7 @@
 				867329052A825D0B00BEA07D /* EditBinAssembley.swift in Sources */,
 				867328FE2A82438200BEA07D /* MainAssembley.swift in Sources */,
 				86DF7F0C2A6F22AC00B304EE /* WeekDay.swift in Sources */,
+				8605D9062AFA5A580039DE71 /* AlertView.swift in Sources */,
 				86DF7EEF2A6EA13B00B304EE /* MainView.swift in Sources */,
 				867328EB2A79425000BEA07D /* NotificationManager.swift in Sources */,
 				86DF7F1E2A703E4000B304EE /* EditBinViewModel.swift in Sources */,
@@ -330,9 +350,9 @@
 				8643934D2A9B8257005AF8B6 /* NotifyDayToggleView.swift in Sources */,
 				86023F122AE69F84004AC376 /* HapticsManager.swift in Sources */,
 				86DF7F0F2A6FCD6D00B304EE /* WeekdayRow.swift in Sources */,
-				86FA52242A93827B00D3495A /* AlertView.swift in Sources */,
 				86DF7F012A6EFBD500B304EE /* AddBinView.swift in Sources */,
 				86DF7EED2A6EA13B00B304EE /* my_waste_appApp.swift in Sources */,
+				8605D9092AFA5ACD0039DE71 /* ViewExtensions.swift in Sources */,
 				86DF7F1A2A70394800B304EE /* EditBinView.swift in Sources */,
 				86F9D7DF2A851D5E00F9765C /* Day.swift in Sources */,
 				86F9D7E12A851E7B00F9765C /* Bin.swift in Sources */,

@@ -82,6 +82,7 @@ struct AddBinView: View {
                             .cornerRadius(10.0)
                         Text("Save")
                             .foregroundColor(.white)
+                            .font(.system(.title3, design: .rounded))
                     }
                     
                 }
@@ -92,6 +93,13 @@ struct AddBinView: View {
         .alert("You should choose at least one collection day.", isPresented: $vm.hasError) {
             Button("OK", role: .cancel) { }
         }
+        .alert(title: "Why is it disabled?", message: "You should allow Notifications in your app Settings.", dismissButton: AlertButton(title: "Settings", color: Color("primary_elements"), action: {
+            Task {
+                if let url = URL(string: UIApplication.openNotificationSettingsURLString) {
+                    await UIApplication.shared.open(url)
+                }
+            }
+        }), isPresented: $showAlertView)
         .onAppear(perform: {
             self.vm.setup(nm)
             Task {
@@ -101,29 +109,29 @@ struct AddBinView: View {
             
 
         })
-        .overlay(alignment: .bottom) {
-            
-            if showAlertView {
-                Color.black.opacity(0.7)
-                    .ignoresSafeArea()
-                    .transition(.opacity)
-                    .onTapGesture {
-                        showAlertView.toggle()
-                        Task {
-                            await nm.getAuthStatus()
-                        }
-                        
-                    }
-                AlertView(didTapClose: {
-                    showAlertView.toggle()
-                    Task {
-                        await nm.getAuthStatus()
-                    }
-                })
-            }
-            
-        }
-        .animation(.spring(), value: showAlertView)
+//        .overlay(alignment: .bottom) {
+//            
+//            if showAlertView {
+//                Color.black.opacity(0.7)
+//                    .ignoresSafeArea()
+//                    .transition(.opacity)
+//                    .onTapGesture {
+//                        showAlertView.toggle()
+//                        Task {
+//                            await nm.getAuthStatus()
+//                        }
+//                        
+//                    }
+//                AlertView(didTapClose: {
+//                    showAlertView.toggle()
+//                    Task {
+//                        await nm.getAuthStatus()
+//                    }
+//                })
+//            }
+//            
+//        }
+//        .animation(.spring(), value: showAlertView)
     }
 }
 
