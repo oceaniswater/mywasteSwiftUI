@@ -30,6 +30,7 @@ struct my_waste_appApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     
     @State var notificationManager = NotificationManager()
+    @State var requestsReviewManager = RequestsReviewManager()
     @ObservedObject var router = Router.shared
     
     var body: some Scene {
@@ -47,6 +48,7 @@ struct my_waste_appApp: App {
                     }
             }
             .environment(notificationManager)
+            .environment(requestsReviewManager)
         }
         .modelContainer(for: Bin.self)
 

@@ -7,14 +7,20 @@
 
 import SwiftUI
 import StoreKit
+import SwiftData
 
 struct MainView: View {
     
     @State var showNotificationView: Bool = false
     @State var showNotificationBage: Bool = false
+    @State var showReviewAlert: Bool = false
     
     @StateObject var vm: MainViewModel
     @Environment(NotificationManager.self) private var nm
+    @Environment(RequestsReviewManager.self) private var requestsReviewManager
+    @Environment(\.requestReview) var requestReview: RequestReviewAction
+    
+    @Query private var bins: [Bin]
     
     var body: some View {
         ZStack {
@@ -36,11 +42,22 @@ struct MainView: View {
 
             }
             .environmentObject(vm)
+            .alert(dismissButton: AlertButton(title: "Review", color: .purple, action: {
+                Task {
+                    requestReview()
+                }
+            }), isPresented: $showReviewAlert)
             .onAppear {
                 if UserDefaults.standard.bool(forKey: "notFirstTime") != true {
                     withAnimation {
                         showNotificationView = true
                     }
+                }
+                
+                requestsReviewManager.increase()
+                
+                if requestsReviewManager.canAskForReview(binsCount: bins.count) {
+                    requestReview()
                 }
                 
                 Task {
@@ -66,6 +83,7 @@ struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         MainAssembley().build()
             .environment(NotificationManager())
+            .environment(RequestsReviewManager())
     }
 }
 
