@@ -18,7 +18,6 @@ struct MainView: View {
     @StateObject var vm: MainViewModel
     @Environment(NotificationManager.self) private var nm
     @Environment(RequestsReviewManager.self) private var requestsReviewManager
-    @Environment(\.requestReview) var requestReview: RequestReviewAction
     
     @Query private var bins: [Bin]
     
@@ -42,11 +41,6 @@ struct MainView: View {
 
             }
             .environmentObject(vm)
-            .alert(dismissButton: AlertButton(title: "Review", color: .purple, action: {
-                Task {
-                    requestReview()
-                }
-            }), isPresented: $showReviewAlert)
             .onAppear {
                 if UserDefaults.standard.bool(forKey: "notFirstTime") != true {
                     withAnimation {
@@ -57,7 +51,13 @@ struct MainView: View {
                 requestsReviewManager.increase()
                 
                 if requestsReviewManager.canAskForReview(binsCount: bins.count) {
-                    requestReview()
+                    // try getting current scene
+                    guard let currentScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else {
+                          return
+                    }
+                         
+                    // show review dialog
+                    SKStoreReviewController.requestReview(in: currentScene)
                 }
                 
                 Task {
