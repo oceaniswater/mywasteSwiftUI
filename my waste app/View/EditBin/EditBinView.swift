@@ -95,6 +95,7 @@ struct EditBinView: View {
                                 .cornerRadius(10.0)
                             Text("Save")
                                 .foregroundColor(.white)
+                                .font(.system(.title3, design: .rounded))
                         }
                             
                     }
@@ -107,29 +108,13 @@ struct EditBinView: View {
                     await nm.getAuthStatus()
                 }
             })
-            .overlay(alignment: .bottom) {
-                
-                if showAlertView {
-                    Color.black.opacity(0.7)
-                        .ignoresSafeArea()
-                        .transition(.opacity)
-                        .onTapGesture {
-                            showAlertView.toggle()
-                            Task {
-                                await nm.getAuthStatus()
-                            }
-                            
-                        }
-                    AlertView(didTapClose: {
-                        showAlertView.toggle()
-                        Task {
-                            await nm.getAuthStatus()
-                        }
-                    })
+            .alert(title: "Why is it disabled?", message: "You should allow Notifications in your app Settings.", dismissButton: AlertButton(title: "Settings", color: Color("primary_elements"), action: {
+                Task {
+                    if let url = URL(string: UIApplication.openNotificationSettingsURLString) {
+                        await UIApplication.shared.open(url)
+                    }
                 }
-                
-            }
-            .animation(.spring(), value: showAlertView)
+            }), isPresented: $showAlertView)
             .alert("You should choose at least one collection day.", isPresented: $vm.hasError) {
                 Button("OK", role: .cancel) { }
             }
