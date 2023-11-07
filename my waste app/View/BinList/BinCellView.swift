@@ -24,6 +24,8 @@ struct BinCellView: View {
                         .aspectRatio(contentMode: .fit)
                         .frame(maxWidth: 25)
                 }
+                .accessibilityHidden(true)
+                
                 VStack(alignment: .leading, spacing: 4.0) {
                     Text("\(bin.type.rawValue.capitalized(with: .current)) waste")
                         .font(.system(.headline, design: .rounded))
@@ -35,6 +37,8 @@ struct BinCellView: View {
                         .foregroundStyle(Color.gray)
                         .frame(height: 35.0)
                 }
+                .accessibilityElement(children: .combine)
+                .accessibilityRemoveTraits(.isStaticText)
                 .padding()
                 Spacer()
                 bin.notifyMe ? nil :

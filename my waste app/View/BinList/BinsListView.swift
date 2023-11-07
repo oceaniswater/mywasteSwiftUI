@@ -26,6 +26,7 @@ struct BinsListView: View {
                             }
                         
                     }
+                    .accessibilityAddTraits(.isButton)
                     .onDelete(perform: deleteItems)
                     .listRowSeparator(.hidden, edges: .all)
                     .listRowBackground(Color("primary_bg"))
