@@ -33,6 +33,8 @@ struct my_waste_appApp: App {
     @State var requestsReviewManager = RequestsReviewManager()
     @ObservedObject var router = Router.shared
     
+    @Environment(\.scenePhase) private var scenePhase
+    
     var body: some Scene {
         WindowGroup {
             NavigationStack(path: $router.path) {
@@ -51,6 +53,20 @@ struct my_waste_appApp: App {
             .environment(requestsReviewManager)
         }
         .modelContainer(for: Bin.self)
+        .onChange(of: scenePhase) { _, newScenePhase in
+                    switch newScenePhase {
+                    case .active:
+                        Task {
+                            await notificationManager.getAuthStatus()
+                        }
+                    case .inactive:
+                        break
+                    case .background:
+                        break
+                    @unknown default:
+                        break
+                    }
+                }
 
     }
 }
