@@ -26,12 +26,9 @@ struct MainView: View {
             Color("primary_bg")
                 .edgesIgnoringSafeArea(.all)
             VStack {
-                nm.hasPermisions || !showNotificationBage
+                nm.hasPermisions
                     ? nil
                     : NotificationBageView(didTapClose: {
-                        withAnimation {
-                            showNotificationBage = false
-                        }
                     })
                     .frame(maxWidth: 500)
                 YourBinsHeaderView()
@@ -134,46 +131,4 @@ struct YourBinsHeaderView: View {
     }
 }
 
-struct NotificationBageView: View {
-    var didTapClose: () -> ()
-    
-    var body: some View {
-        Button {
-            didTapClose()
-            
-            Task {
-                if let url = URL(string: UIApplication.openNotificationSettingsURLString) {
-                    await UIApplication.shared.open(url)
-                }
-                
-            }
-        } label: {
-            HStack(alignment: .top) {
-                Image(systemName: "bell.badge.fill")
-                    .font(.title2)
-                    .foregroundColor(.white)
-                    .padding(.all, 4)
-                    .background(Color("primary_elements"))
-                    .cornerRadius(10.0)
-                Spacer()
-                VStack(alignment: .leading, spacing: 4) {
-                    Text("Enable push notifications")
-                        .font(.headline)
-                        .foregroundColor(.white)
-                    Text("The app will let you know when it’s time to take out the bins.")
-                        .font(.subheadline)
-                        .foregroundColor(.gray)
-                        .multilineTextAlignment(.leading)
-                }
-                Spacer()
-            }
-            .padding(.all, 20)
-            .background(Color("primary_cell"))
-            .cornerRadius(10.0)
 
-
-        }
-//        .padding(.vertical)
-        .padding(.horizontal, 20)
-    }
-}
