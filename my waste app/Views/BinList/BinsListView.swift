@@ -21,12 +21,12 @@ struct BinsListView: View {
                 List {
                     ForEach(bins) { bin in
                         BinCellView(bin: bin)
+                            .environmentObject(vm)
                             .onTapGesture {
                                 vm.showEditBin(bin: bin)
                             }
                         
                     }
-                    .onDelete(perform: deleteItems)
                     .listRowSeparator(.hidden, edges: .all)
                     .listRowBackground(Color("primary_bg"))
                 }
@@ -46,22 +46,6 @@ struct BinsListView: View {
         }
         .onAppear {
             vm.setup(nm)
-        }
-    }
-    
-    private func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            for index in offsets {
-                let bin = bins[index]
-                // delete notification
-
-                Task {
-                    await vm.deleteNotifications(for: bin.id.uuidString)
-                }
-
-                // delete bin
-                modelContext.delete(bins[index])
-            }
         }
     }
 }

@@ -5,14 +5,16 @@
 //  Created by Mark Golubev on 25/07/2023.
 //
 
-import Foundation
+import SwiftUI
+
 
 protocol BinsListViewModelProtocol: ObservableObject {
 
 }
 
 final class BinsListViewModel:  BinsListViewModelProtocol {
-    @Published  var isEmptyList: Bool = true
+    @Published var isEmptyList: Bool = true
+    @Published var bins: [Bin] = []
     
     var nm: NotificationManager?
     
@@ -22,16 +24,8 @@ final class BinsListViewModel:  BinsListViewModelProtocol {
         self.nm = nm
     }
     
-    func editBin(at offsets: IndexSet) {
-        //
-    }
-    
     func deleteNotifications(for id: String) async {
         await nm?.removeNotification(id: id)
-    }
-    
-    func isEmpty() {
-//        isEmptyList = bins.isEmpty
     }
         
     func showEditBin(bin: Bin) {
