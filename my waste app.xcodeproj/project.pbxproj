@@ -19,6 +19,10 @@
 		867329052A825D0B00BEA07D /* EditBinAssembley.swift in Sources */ = {isa = PBXBuildFile; fileRef = 867329042A825D0B00BEA07D /* EditBinAssembley.swift */; };
 		867329072A826E8700BEA07D /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 867329062A826E8700BEA07D /* MainViewModel.swift */; };
 		86A04D362A97C3C700A0C524 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86A04D352A97C3C700A0C524 /* LaunchScreen.storyboard */; };
+		86AE2ED22B076FCA006681D0 /* ColourExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86AE2ED12B076FCA006681D0 /* ColourExtensions.swift */; };
+		86AE2ED42B07710E006681D0 /* FillRandomiser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86AE2ED32B07710E006681D0 /* FillRandomiser.swift */; };
+		86AE2ED62B077390006681D0 /* Particle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86AE2ED52B077390006681D0 /* Particle.swift */; };
+		86AE2EDB2B077615006681D0 /* EmitterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86AE2EDA2B077615006681D0 /* EmitterView.swift */; };
 		86AF77472AFD57A0000D2162 /* NotificationBageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86AF77462AFD57A0000D2162 /* NotificationBageView.swift */; };
 		86BE857E2A73FDD5003650AE /* NotificationScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86BE857D2A73FDD5003650AE /* NotificationScreenView.swift */; };
 		86DF7EED2A6EA13B00B304EE /* my_waste_appApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86DF7EEC2A6EA13B00B304EE /* my_waste_appApp.swift */; };
@@ -53,6 +57,10 @@
 		867329042A825D0B00BEA07D /* EditBinAssembley.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBinAssembley.swift; sourceTree = "<group>"; };
 		867329062A826E8700BEA07D /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		86A04D352A97C3C700A0C524 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		86AE2ED12B076FCA006681D0 /* ColourExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColourExtensions.swift; sourceTree = "<group>"; };
+		86AE2ED32B07710E006681D0 /* FillRandomiser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FillRandomiser.swift; sourceTree = "<group>"; };
+		86AE2ED52B077390006681D0 /* Particle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Particle.swift; sourceTree = "<group>"; };
+		86AE2EDA2B077615006681D0 /* EmitterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmitterView.swift; sourceTree = "<group>"; };
 		86AF77462AFD57A0000D2162 /* NotificationBageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationBageView.swift; sourceTree = "<group>"; };
 		86BE857D2A73FDD5003650AE /* NotificationScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationScreenView.swift; sourceTree = "<group>"; };
 		86DF7EE92A6EA13B00B304EE /* my waste app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "my waste app.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -98,6 +106,7 @@
 			isa = PBXGroup;
 			children = (
 				8605D9082AFA5ACD0039DE71 /* ViewExtensions.swift */,
+				86AE2ED12B076FCA006681D0 /* ColourExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -106,6 +115,7 @@
 			isa = PBXGroup;
 			children = (
 				867328F52A7A689500BEA07D /* Route.swift */,
+				86AE2ED32B07710E006681D0 /* FillRandomiser.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -117,6 +127,7 @@
 				86F9D7DE2A851D5E00F9765C /* Day.swift */,
 				86DF7F0B2A6F22AC00B304EE /* WeekDay.swift */,
 				86DF7F0E2A6FCD6D00B304EE /* WeekdayRow.swift */,
+				86AE2ED52B077390006681D0 /* Particle.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -152,6 +163,14 @@
 			path = Builder;
 			sourceTree = "<group>";
 		};
+		86AE2ED72B077532006681D0 /* Support Shapes */ = {
+			isa = PBXGroup;
+			children = (
+				86AE2EDA2B077615006681D0 /* EmitterView.swift */,
+			);
+			path = "Support Shapes";
+			sourceTree = "<group>";
+		};
 		86BE857C2A73FD89003650AE /* Notification */ = {
 			isa = PBXGroup;
 			children = (
@@ -182,7 +201,7 @@
 			children = (
 				8605D9072AFA5A740039DE71 /* Extensions */,
 				86266F022AE17E4400FA892D /* Model */,
-				86DF7F292A7055CC00B304EE /* View */,
+				86DF7F292A7055CC00B304EE /* Views */,
 				86266F032AE17E5200FA892D /* ViewModel */,
 				86266F042AE17F5900FA892D /* App */,
 				8606200B2A77D00900E8123C /* my waste app.entitlements */,
@@ -245,9 +264,10 @@
 			path = Services;
 			sourceTree = "<group>";
 		};
-		86DF7F292A7055CC00B304EE /* View */ = {
+		86DF7F292A7055CC00B304EE /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				86AE2ED72B077532006681D0 /* Support Shapes */,
 				8605D9042AFA599D0039DE71 /* Support View */,
 				86DF7F112A6FE82900B304EE /* BinList */,
 				86DF7F032A6EFBFC00B304EE /* Main */,
@@ -256,7 +276,7 @@
 				86DF7F182A70390100B304EE /* EditBin */,
 				86A04D352A97C3C700A0C524 /* LaunchScreen.storyboard */,
 			);
-			path = View;
+			path = Views;
 			sourceTree = "<group>";
 		};
 		86FA521A2A8F826E00D3495A /* Frameworks */ = {
@@ -347,6 +367,7 @@
 				867328FE2A82438200BEA07D /* MainAssembley.swift in Sources */,
 				86DF7F0C2A6F22AC00B304EE /* WeekDay.swift in Sources */,
 				8605D9062AFA5A580039DE71 /* AlertView.swift in Sources */,
+				86AE2ED22B076FCA006681D0 /* ColourExtensions.swift in Sources */,
 				86DF7EEF2A6EA13B00B304EE /* MainView.swift in Sources */,
 				867328EB2A79425000BEA07D /* NotificationManager.swift in Sources */,
 				86DF7F1E2A703E4000B304EE /* EditBinViewModel.swift in Sources */,
@@ -362,11 +383,14 @@
 				86AF77472AFD57A0000D2162 /* NotificationBageView.swift in Sources */,
 				8605D9092AFA5ACD0039DE71 /* ViewExtensions.swift in Sources */,
 				86DF7F1A2A70394800B304EE /* EditBinView.swift in Sources */,
+				86AE2ED42B07710E006681D0 /* FillRandomiser.swift in Sources */,
 				86F9D7DF2A851D5E00F9765C /* Day.swift in Sources */,
 				86F9D7E12A851E7B00F9765C /* Bin.swift in Sources */,
 				86DF7F172A6FF36F00B304EE /* AddBinViewModel.swift in Sources */,
 				867328F62A7A689500BEA07D /* Route.swift in Sources */,
 				867329072A826E8700BEA07D /* MainViewModel.swift in Sources */,
+				86AE2ED62B077390006681D0 /* Particle.swift in Sources */,
+				86AE2EDB2B077615006681D0 /* EmitterView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -512,7 +536,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.3;
+				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.markgolubev.my-waste-app";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -550,7 +574,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.3;
+				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.markgolubev.my-waste-app";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
