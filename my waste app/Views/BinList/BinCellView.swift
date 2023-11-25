@@ -126,9 +126,9 @@ struct BinCellView: View {
     }
     
     func delete() {
-        modelContext.delete(bin)
         Task {
             await vm.deleteNotifications(for: bin.id.uuidString)
+            modelContext.delete(bin)
         }
     }
 }
