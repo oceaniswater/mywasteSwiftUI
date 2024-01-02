@@ -17,7 +17,7 @@ extension View {
     }
     
     /// Presents  a customized alert view with a given title, message, close button, dismiss button.
-    func alert(title: String = "", message: String = "", closeButton: CloseAlertButton = CloseAlertButton(systemName: "xmark"), dismissButton: AlertButton = AlertButton(title: "OK", color: .purple), isPresented: Binding<Bool>) -> some View {
+    func alert(title: String = "", message: String = "", closeButton: CloseAlertButton = CloseAlertButton(systemName: "xmark"), dismissButton: AlertButton = AlertButton(title: "OK", color: nil), isPresented: Binding<Bool>) -> some View {
         // Localize the title and message for internationalization.
         let title   = NSLocalizedString(title, comment: "")
         let message = NSLocalizedString(message, comment: "")

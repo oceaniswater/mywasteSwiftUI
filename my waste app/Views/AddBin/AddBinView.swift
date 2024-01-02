@@ -90,9 +90,7 @@ struct AddBinView: View {
                 
             }
         }
-        .alert("You should choose at least one collection day.", isPresented: $vm.hasError) {
-            Button("OK", role: .cancel) { }
-        }
+        .alert(message: "You should choose at least one collection day.", isPresented: $vm.hasError)
         .alert(title: "Why is it disabled?", message: "You should allow Notifications in your app Settings.", dismissButton: AlertButton(title: "Settings", color: Color("primary_elements"), action: {
             Task {
                 if let url = URL(string: UIApplication.openNotificationSettingsURLString) {

@@ -222,7 +222,7 @@ struct AlertButton: View {
     
     // MARK: - Public Properties
     let title: LocalizedStringKey
-    let color: Color
+    let color: Color?
     var action: (() -> Void)? = nil
     
     
@@ -239,7 +239,7 @@ struct AlertButton: View {
         }
         .frame(minWidth: 0, maxWidth: .infinity, alignment: .center)
         .frame(height: 55)
-        .background(color)
+        .background(color ?? .accentColor)
         .cornerRadius(8)
         
     }
