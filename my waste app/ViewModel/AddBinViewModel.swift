@@ -34,7 +34,6 @@ final class AddBinViewModel: AddBinViewModelProtocol {
     }
     
     func isBinExist(bin: Bin) -> Bool {
-        //
         return false
     }
 }

@@ -31,7 +31,7 @@ struct my_waste_appApp: App {
     
     @State var notificationManager = NotificationManager()
     @State var requestsReviewManager = RequestsReviewManager()
-    @ObservedObject var router = Router.shared
+    @StateObject var router = Router.shared
     
     @Environment(\.scenePhase) private var scenePhase
     

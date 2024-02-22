@@ -38,5 +38,4 @@ enum Day:Int, Codable, CaseIterable{
             case .Sat: return 7
         }
     }
-    
 }

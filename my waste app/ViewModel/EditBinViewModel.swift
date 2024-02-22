@@ -52,7 +52,6 @@ final class EditBinViewModel: EditBinViewModelProtocol {
     
     func updateNotifications(bin: Bin) async {
         await nm?.updateNotification(for: bin)
-        
     }
     
     func deleteNotifications(for bin: Bin) async {

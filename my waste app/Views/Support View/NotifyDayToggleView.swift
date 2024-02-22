@@ -32,7 +32,6 @@ struct NotifyDayToggleView: View {
                                 withAnimation {
                                     atTheSameDay.toggle()
                                     atTheDayBefore.toggle()
-                                    
                                 }
                             }
                     }

@@ -24,7 +24,6 @@ struct AlertView: View {
     
     @Environment(\.dismiss) private var dismiss
     
-    
     // MARK: - Body
     var body: some View {
         // Main content of the alert view.
@@ -37,7 +36,6 @@ struct AlertView: View {
                         .opacity(opacity)
                 }
                     .transition(.opacity)
-                
             )
             .ignoresSafeArea()
             .task {
@@ -183,11 +181,11 @@ struct AlertView: View {
     
     
     // MARK: - Private Functions
-        
-        /// Animates the appearance/disappearance of the alert view.
-        /// - Parameters:
-        ///   - isShown: A boolean indicating whether the alert view should be shown or hidden.
-        ///   - completion: A closure to be executed after the animation completes.
+    
+    /// Animates the appearance/disappearance of the alert view.
+    /// - Parameters:
+    ///   - isShown: A boolean indicating whether the alert view should be shown or hidden.
+    ///   - completion: A closure to be executed after the animation completes.
     private func animate(isShown: Bool, completion: (() -> Void)? = nil) {
         // Animation logic for showing/hiding the alert view
         switch isShown {
@@ -293,12 +291,8 @@ extension CustomAlertModifier: ViewModifier {
                     AlertView(title: title, message: message, closeButton: closeButton, dismissButton: dismissButton, primaryButton: primaryButton, secondaryButton: secondaryButton)
                 }
                 .presentationBackground(.clear)
-                
             }
-        
     }
-    
-    
 }
 
 extension CustomAlertModifier {

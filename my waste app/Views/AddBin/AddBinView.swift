@@ -29,12 +29,12 @@ struct AddBinView: View {
                     Section {
                         ColorPicker(colorSelected: $newBin.color)
                         TypePicker(typeSelected: $newBin.type)
-
+                        
                         NavigationLink(newBin.selectDays.isEmpty ? "Collection days" : newBin.noteLabel) {
                             WeekdayList(selectedRows: $newBin.selectDays, days: $vm.days)
                         }
                         .foregroundStyle(newBin.selectDays.isEmpty ? Color(.textOne) : .gray)
-
+                        
                         Toggle("Enable notifications", isOn: $newBin.notifyMe)
                             .disabled(!nm.hasPermisions)
                             .onTapGesture {
@@ -60,7 +60,6 @@ struct AddBinView: View {
                 }
                 .frame(maxWidth: 500)
                 .scrollContentBackground(.hidden)
-                
                 
                 Button {
                     if newBin.selectDays.isEmpty {
@@ -104,32 +103,7 @@ struct AddBinView: View {
                 await nm.getAuthStatus()
                 newBin.notifyMe = nm.hasPermisions
             }
-            
-
         })
-//        .overlay(alignment: .bottom) {
-//            
-//            if showAlertView {
-//                Color.black.opacity(0.7)
-//                    .ignoresSafeArea()
-//                    .transition(.opacity)
-//                    .onTapGesture {
-//                        showAlertView.toggle()
-//                        Task {
-//                            await nm.getAuthStatus()
-//                        }
-//                        
-//                    }
-//                AlertView(didTapClose: {
-//                    showAlertView.toggle()
-//                    Task {
-//                        await nm.getAuthStatus()
-//                    }
-//                })
-//            }
-//            
-//        }
-//        .animation(.spring(), value: showAlertView)
     }
 }
 
@@ -170,7 +144,7 @@ struct ColorPicker: View {
             }
         }
         .scrollContentBackground(.hidden)
-
+        
     }
 }
 

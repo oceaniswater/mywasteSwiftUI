@@ -23,7 +23,6 @@ struct WeekdayRow: View {
                 Image(systemName: "checkmark")
             }
         }
-
         .padding(.horizontal)
         .contentShape(Rectangle())
         .frame(height: 20)
@@ -34,7 +33,6 @@ struct WeekdayRow: View {
                 self.selectedItems.insert(day)
             }
         }
-        
     }
 }
 

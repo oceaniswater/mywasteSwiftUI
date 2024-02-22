@@ -88,8 +88,8 @@ struct BinCellView: View {
                         .font(.system(size: 25, weight:
                                 .semibold))
                         .foregroundColor(Color("primary_elements"))
-
-                        
+                    
+                    
                 }
                 .buttonStyle(.plain)
                 .opacity(showRemove ? 1 : 0)

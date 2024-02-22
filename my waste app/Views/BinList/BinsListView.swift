@@ -40,9 +40,8 @@ struct BinsListView: View {
                 Spacer()
                 Spacer()
                 Spacer()
-                
             }
-
+            
         }
         .onAppear {
             vm.setup(nm)

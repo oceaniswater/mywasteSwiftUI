@@ -18,7 +18,6 @@ struct NotificationBageView: View {
                 if let url = URL(string: UIApplication.openNotificationSettingsURLString) {
                     await UIApplication.shared.open(url)
                 }
-                
             }
         } label: {
             HStack(alignment: .top) {
@@ -43,10 +42,7 @@ struct NotificationBageView: View {
             .padding(.all, 20)
             .background(Color("primary_cell"))
             .cornerRadius(10.0)
-
-
         }
-//        .padding(.vertical)
         .padding(.horizontal, 20)
     }
 }

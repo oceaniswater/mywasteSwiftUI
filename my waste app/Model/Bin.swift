@@ -63,7 +63,6 @@ class Bin: Identifiable {
             }
             return remindSet
         }
-
     }
     
     init(id: UUID = UUID(), date: Date, type: BinType, color: BinColor, selectDays: Set<Day>, notifyMe: Bool = true, atTheSameDay: Bool = false, atTheDayBefore: Bool = true) {

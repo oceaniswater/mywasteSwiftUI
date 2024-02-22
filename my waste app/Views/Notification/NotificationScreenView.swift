@@ -13,8 +13,6 @@ struct NotificationView: View {
     @Binding var showNotificationView: Bool
     @State var isRotating = false
 
-    
-    
     var body: some View {
         NavigationView {
             ZStack {
@@ -63,24 +61,6 @@ struct NotificationView: View {
                             .foregroundColor(.black)
                         }
                     }
-//                    Button {
-//                        showNotificationView = false
-//                        UserDefaults.standard.setValue(true, forKey: "notFirstTime")
-//                    } label: {
-//                        ZStack {
-//                            Rectangle()
-//                                .foregroundColor(.clear)
-//                                .cornerRadius(10)
-//                                .frame(width: 250,height: 44)
-//                                .overlay(
-//                                        RoundedRectangle(cornerRadius: 10)
-//                                            .stroke(.white, lineWidth: 1)
-//                                    )
-//
-//                            Text("Later")
-//                                .foregroundColor(.white)
-//                        }
-//                    }
                     Spacer()
                 }
                 .onDisappear(perform: {

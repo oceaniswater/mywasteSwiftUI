@@ -27,15 +27,15 @@ struct MainView: View {
                 .edgesIgnoringSafeArea(.all)
             VStack {
                 nm.hasPermisions
-                    ? nil
-                    : NotificationBageView(didTapClose: {
-                    })
-                    .frame(maxWidth: 500)
+                ? nil
+                : NotificationBageView(didTapClose: {
+                })
+                .frame(maxWidth: 500)
                 YourBinsHeaderView()
                     .frame(maxWidth: 500)
                 BinsListView()
                     .frame(maxWidth: 500)
-
+                
             }
             .environmentObject(vm)
             .onAppear {
@@ -50,9 +50,9 @@ struct MainView: View {
                 if requestsReviewManager.canAskForReview(binsCount: bins.count) {
                     // try getting current scene
                     guard let currentScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else {
-                          return
+                        return
                     }
-                         
+                    
                     // show review dialog
                     SKStoreReviewController.requestReview(in: currentScene)
                 }
